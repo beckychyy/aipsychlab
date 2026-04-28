@@ -1,0 +1,697 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Becky Chen | AI Psych Lab</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=Noto+Serif+SC:wght@400;600&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{--cr:#6B1C23;--crd:#4d1219;--gold:#C9A961;--cream:#F5F1E8;--creamd:#EDE8DC;--dark:#2C2C2C;--gray:#7a7a7a;--lg:#E8E4DC}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{font-family:'DM Sans',sans-serif;background:var(--cream);color:var(--dark);overflow-x:hidden}
+
+/* NAV */
+nav{position:fixed;top:0;left:0;right:0;z-index:999;display:flex;align-items:center;justify-content:space-between;padding:16px 60px;background:rgba(245,241,232,.97);backdrop-filter:blur(8px);border-bottom:1px solid var(--lg)}
+.logo{font-family:'Playfair Display',serif;font-size:18px;color:var(--cr);font-weight:700;text-decoration:none}
+.nav-links{display:flex;gap:28px;list-style:none;align-items:center}
+.nav-links a{text-decoration:none;font-size:12px;letter-spacing:1.5px;color:var(--dark);text-transform:uppercase;transition:color .25s}
+.nav-links a:hover{color:var(--cr)}
+.nav-cta{background:var(--cr)!important;color:#fff!important;padding:10px 22px}
+.nav-cta:hover{background:var(--crd)!important}
+.lang-btn{background:transparent;border:1px solid var(--gold);color:var(--gold);padding:6px 14px;font-size:11px;letter-spacing:2px;cursor:pointer;font-family:'DM Sans',sans-serif;transition:all .25s}
+.lang-btn:hover{background:var(--gold);color:#fff}
+.hbg{display:none;flex-direction:column;gap:5px;cursor:pointer;background:none;border:none}
+.hbg span{width:22px;height:1.5px;background:var(--cr);display:block}
+
+/* HERO - Full screen with photo background */
+.hero{min-height:100vh;position:relative;display:flex;align-items:center;justify-content:center;text-align:center;overflow:hidden;padding-top:60px}
+.hero-bg{position:absolute;inset:0;background:linear-gradient(135deg,#3d1016 0%,#6B1C23 40%,#8a2530 100%);z-index:0}
+/* Photo overlay - add your photo as background-image here */
+.hero-photo-overlay{position:absolute;inset:0;background-image:url('hero-bg.jpg');background-size:cover;background-position:center;opacity:.35;z-index:1;mix-blend-mode:multiply}
+.hero-content{position:relative;z-index:2;max-width:800px;padding:0 24px}
+.hero-eyebrow{font-size:11px;letter-spacing:4px;text-transform:uppercase;color:var(--gold);margin-bottom:16px;display:block}
+.hero h1{font-family:'Playfair Display',serif;font-size:64px;color:#fff;font-weight:700;line-height:1.1;margin-bottom:18px}
+.hero-sub{font-size:16px;color:rgba(255,255,255,.85);line-height:1.7;margin-bottom:14px;max-width:640px;margin-left:auto;margin-right:auto}
+.hero-tags-row{font-size:13px;color:rgba(201,169,97,.9);letter-spacing:.5px;margin-bottom:32px}
+.hero-tags-row span{margin:0 8px}
+.hero-btns{display:flex;gap:16px;justify-content:center;flex-wrap:wrap}
+.btn-primary{background:var(--cr);color:#fff;padding:14px 32px;font-size:12px;letter-spacing:2px;text-transform:uppercase;text-decoration:none;transition:all .25s;display:inline-block;border:none;cursor:pointer;font-family:'DM Sans',sans-serif}
+.btn-primary:hover{background:var(--crd);transform:translateY(-2px)}
+.btn-outline{background:transparent;color:#fff;padding:14px 32px;font-size:12px;letter-spacing:2px;text-transform:uppercase;text-decoration:none;border:1px solid rgba(255,255,255,.6);transition:all .25s;display:inline-block}
+.btn-outline:hover{background:rgba(255,255,255,.1);transform:translateY(-2px)}
+
+/* STATS */
+.stats{background:var(--cr);padding:44px 60px;display:grid;grid-template-columns:repeat(4,1fr);gap:20px;text-align:center}
+.sn{font-family:'Playfair Display',serif;font-size:42px;color:var(--gold);font-weight:700;line-height:1;display:block}
+.sl{font-size:11px;letter-spacing:2px;text-transform:uppercase;color:rgba(255,255,255,.6);margin-top:6px;display:block}
+
+/* SECTION */
+section{padding:80px 60px}
+.sec-eye{font-size:10px;letter-spacing:4px;text-transform:uppercase;color:var(--gold);margin-bottom:8px;display:block}
+.sec-h{font-family:'Playfair Display',serif;font-size:36px;color:var(--cr);font-weight:700;line-height:1.2}
+.sec-bar{width:44px;height:1px;background:var(--gold);margin:12px auto 0}
+.sec-head{text-align:center;margin-bottom:52px}
+
+/* RESEARCH - expandable cards */
+.research-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:20px;max-width:1100px;margin:0 auto}
+.rc{background:#fff;padding:28px;border:1px solid var(--lg);border-left:3px solid var(--gold);cursor:pointer;transition:all .25s;position:relative}
+.rc:hover{box-shadow:0 8px 32px rgba(107,28,35,.08);transform:translateY(-3px)}
+.rc-head{display:flex;align-items:center;justify-content:space-between}
+.rc-title{font-family:'Playfair Display',serif;font-size:17px;color:var(--cr);font-weight:600;margin-bottom:8px}
+.rc-plus{font-size:18px;color:var(--gold);transition:transform .3s;flex-shrink:0;margin-left:8px;margin-top:-20px}
+.rc.open .rc-plus{transform:rotate(45deg)}
+.rc-preview{font-size:13px;line-height:1.7;color:var(--gray)}
+.rc-detail{max-height:0;overflow:hidden;transition:max-height .4s ease;font-size:13px;line-height:1.75;color:var(--gray)}
+.rc.open .rc-detail{max-height:300px}
+.rc-detail p{padding-top:12px;border-top:1px solid var(--lg);margin-top:12px}
+
+/* ABOUT */
+.about-wrap{display:grid;grid-template-columns:1fr 1fr;gap:72px;align-items:start;max-width:1000px;margin:0 auto}
+.about-photo{width:100%;max-width:420px;aspect-ratio:3/4;object-fit:cover;object-position:top}
+.about-photo-placeholder{width:100%;max-width:420px;aspect-ratio:3/4;background:linear-gradient(135deg,var(--cr),#9B4D5E);display:flex;align-items:center;justify-content:center;color:rgba(255,255,255,.5);font-size:13px;letter-spacing:2px;text-align:center;padding:20px}
+.about-quote{font-family:'Playfair Display',serif;font-size:19px;font-style:italic;color:var(--cr);line-height:1.6;padding-left:18px;border-left:2px solid var(--gold);margin-bottom:18px}
+.about-intro{font-size:14px;line-height:1.9;color:var(--gray);margin-bottom:24px}
+.cred-block{margin-bottom:20px;padding-bottom:20px;border-bottom:1px solid var(--lg)}
+.cred-block:last-child{border-bottom:none;margin-bottom:0;padding-bottom:0}
+.cred-cat{font-size:10px;letter-spacing:3px;text-transform:uppercase;color:var(--gold);margin-bottom:8px}
+.cred-list{list-style:none;display:flex;flex-direction:column;gap:6px}
+.cred-list li{font-size:13px;color:var(--dark);padding-left:14px;position:relative}
+.cred-list li::before{content:'—';position:absolute;left:0;color:var(--gold);font-size:10px;top:2px}
+
+/* SERVICES */
+.svc-intro{text-align:center;font-family:'Playfair Display',serif;font-size:18px;font-style:italic;color:var(--dark);line-height:1.7;max-width:660px;margin:0 auto 48px;opacity:.8}
+.mtss-section{max-width:860px;margin:0 auto 56px}
+.mtss-label{text-align:center;font-size:15px;font-weight:600;color:var(--cr);margin-bottom:28px;letter-spacing:.5px}
+.mtss-layout{display:flex;align-items:center;justify-content:center;gap:48px;flex-wrap:wrap}
+.mtss-lbls{display:flex;flex-direction:column;gap:10px}
+.mlbl{cursor:pointer;padding:13px 16px;border-left:3px solid;border-radius:0 8px 8px 0;transition:background .2s}
+.mlbl:hover{background:rgba(201,169,97,.07)}
+.ml3{border-color:var(--cr)}.ml2{border-color:#9B4D5E}.ml1{border-color:var(--gold)}
+.mlt{font-size:14px;font-weight:600;color:var(--dark);margin-bottom:3px}
+.mls{font-size:12px;color:var(--gold);margin-bottom:2px}
+.mlv{font-size:11px;color:var(--gray)}
+.mlm{font-size:11px;color:var(--gold);margin-top:3px}
+.ct{cursor:pointer;transition:opacity .15s}
+.ct:hover{opacity:.85}
+.mtss-desc{text-align:center;font-size:12px;color:var(--gray);line-height:1.8;margin-top:24px;max-width:640px;margin-left:auto;margin-right:auto}
+.svc-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;max-width:1100px;margin:0 auto}
+.svc-card{background:#fff;padding:32px;border:1px solid var(--lg);transition:all .25s;position:relative;overflow:hidden;display:flex;flex-direction:column}
+.svc-card::after{content:'';position:absolute;bottom:0;left:0;width:0;height:2px;background:var(--gold);transition:width .4s}
+.svc-card:hover::after{width:100%}
+.svc-card:hover{transform:translateY(-4px);box-shadow:0 12px 40px rgba(107,28,35,.08)}
+.svc-tier{font-size:10px;letter-spacing:2px;color:var(--gold);text-transform:uppercase;margin-bottom:6px}
+.svc-icon{font-size:26px;margin-bottom:12px;display:block}
+.svc-title{font-family:'Playfair Display',serif;font-size:18px;color:var(--cr);margin-bottom:8px;font-weight:600}
+.svc-method{font-size:11px;font-style:italic;color:var(--gold);margin-bottom:12px}
+.svc-tags{display:flex;gap:5px;flex-wrap:wrap;margin-bottom:12px}
+.svc-tag{background:var(--cr);color:#fff;font-size:9px;padding:3px 9px;border-radius:20px;letter-spacing:.5px}
+.svc-body{font-size:13px;line-height:1.78;color:var(--gray);margin-bottom:12px;flex:1}
+.svc-fit{font-size:11px;color:var(--gold);font-style:italic;margin-bottom:18px}
+.svc-btn{display:block;text-align:center;background:var(--cr);color:#fff;padding:12px;font-size:11px;letter-spacing:2px;text-transform:uppercase;text-decoration:none;transition:background .25s;border:none;cursor:pointer;width:100%;font-family:'DM Sans',sans-serif;margin-top:auto}
+.svc-btn:hover{background:var(--crd)}
+.svc-grid-2{display:grid;grid-template-columns:repeat(2,1fr);gap:20px;max-width:1100px;margin:20px auto 0}
+
+/* MISSION */
+.mission{background:var(--cr);padding:80px 60px}
+.mission .sec-h{color:var(--cream)}
+.mission .sec-eye{color:var(--gold)}
+.mission .sec-bar{background:rgba(201,169,97,.5)}
+.mission-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:2px;background:rgba(255,255,255,.1);margin-top:52px}
+.mc{background:var(--cr);padding:36px 28px;text-align:center;transition:background .25s}
+.mc:hover{background:#7a2029}
+.mc-icon{font-size:34px;display:block;margin-bottom:14px}
+.mc-title{font-family:'Playfair Display',serif;font-size:17px;color:var(--cream);margin-bottom:8px;font-weight:600}
+.mc-body{font-size:13px;line-height:1.7;color:rgba(245,241,232,.7)}
+
+/* COLLAB */
+.collab-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:22px;max-width:1000px;margin:0 auto}
+.collab-card{padding:36px 28px;border:1px solid var(--lg);text-align:center;transition:all .25s;background:#fff}
+.collab-card:hover{border-color:var(--gold);transform:translateY(-4px);box-shadow:0 8px 32px rgba(107,28,35,.07)}
+.cc-icon{font-size:38px;display:block;margin-bottom:14px}
+.cc-title{font-family:'Playfair Display',serif;font-size:19px;color:var(--cr);margin-bottom:10px;font-weight:600}
+.cc-body{font-size:13px;line-height:1.75;color:var(--gray);margin-bottom:18px}
+.cc-btn{display:inline-block;padding:10px 20px;background:var(--cr);color:#fff;font-size:11px;letter-spacing:2px;text-transform:uppercase;text-decoration:none;transition:background .25s;border:none;cursor:pointer;font-family:'DM Sans',sans-serif}
+.cc-btn:hover{background:var(--crd)}
+
+/* PUBLIC GOOD */
+.pg{background:var(--creamd)}
+.pg-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:2px;background:var(--lg);margin-top:52px}
+.pg-item{background:var(--cream);padding:36px;transition:background .25s}
+.pg-item:hover{background:#fff}
+.pg-org{font-size:10px;letter-spacing:3px;text-transform:uppercase;color:var(--gold);margin-bottom:8px}
+.pg-title{font-family:'Playfair Display',serif;font-size:17px;color:var(--cr);margin-bottom:10px;font-weight:600}
+.pg-body{font-size:13px;line-height:1.75;color:var(--gray)}
+
+/* ENDORSEMENTS */
+.endorse-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:1px;background:var(--lg);margin-top:48px}
+.ei{background:#fff;padding:28px 16px;text-align:center;transition:all .25s}
+.ei:hover{background:var(--cream);transform:translateY(-3px)}
+.ei-name{font-size:12px;font-weight:600;color:var(--gray);letter-spacing:.5px;line-height:1.4;transition:color .25s}
+.ei:hover .ei-name{color:var(--cr)}
+.ei-sub{font-size:10px;color:var(--gold);margin-top:4px;letter-spacing:.5px}
+
+/* SPEAKING */
+.speaking-list{margin-top:48px;max-width:880px;margin-left:auto;margin-right:auto}
+.si{display:grid;grid-template-columns:110px 1fr auto;gap:28px;align-items:start;padding:20px 0;border-bottom:1px solid var(--lg);transition:padding-left .25s}
+.si:hover{padding-left:6px}
+.si:last-child{border-bottom:none}
+.si-date{font-size:10px;letter-spacing:2px;color:var(--gold);text-transform:uppercase;padding-top:3px}
+.si-title{font-family:'Playfair Display',serif;font-size:16px;color:var(--cr);margin-bottom:4px;font-weight:600}
+.si-org{font-size:13px;color:var(--gray)}
+.si-role{font-size:10px;letter-spacing:1.5px;text-transform:uppercase;color:var(--gold);border:1px solid var(--gold);padding:5px 10px;white-space:nowrap;align-self:center}
+
+/* CONTACT */
+.contact{background:var(--crd);display:grid;grid-template-columns:1fr 1fr;gap:72px}
+.contact .sec-h{color:var(--cream)}
+.contact .sec-eye{color:var(--gold)}
+.contact-quote{font-family:'Playfair Display',serif;font-size:18px;font-style:italic;color:rgba(245,241,232,.8);line-height:1.7;margin-top:18px;padding-left:18px;border-left:2px solid var(--gold)}
+.cinfo{margin-top:36px;display:flex;flex-direction:column;gap:14px}
+.ci{display:flex;align-items:center;gap:12px}
+.ci-icon{width:34px;height:34px;background:var(--gold);display:flex;align-items:center;justify-content:center;font-size:13px;flex-shrink:0;color:var(--crd)}
+.ci-text{font-size:14px;color:var(--cream)}
+.fg{margin-bottom:18px}
+.fg label{display:block;font-size:10px;letter-spacing:2px;text-transform:uppercase;color:rgba(245,241,232,.55);margin-bottom:7px}
+.fg input,.fg select,.fg textarea{width:100%;background:rgba(255,255,255,.08);border:1px solid rgba(245,241,232,.18);padding:12px 14px;font-size:13px;font-family:'DM Sans',sans-serif;color:var(--cream);outline:none;transition:border-color .25s;appearance:none}
+.fg input:focus,.fg select:focus,.fg textarea:focus{border-color:var(--gold)}
+.fg select option{background:var(--crd);color:var(--cream)}
+.fg textarea{resize:vertical;min-height:90px}
+.frow{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.sbtn{width:100%;background:var(--gold);color:var(--crd);border:none;padding:14px;font-size:11px;letter-spacing:3px;text-transform:uppercase;cursor:pointer;font-family:'DM Sans',sans-serif;font-weight:600;transition:background .25s}
+.sbtn:hover{background:var(--gold-l,#dfc285)}
+.ok{display:none;background:rgba(201,169,97,.15);border:1px solid var(--gold);padding:14px;text-align:center;color:var(--gold);font-size:13px;margin-top:12px}
+
+/* FOOTER */
+footer{background:#1a0a0c;padding:44px 60px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:18px}
+.fb{font-family:'Playfair Display',serif;font-size:17px;color:var(--cream);font-weight:600}
+.fs{font-size:10px;color:rgba(255,255,255,.35);margin-top:4px;letter-spacing:1px}
+.fl{display:flex;gap:22px;flex-wrap:wrap}
+.fl a{text-decoration:none;font-size:10px;letter-spacing:2px;text-transform:uppercase;color:rgba(255,255,255,.35);transition:color .25s}
+.fl a:hover{color:var(--gold)}
+.fc{width:100%;padding-top:20px;border-top:1px solid rgba(255,255,255,.06);font-size:10px;color:rgba(255,255,255,.2);letter-spacing:1px}
+
+/* MODAL */
+.mov{display:none;position:fixed;inset:0;background:rgba(0,0,0,.48);z-index:2000;align-items:center;justify-content:center}
+.mov.on{display:flex}
+.modal{background:#fff;border-radius:10px;padding:30px;max-width:460px;width:92%;position:relative;animation:pop .2s ease}
+@keyframes pop{from{opacity:0;transform:scale(.95) translateY(-12px)}to{opacity:1;transform:scale(1) translateY(0)}}
+.mclose{position:absolute;top:12px;right:16px;font-size:22px;cursor:pointer;color:#aaa;border:none;background:none}
+.mclose:hover{color:#333}
+.mbadge{display:inline-block;font-size:10px;letter-spacing:2px;font-weight:700;padding:3px 12px;border-radius:20px;margin-bottom:10px}
+.mb3{background:var(--cr);color:#fff}.mb2{background:#9B4D5E;color:#fff}.mb1{background:var(--cream);color:var(--cr);border:1px solid var(--gold)}
+.mtitle{font-size:20px;font-weight:700;color:var(--cr);margin-bottom:5px;font-family:'Playfair Display',serif}
+.msub{font-size:12px;color:var(--gold);font-weight:600;margin-bottom:12px}
+.mline{height:1px;background:#f0ece4;margin-bottom:12px}
+.mbody{font-size:13px;line-height:1.85;color:#444;margin-bottom:20px}
+.mbtn1{display:block;width:100%;background:var(--cr);color:#fff;border:none;padding:12px;font-size:12px;letter-spacing:1px;cursor:pointer;border-radius:6px;text-align:center;text-decoration:none;transition:background .2s;font-family:'DM Sans',sans-serif}
+.mbtn1:hover{background:var(--crd)}
+.mbtn2{display:block;width:100%;background:transparent;color:var(--cr);border:1px solid var(--cr);padding:11px;font-size:12px;cursor:pointer;border-radius:6px;text-align:center;text-decoration:none;margin-top:8px;transition:all .2s;font-family:'DM Sans',sans-serif}
+.mbtn2:hover{background:var(--cr);color:#fff}
+
+/* FADE */
+.fi{opacity:0;transform:translateY(22px);transition:opacity .65s ease,transform .65s ease}
+.fi.vis{opacity:1;transform:translateY(0)}
+
+/* MOBILE */
+@media(max-width:900px){
+  nav{padding:14px 20px}
+  .nav-links{display:none}
+  .hbg{display:flex}
+  .hero h1{font-size:38px}
+  .stats{grid-template-columns:repeat(2,1fr);padding:36px 24px}
+  section{padding:60px 24px}
+  .research-grid{grid-template-columns:1fr 1fr}
+  .about-wrap{grid-template-columns:1fr}
+  .svc-grid{grid-template-columns:1fr}
+  .svc-grid-2{grid-template-columns:1fr}
+  .mission-grid{grid-template-columns:repeat(2,1fr)}
+  .collab-grid{grid-template-columns:1fr}
+  .pg-grid{grid-template-columns:1fr}
+  .endorse-grid{grid-template-columns:repeat(3,1fr)}
+  .si{grid-template-columns:1fr;gap:6px}
+  .si-role{display:none}
+  .contact{grid-template-columns:1fr;padding:60px 24px;gap:36px}
+  .frow{grid-template-columns:1fr}
+  footer{padding:28px 20px}
+  .mtss-layout{flex-direction:column;gap:24px}
+}
+@media(max-width:500px){
+  .research-grid{grid-template-columns:1fr}
+  .endorse-grid{grid-template-columns:repeat(2,1fr)}
+  .mission-grid{grid-template-columns:1fr}
+}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a href="#" class="logo">Becky Chen | AI Psych Lab</a>
+  <ul class="nav-links">
+    <li><a href="#about">关于我</a></li>
+    <li><a href="#services">服务</a></li>
+    <li><a href="#endorse">机构背书</a></li>
+    <li><a href="#speaking">演讲经历</a></li>
+    <li><a href="#contact" class="nav-cta">预约咨询</a></li>
+  </ul>
+  <button class="lang-btn" onclick="toggleLang()">EN</button>
+  <button class="hbg" onclick="document.getElementById('mob').classList.toggle('open')" style="margin-left:12px">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+<div id="mob" style="display:none;position:fixed;top:60px;left:0;right:0;background:var(--cream);padding:20px;border-bottom:1px solid var(--lg);z-index:998">
+  <div style="display:flex;flex-direction:column;gap:14px">
+    <a href="#about" style="text-decoration:none;font-size:13px;letter-spacing:1px;color:var(--dark);text-transform:uppercase" onclick="document.getElementById('mob').classList.remove('open')">关于我</a>
+    <a href="#services" style="text-decoration:none;font-size:13px;letter-spacing:1px;color:var(--dark);text-transform:uppercase" onclick="document.getElementById('mob').classList.remove('open')">服务</a>
+    <a href="#endorse" style="text-decoration:none;font-size:13px;letter-spacing:1px;color:var(--dark);text-transform:uppercase" onclick="document.getElementById('mob').classList.remove('open')">机构背书</a>
+    <a href="#speaking" style="text-decoration:none;font-size:13px;letter-spacing:1px;color:var(--dark);text-transform:uppercase" onclick="document.getElementById('mob').classList.remove('open')">演讲经历</a>
+    <a href="#contact" style="text-decoration:none;font-size:13px;letter-spacing:1px;color:var(--cr);text-transform:uppercase;font-weight:600" onclick="document.getElementById('mob').classList.remove('open')">预约咨询</a>
+  </div>
+</div>
+
+<!-- HERO -->
+<!-- 💡 把你的哈佛校园照片命名为 hero-bg.jpg 放在同一文件夹即可显示 -->
+<section class="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-photo-overlay"></div>
+  <div class="hero-content">
+    <span class="hero-eyebrow">Harvard Alumni Founded · JHU Research Based</span>
+    <h1>科学养育，温暖同行</h1>
+    <p class="hero-sub">结合人工智能与脑科学研究，为家庭提供循证的教育规划与心理养育支持</p>
+    <p class="hero-tags-row">
+      <span>AI × 脑科学</span>|<span>循证教育规划</span>|<span>家庭心理养育</span>|<span>跨文化成长支持</span>
+    </p>
+    <div class="hero-btns">
+      <a href="#services" class="btn-primary">了解我们的研究</a>
+      <a href="#contact" class="btn-outline">预约服务</a>
+    </div>
+  </div>
+</section>
+
+<!-- RESEARCH -->
+<section class="fi" style="background:var(--creamd)">
+  <div class="sec-head">
+    <span class="sec-eye">Research</span>
+    <h2 class="sec-h">我们的研究方向</h2>
+    <div class="sec-bar"></div>
+  </div>
+  <div class="research-grid">
+    <div class="rc" onclick="toggleRC(this)">
+      <div class="rc-head">
+        <div class="rc-title">AI 与心理教育</div>
+        <span class="rc-plus">+</span>
+      </div>
+      <div class="rc-preview">探索人工智能如何辅助个性化心理支持与教育规划</div>
+      <div class="rc-detail"><p>探索AI如何辅助个性化心理评估与教育规划。研究方向包括：AI辅助学习风格评估系统、自然语言处理在心理支持中的应用、个性化成长路径算法设计。AI Psych Lab正在开发基于脑科学数据的AI评估工具，为每个孩子生成专属成长报告。</p></div>
+    </div>
+    <div class="rc" onclick="toggleRC(this)">
+      <div class="rc-head">
+        <div class="rc-title">神经多样性与学习</div>
+        <span class="rc-plus">+</span>
+      </div>
+      <div class="rc-preview">基于脑科学的 ADHD、自闭症等神经多样性儿童支持</div>
+      <div class="rc-detail"><p>基于约翰斯·霍普金斯大学神经教育研究，为ADHD、自闭症谱系及其他神经多样性青少年提供循证支持。研究方向：神经多样性学习模式识别、执行功能干预方案设计、学校融合教育支持体系。创始人已积累1000+小时一线临床经验。</p></div>
+    </div>
+    <div class="rc" onclick="toggleRC(this)">
+      <div class="rc-head">
+        <div class="rc-title">跨文化心理适应</div>
+        <span class="rc-plus">+</span>
+      </div>
+      <div class="rc-preview">海外华人家庭与留学生的文化身份与心理健康研究</div>
+      <div class="rc-detail"><p>研究海外华人家庭与留学生在文化转换过程中的心理适应机制。研究方向：文化身份认同建构、双文化心理韧性培养、跨文化家庭系统动力。已为EducationUSA官方合作课程设计者，服务覆盖美、英、澳、新。</p></div>
+    </div>
+    <div class="rc" onclick="toggleRC(this)">
+      <div class="rc-head">
+        <div class="rc-title">家庭系统与养育科学</div>
+        <span class="rc-plus">+</span>
+      </div>
+      <div class="rc-preview">基于依附理论的亲子关系与家庭动力研究</div>
+      <div class="rc-detail"><p>基于依附理论与家庭系统治疗理论，研究亲子关系对儿童心理发展的长远影响。研究方向：安全依附关系建立、家庭沟通模式优化、高净值家庭教育焦虑干预。研究成果已应用于教育部全国教师培训网络课程。</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- STATS -->
+<div class="stats fi">
+  <div><span class="sn">1,000+</span><span class="sl">临床服务小时</span></div>
+  <div><span class="sn">10,000+</span><span class="sl">社群覆盖人数</span></div>
+  <div><span class="sn">12</span><span class="sl">演讲场次</span></div>
+  <div><span class="sn">3</span><span class="sl">顶尖学术机构</span></div>
+</div>
+
+<!-- ABOUT -->
+<section id="about" style="background:#fff" class="fi">
+  <div class="sec-head">
+    <span class="sec-eye">About</span>
+    <h2 class="sec-h">关于我们</h2>
+    <div class="sec-bar"></div>
+  </div>
+  <div class="about-wrap">
+    <!-- 💡 把你的照片命名为 becky.jpg 放同一文件夹，或用下面的占位符 -->
+    <img src="becky.jpg" alt="Becky Chen" class="about-photo" onerror="this.style.display='none';document.getElementById('apholder').style.display='flex'">
+    <div id="apholder" class="about-photo-placeholder" style="display:none">
+      <div>📷<br><br>添加照片：<br>becky.jpg</div>
+    </div>
+    <div>
+      <div class="about-quote">"学术根基 × 临床深度 × 人文温度"</div>
+      <p class="about-intro">AI Psych Lab 由哈佛教育研究生院校友 Yiyi (Becky) Chen 创立，是一个连接顶尖学术研究与家庭实践的跨学科平台。我们以约翰斯·霍普金斯大学与哈佛大学的脑科学研究为基础，致力于将前沿心理教育研究转化为可落地的家庭养育与学校支持方案。</p>
+      <div class="cred-block">
+        <div class="cred-cat">学历背景</div>
+        <ul class="cred-list">
+          <li>JHU PhD · AI心理教育与神经教育（在读）</li>
+          <li>Harvard HGSE Ed.M · 学校心理咨询</li>
+          <li>UC Berkeley BA · 心理学</li>
+        </ul>
+      </div>
+      <div class="cred-block">
+        <div class="cred-cat">专业资质</div>
+        <ul class="cred-list">
+          <li>APA Associate Member · 美国心理学协会准会员</li>
+          <li>IAAP 国际分析心理学协会会员</li>
+          <li>1,000+ 小时神经多样性青少年临床经验</li>
+        </ul>
+      </div>
+      <div class="cred-block">
+        <div class="cred-cat">行业身份</div>
+        <ul class="cred-list">
+          <li>哈佛中国教育论坛 14/16/17届负责人</li>
+          <li>HGSE全球校友会主席</li>
+          <li>企业家助残论坛2025主席</li>
+        </ul>
+      </div>
+      <div class="cred-block">
+        <div class="cred-cat">国际背景</div>
+        <ul class="cred-list">
+          <li>前联合国UNICEF顾问</li>
+          <li>EducationUSA 特邀讲师</li>
+          <li>iOffer.AI 联创 COO</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SERVICES -->
+<section id="services" style="background:var(--cream)" class="fi">
+  <div class="sec-head">
+    <span class="sec-eye">Services</span>
+    <h2 class="sec-h">我们的服务</h2>
+    <div class="sec-bar"></div>
+  </div>
+  <p class="svc-intro">别的顾问问孩子想去哪所学校。我们先问：这个孩子是谁？他的内驱力在哪里？什么样的环境能让他真正成长？<br>我们用心理学的视角解决教育问题——这是我们与所有教育规划机构最本质的区别。</p>
+
+  <!-- MTSS -->
+  <div class="mtss-section">
+    <div class="mtss-label">我们的服务框架：基于 MTSS 多层次支持体系</div>
+    <div class="mtss-layout">
+      <svg width="260" height="330" viewBox="0 0 260 330" xmlns="http://www.w3.org/2000/svg">
+        <polygon class="ct" points="130,8 78,125 182,125" fill="#6B1C23" onclick="openM(3)"/>
+        <polygon class="ct" points="78,125 40,222 220,222 182,125" fill="#9B4D5E" onclick="openM(2)"/>
+        <polygon class="ct" points="40,222 6,320 254,320 220,222" fill="#F5F1E8" stroke="#C9A961" stroke-width="1.5" onclick="openM(1)"/>
+        <line x1="78" y1="125" x2="182" y2="125" stroke="rgba(255,255,255,.25)" stroke-width="1"/>
+        <line x1="40" y1="222" x2="220" y2="222" stroke="rgba(255,255,255,.25)" stroke-width="1"/>
+        <text x="130" y="65" text-anchor="middle" fill="white" font-size="22" font-weight="700" font-family="DM Sans">3</text>
+        <text x="130" y="86" text-anchor="middle" fill="rgba(255,255,255,.85)" font-size="10.5">Tier 3 · 密集支持</text>
+        <text x="130" y="101" text-anchor="middle" fill="rgba(255,255,255,.6)" font-size="9.5">个体深度成长陪伴</text>
+        <text x="130" y="158" text-anchor="middle" fill="white" font-size="22" font-weight="700" font-family="DM Sans">2</text>
+        <text x="130" y="179" text-anchor="middle" fill="rgba(255,255,255,.85)" font-size="10.5">Tier 2 · 定向支持</text>
+        <text x="130" y="194" text-anchor="middle" fill="rgba(255,255,255,.6)" font-size="9.5">群体小组干预</text>
+        <text x="130" y="253" text-anchor="middle" fill="#6B1C23" font-size="22" font-weight="700" font-family="DM Sans">1</text>
+        <text x="130" y="274" text-anchor="middle" fill="#6B1C23" font-size="10.5">Tier 1 · 全体支持</text>
+        <text x="130" y="289" text-anchor="middle" fill="#9B6B3A" font-size="9.5">全校·全家庭·全员预防</text>
+        <text x="130" y="310" text-anchor="middle" fill="#C9A961" font-size="9">点击各层了解详情</text>
+      </svg>
+      <div class="mtss-lbls">
+        <div class="mlbl ml3" onclick="openM(3)"><div class="mlt">Tier 3 · 密集支持</div><div class="mls">个体深度成长陪伴</div><div class="mlv">对应：个人教育规划与成长陪伴</div><div class="mlm">点击了解详情 →</div></div>
+        <div class="mlbl ml2" onclick="openM(2)"><div class="mlt">Tier 2 · 定向支持</div><div class="mls">群体小组定向干预</div><div class="mlv">对应：家庭养育指导 & 留学生支持</div><div class="mlm">点击了解详情 →</div></div>
+        <div class="mlbl ml1" onclick="openM(1)"><div class="mlt">Tier 1 · 全体支持</div><div class="mls">全校·全家庭·全员预防</div><div class="mlv">对应：校园合作 & 企业员工培训</div><div class="mlm">点击了解详情 →</div></div>
+      </div>
+    </div>
+    <p class="mtss-desc">Multi-Tiered System of Supports（MTSS）是美国K-12学校广泛采用的循证支持框架。AI Psych Lab将MTSS理念融入每一项服务设计，确保每个孩子、家庭与员工在正确的层级获得恰当的支持。</p>
+  </div>
+
+  <!-- 3 cards row 1 -->
+  <div class="svc-grid">
+    <div class="svc-card">
+      <div class="svc-tier">Tier 1-2-3 · 全层级AI素养支持</div>
+      <span class="svc-icon">🤖</span>
+      <h3 class="svc-title">AI时代青少年素养培育</h3>
+      <div class="svc-method">人机协作 × 数字心理健康</div>
+      <div class="svc-tags"><span class="svc-tag">AI编程启蒙</span><span class="svc-tag">1对1深度学习</span><span class="svc-tag">数字心理健康</span></div>
+      <p class="svc-body">AI时代，每个孩子都需要学会与AI协作——而不是被AI取代。基于约翰斯·霍普金斯大学神经教育研究与哈佛脑科学训练，为6-18岁青少年提供适龄的AI素养课程与1对1深度学习支持，涵盖Claude、ChatGPT等主流AI工具应用、Python与AI编程启蒙、AI辅助学术研究技巧、人机协作思维与数字心理健康。</p>
+      <p class="svc-fit">适合：6-18岁青少年，希望建立AI素养的家庭与学校</p>
+      <a href="#contact" class="svc-btn">预约免费探索评估</a>
+    </div>
+    <div class="svc-card">
+      <div class="svc-tier">Tier 3 · 密集个体支持</div>
+      <span class="svc-icon">🎓</span>
+      <h3 class="svc-title">个人教育规划与成长陪伴</h3>
+      <div class="svc-method">以心理评估为底座的成长规划</div>
+      <p class="svc-body">我们相信，真正好的教育规划从了解这个孩子开始。基于哈佛脑科学研究与1000+小时临床经验，深度评估孩子的学习风格、情绪模式与内在驱动力。在AI时代，同时帮助青少年建立AI素养，学会与AI协作而不是被AI取代。不只规划去哪里，更陪伴他成为更好的自己。年度会员制，支持季度分期。</p>
+      <p class="svc-fit">适合：有升学规划或成长困惑的青少年及家庭</p>
+      <a href="#contact" class="svc-btn">预约免费探索评估</a>
+    </div>
+    <div class="svc-card">
+      <div class="svc-tier">Tier 2-3 · 家庭系统支持</div>
+      <span class="svc-icon">🏡</span>
+      <h3 class="svc-title">家庭养育指导与亲子关系陪伴</h3>
+      <div class="svc-method">基于家庭系统治疗理论</div>
+      <p class="svc-body">最好的教育投资，是父母自己的成长。AI时代的家庭面临全新挑战：孩子沉迷屏幕、亲子沟通断层、父母对AI教育焦虑迷茫。基于家庭系统治疗理论，帮助家庭建立健康的AI使用边界，改善沟通模式，让家庭在科技时代保持真实的情感连接与养育力量。年度会员制，支持季度分期。</p>
+      <p class="svc-fit">适合：希望提升家庭关系质量的精英父母</p>
+      <a href="#contact" class="svc-btn">预约免费探索评估</a>
+    </div>
+  </div>
+  <!-- 2 cards row 2 -->
+  <div class="svc-grid-2">
+    <div class="svc-card">
+      <div class="svc-tier">Tier 1-2 · 全校/全员系统支持</div>
+      <span class="svc-icon">🏫</span>
+      <h3 class="svc-title">校园心理健康合作项目及企业员工培训</h3>
+      <div class="svc-method">B2B机构合作 · 可定制化方案</div>
+      <p class="svc-body">与K-12学校及企业建立长期心理健康合作。学校端：基于MTSS框架提供学生成长评估、AI时代青少年心理健康专项课程、Tier 1全校预防性课程、教师培训；企业端：提供员工AI转型期心理适应培训、EAP支持方案及AI时代团队韧性建设工作坊。AI Psych Lab作为长期专业合作伙伴，而非一次性服务提供商。</p>
+      <p class="svc-fit">适合：希望建立系统性心理健康支持的学校与企业</p>
+      <a href="#contact" class="svc-btn">预约免费探索评估</a>
+    </div>
+    <div class="svc-card">
+      <div class="svc-tier">Tier 2-3 · 跨文化专项支持</div>
+      <span class="svc-icon">✈️</span>
+      <h3 class="svc-title">留学生全程成长支持</h3>
+      <div class="svc-method">跨文化适应 × 心理韧性建设</div>
+      <p class="svc-body">留学不只是换个地方读书，是一场深刻的自我重建。我们为赴美、英、澳、新的华人留学生提供中文语境下的专业支持，从出发前的心理准备到海外期间的持续陪伴。同时提供AI学习工具使用指导，帮助留学生用AI提升学术效率、适应海外AI教育环境，在异国真正扎根。已为EducationUSA官方合作课程设计者。</p>
+      <p class="svc-fit">适合：正在海外求学或即将出发的华人留学生</p>
+      <a href="#contact" class="svc-btn">预约免费探索评估</a>
+    </div>
+  </div>
+</section>
+
+<!-- MISSION -->
+<section class="mission fi">
+  <div class="sec-head">
+    <span class="sec-eye">Mission</span>
+    <h2 class="sec-h">我们服务的人群</h2>
+    <div class="sec-bar" style="background:rgba(201,169,97,.5)"></div>
+  </div>
+  <div class="mission-grid">
+    <div class="mc"><span class="mc-icon">🌱</span><div class="mc-title">成长中的孩子</div><div class="mc-body">需要科学支持与情绪陪伴的青少年，帮助他们建立自信、找到学习动力、健康度过青春期</div></div>
+    <div class="mc"><span class="mc-icon">🏠</span><div class="mc-title">在路上的家庭</div><div class="mc-body">正在经历留学、移居、跨文化适应的家庭，提供全方位的心理支持与适应指导</div></div>
+    <div class="mc"><span class="mc-icon">💼</span><div class="mc-title">高压中的父母</div><div class="mc-body">在事业与家庭之间寻找平衡的精英父母，帮助他们建立高质量的亲子连接</div></div>
+    <div class="mc"><span class="mc-icon">🎯</span><div class="mc-title">有梦想的年轻人</div><div class="mc-body">正在规划人生方向的大学生与青年，陪伴他们探索自我、实现潜能</div></div>
+  </div>
+</section>
+
+<!-- COLLAB -->
+<section style="background:#fff" class="fi">
+  <div class="sec-head">
+    <span class="sec-eye">Collaborate</span>
+    <h2 class="sec-h">与我们合作</h2>
+    <div class="sec-bar"></div>
+  </div>
+  <div class="collab-grid">
+    <div class="collab-card"><span class="cc-icon">🏫</span><div class="cc-title">学校与机构</div><div class="cc-body">为K-12学校及高中提供心理健康评估系统与教师培训，协助国内中小学与HGSE教授建立科研连接，推动哈佛研究在本土落地。</div><a href="#contact" class="cc-btn">申请学校合作</a></div>
+    <div class="collab-card"><span class="cc-icon">👨‍👩‍👧</span><div class="cc-title">家庭预约服务</div><div class="cc-body">AI辅助个性化成长评估、教育规划咨询、亲子关系指导。所有服务均签署保密协议，严守职业伦理，专属定制，支持季度分期。</div><a href="#contact" class="cc-btn">预约家庭服务</a></div>
+    <div class="collab-card"><span class="cc-icon">🔬</span><div class="cc-title">学术科研合作</div><div class="cc-body">面向中国高校及科研机构，AI Psych Lab作为桥梁对接HGSE研究团队，开展心理健康、神经教育及AI教育领域联合研究。</div><a href="#contact" class="cc-btn">提交科研申请</a></div>
+  </div>
+</section>
+
+<!-- PUBLIC GOOD -->
+<section class="pg fi">
+  <div class="sec-head">
+    <span class="sec-eye">Social Impact</span>
+    <h2 class="sec-h">社会影响与公益使命</h2>
+    <div class="sec-bar"></div>
+  </div>
+  <div class="pg-grid">
+    <div class="pg-item"><div class="pg-org">UNICEF China</div><div class="pg-title">联合国儿童基金会</div><div class="pg-body">参与儿童友好城市建设及包容性教育改革，设计的社会情感学习课程已被教育部纳入全国教师培训网络，覆盖全国教师群体。</div></div>
+    <div class="pg-item"><div class="pg-org">EFDF 2025</div><div class="pg-title">企业家助残论坛</div><div class="pg-body">担任2025年企业家助残论坛主席，推动40家企业实践残障融合与多元包容文化，倡导社会企业的包容性发展。</div></div>
+    <div class="pg-item"><div class="pg-org">Harvard × China</div><div class="pg-title">哈佛×中国科研桥梁计划</div><div class="pg-body">致力于为HGSE教授研究团队与中国本土教育机构搭建科研合作桥梁，推动心理教育领域国际学术交流，顶尖研究只有落地本土，才能真正改变每一个孩子的成长。</div></div>
+  </div>
+</section>
+
+<!-- ENDORSEMENTS -->
+<section id="endorse" style="background:#fff" class="fi">
+  <div class="sec-head">
+    <span class="sec-eye">Partners & Affiliations</span>
+    <h2 class="sec-h">机构背书</h2>
+    <div class="sec-bar"></div>
+  </div>
+  <div class="endorse-grid">
+    <div class="ei"><div class="ei-name">Harvard University</div><div class="ei-sub">哈佛大学</div></div>
+    <div class="ei"><div class="ei-name">Johns Hopkins University</div><div class="ei-sub">约翰斯·霍普金斯大学</div></div>
+    <div class="ei"><div class="ei-name">UC Berkeley</div><div class="ei-sub">加州大学伯克利分校</div></div>
+    <div class="ei"><div class="ei-name">Harvard Innovation Labs</div><div class="ei-sub">哈佛创新实验室</div></div>
+    <div class="ei"><div class="ei-name">U.S. Embassy Beijing</div><div class="ei-sub">美国驻华大使馆</div></div>
+    <div class="ei"><div class="ei-name">EducationUSA</div><div class="ei-sub">美国教育局</div></div>
+    <div class="ei"><div class="ei-name">UNICEF China</div><div class="ei-sub">联合国儿童基金会</div></div>
+    <div class="ei"><div class="ei-name">APA</div><div class="ei-sub">美国心理学协会</div></div>
+    <div class="ei"><div class="ei-name">IAAP</div><div class="ei-sub">国际分析心理学协会</div></div>
+    <div class="ei"><div class="ei-name">Harvard China Education Forum</div><div class="ei-sub">哈佛中国教育论坛</div></div>
+  </div>
+</section>
+
+<!-- SPEAKING -->
+<section id="speaking" style="background:var(--cream)" class="fi">
+  <div class="sec-head">
+    <span class="sec-eye">Speaking</span>
+    <h2 class="sec-h">演讲与活动经历</h2>
+    <div class="sec-bar"></div>
+  </div>
+  <div class="speaking-list">
+    <div class="si"><div class="si-date">04.2026</div><div><div class="si-title">哈佛中国教育研讨会 (CES) 青年学者论坛 — AI 与心理学</div><div class="si-org">Harvard China Education Symposium</div></div><div class="si-role">主旨演讲</div></div>
+    <div class="si"><div class="si-date">12.2025</div><div><div class="si-title">企业家助残论坛 (EFDF) 2025 — 推动40家企业残障融合</div><div class="si-org">Entrepreneur for Disability Forum</div></div><div class="si-role">论坛主席</div></div>
+    <div class="si"><div class="si-date">03.2025</div><div><div class="si-title">Zero Project 联合国维也纳 — 促进残障包容性 DEI</div><div class="si-org">Zero Project, UN Vienna</div></div><div class="si-role">圆桌嘉宾</div></div>
+    <div class="si"><div class="si-date">10.2024</div><div><div class="si-title">美国驻华大使馆 — 常春藤学校志愿者博览会</div><div class="si-org">U.S. Embassy Beijing</div></div><div class="si-role">总执行策划</div></div>
+    <div class="si"><div class="si-date">07.2024</div><div><div class="si-title">EducationUSA Mindful Adventure Camp — 课程设计与教学</div><div class="si-org">U.S. Consulate General Guangzhou</div></div><div class="si-role">组织者/讲师</div></div>
+    <div class="si"><div class="si-date">05.2024</div><div><div class="si-title">《在美留学的心理地图》</div><div class="si-org">EducationUSA</div></div><div class="si-role">主旨演讲</div></div>
+    <div class="si"><div class="si-date">04.2024</div><div><div class="si-title">《学校咨询中的学生心理健康优先》培训讲师</div><div class="si-org">UC Santa Barbara · Child Studies Lab</div></div><div class="si-role">培训讲师</div></div>
+    <div class="si"><div class="si-date">01.2024</div><div><div class="si-title">青少年心理健康讨论与分享会</div><div class="si-org">U.S. Embassy Beijing</div></div><div class="si-role">圆桌嘉宾</div></div>
+    <div class="si"><div class="si-date">10.2023</div><div><div class="si-title">哈佛中国教育研讨会 — 教育与非营利组织分论坛</div><div class="si-org">Harvard China Education Symposium</div></div><div class="si-role">主旨演讲</div></div>
+    <div class="si"><div class="si-date">05.2020</div><div><div class="si-title">德雷塞尔大学心理学系 — 第三届本科生心理研究年度研讨会</div><div class="si-org">Drexel University Psychology Department</div></div><div class="si-role">演讲者</div></div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact" class="contact fi">
+  <div>
+    <span class="sec-eye">Contact</span>
+    <h2 class="sec-h">预约免费探索评估</h2>
+    <div class="contact-quote">每一个内心的困惑，都值得被认真对待；每一段成长的旅程，都需要科学与温暖同行。</div>
+    <div class="cinfo">
+      <div class="ci"><div class="ci-icon">✉</div><div class="ci-text">becky@aipsychlab.com</div></div>
+      <div class="ci"><div class="ci-icon">🌐</div><div class="ci-text">aipsychlab.com</div></div>
+      <div class="ci"><div class="ci-icon">📍</div><div class="ci-text">北京 · 波士顿 · 全球远程</div></div>
+    </div>
+    <p style="margin-top:24px;font-size:11px;color:rgba(245,241,232,.45);line-height:1.7">所有咨询均签署保密协议 · 严守职业伦理<br>提交后24小时内回复</p>
+  </div>
+  <div>
+    <form onsubmit="submitForm(event)">
+      <div class="frow">
+        <div class="fg"><label>姓名 *</label><input type="text" required placeholder="您的姓名"></div>
+        <div class="fg"><label>联系方式 *</label><input type="text" required placeholder="手机或邮箱"></div>
+      </div>
+      <div class="fg"><label>服务类型 *</label>
+        <select required>
+          <option value="">请选择服务类型</option>
+          <option>AI时代青少年素养培育</option>
+          <option>个人教育规划与成长陪伴</option>
+          <option>家庭养育指导与亲子关系陪伴</option>
+          <option>校园/企业心理健康合作</option>
+          <option>留学生全程成长支持</option>
+          <option>学术科研合作</option>
+        </select>
+      </div>
+      <div class="fg"><label>机构类型（如适用）</label>
+        <select>
+          <option>个人/家庭</option>
+          <option>小学</option><option>初中</option><option>高中</option>
+          <option>国际学校</option><option>高等院校</option><option>企业</option><option>科研机构</option>
+        </select>
+      </div>
+      <div class="fg"><label>时间偏好</label><input type="text" placeholder="如：工作日下午、周末上午"></div>
+      <div class="fg"><label>简要说明（选填）</label><textarea placeholder="请简要描述您的需求或希望探讨的议题"></textarea></div>
+      <button type="submit" class="sbtn">提交预约申请</button>
+      <div class="ok" id="ok">✓ 已收到您的预约申请，我们将在24小时内与您联系。</div>
+    </form>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div><div class="fb">Becky Chen | AI Psych Lab</div><div class="fs">AIPSYCHLAB.COM · BECKY@AIPSYCHLAB.COM</div></div>
+  <div class="fl">
+    <a href="#about">关于我</a><a href="#services">服务</a>
+    <a href="#endorse">机构背书</a><a href="#speaking">演讲</a><a href="#contact">联系</a>
+  </div>
+  <div class="fc">© 2025 AI Psych Lab · Becky Chen · 保密协议保障 · 严守职业伦理 · All rights reserved</div>
+</footer>
+
+<!-- MTSS MODAL -->
+<div class="mov" id="mov" onclick="closeMout(event)">
+  <div class="modal">
+    <button class="mclose" onclick="closeM()">×</button>
+    <div class="mbadge" id="mb"></div>
+    <div class="mtitle" id="mt"></div>
+    <div class="msub" id="ms"></div>
+    <div class="mline"></div>
+    <div class="mbody" id="mbd"></div>
+    <a class="mbtn1" id="mb1" href="#contact" onclick="closeM()">预约免费探索评估</a>
+    <a class="mbtn2" id="mb2" href="#contact" style="display:none" onclick="closeM()">申请机构合作</a>
+  </div>
+</div>
+
+<script>
+// Mobile menu
+document.querySelector('.hbg').onclick=function(){
+  var m=document.getElementById('mob');
+  m.style.display=m.style.display==='none'?'block':'none'
+}
+
+// Research expand
+function toggleRC(el){
+  var wasOpen=el.classList.contains('open');
+  document.querySelectorAll('.rc').forEach(r=>r.classList.remove('open'));
+  if(!wasOpen)el.classList.add('open');
+}
+
+// Fade in
+var obs=new IntersectionObserver(function(entries){
+  entries.forEach(function(e){if(e.isIntersecting)e.target.classList.add('vis')});
+},{threshold:.12});
+document.querySelectorAll('.fi').forEach(function(el){obs.observe(el)});
+
+// Form
+function submitForm(e){
+  e.preventDefault();
+  document.getElementById('ok').style.display='block';
+  e.target.reset();
+  setTimeout(function(){document.getElementById('ok').style.display='none'},5000);
+}
+
+// MTSS modal data
+var MD={
+  3:{badge:'TIER 3 · 密集支持',bc:'mb3',title:'Tier 3 · 密集支持',sub:'适用人群：需要密集个体支持的青少年与家庭',body:'Tier 3是MTSS框架中强度最高的支持层级，为有复杂需求的个体提供高频次、高强度的专属陪伴。在AI Psych Lab，Tier 3对应我们的个人教育规划与成长陪伴服务，采用年度会员制，由创始人Becky Chen主导，全程1对1深度支持。每一位来访者都将获得基于脑科学的个性化评估报告与长期成长陪伴方案。',btn2:''},
+  2:{badge:'TIER 2 · 定向支持',bc:'mb2',title:'Tier 2 · 定向支持',sub:'适用人群：需要额外定向支持的特定群体',body:'Tier 2针对需要比普遍预防更多支持的群体，通过小组干预和定向辅导提供支持。在AI Psych Lab，Tier 2对应家庭养育指导与亲子关系陪伴、以及留学生全程成长支持服务，帮助有特定需求的家庭和学生建立更强的心理韧性，找到属于自己的方向。',btn2:''},
+  1:{badge:'TIER 1 · 全体支持',bc:'mb1',title:'Tier 1 · 全体支持',sub:'适用人群：全体学生、家庭成员及企业员工',body:'Tier 1是面向所有人的预防性心理健康建设，覆盖范围最广、支持强度最基础。在AI Psych Lab，Tier 1对应校园心理健康合作项目及企业员工培训，通过系统性课程、工作坊和培训帮助学校和企业建立全员心理健康文化，将心理支持融入日常生活。',btn2:'申请机构合作'}
+};
+function openM(t){
+  var d=MD[t];
+  document.getElementById('mb').textContent=d.badge;
+  document.getElementById('mb').className='mbadge '+d.bc;
+  document.getElementById('mt').textContent=d.title;
+  document.getElementById('ms').textContent=d.sub;
+  document.getElementById('mbd').textContent=d.body;
+  var b2=document.getElementById('mb2');
+  if(d.btn2){b2.textContent=d.btn2;b2.style.display='block';}else{b2.style.display='none';}
+  document.getElementById('mov').classList.add('on');
+}
+function closeM(){document.getElementById('mov').classList.remove('on')}
+function closeMout(e){if(e.target===document.getElementById('mov'))closeM()}
+document.addEventListener('keydown',function(e){if(e.key==='Escape')closeM()});
+
+// Lang toggle (placeholder)
+function toggleLang(){
+  var btn=document.querySelector('.lang-btn');
+  btn.textContent=btn.textContent==='EN'?'中':'EN';
+}
+</script>
+</body>
+</html>
