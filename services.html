@@ -56,44 +56,69 @@ footer{background:#1a0a0c;padding:44px 60px}
 .page-hero-eye{font-size:10px;letter-spacing:5px;text-transform:uppercase;color:var(--gold);margin-bottom:14px;display:block}
 .page-hero h1{font-family:'Playfair Display',serif;font-size:52px;color:#fff;font-weight:700;margin-bottom:16px}
 .page-hero p{font-size:15px;color:rgba(255,255,255,.75);max-width:580px;margin:0 auto;line-height:1.75}
-.lab-badge{display:inline-flex;align-items:center;gap:8px;background:var(--creamd);border:1px solid var(--lg);padding:9px 18px;font-size:10px;letter-spacing:2px;text-transform:uppercase;color:var(--gray);margin:0 auto 52px;display:flex;width:fit-content}
+.lab-badge{display:inline-flex;align-items:center;gap:8px;background:var(--creamd);border:1px solid var(--lg);padding:9px 18px;font-size:10px;letter-spacing:2px;text-transform:uppercase;color:var(--gray);width:fit-content}
 .lab-dot{width:6px;height:6px;border-radius:50%;background:var(--gold);flex-shrink:0}
-/* PRODUCT CARD unified */
-.product-block{margin-bottom:3px;border:1px solid var(--lg);overflow:hidden;transition:box-shadow .3s}
-.product-block:hover{box-shadow:0 20px 60px rgba(107,28,35,.1)}
+.product-block{margin-bottom:4px;overflow:hidden;transition:box-shadow .3s}
+.product-block:hover{box-shadow:0 20px 60px rgba(0,0,0,.15)}
 .pb-inner{display:grid;grid-template-columns:1fr 1fr}
-.pb-left{background:var(--cr);padding:52px 44px;position:relative;overflow:hidden}
-.pb-left::before{content:'';position:absolute;top:-100px;right:-100px;width:300px;height:300px;border-radius:50%;background:rgba(255,255,255,.025)}
-.pb-status{display:inline-block;font-size:9px;letter-spacing:2px;text-transform:uppercase;padding:4px 12px;margin-bottom:6px;font-weight:700}
-.pb-status-open{background:rgba(201,169,97,.2);color:var(--gold);border:1px solid rgba(201,169,97,.4)}
-.pb-status-soon{background:rgba(255,255,255,.08);color:rgba(255,255,255,.5);border:1px solid rgba(255,255,255,.2)}
-.pb-status-dev{background:rgba(255,255,255,.06);color:rgba(255,255,255,.4);border:1px solid rgba(255,255,255,.15)}
-.pb-badge{display:inline-block;font-size:9px;letter-spacing:2px;text-transform:uppercase;background:var(--gold);color:var(--crd);padding:5px 14px;margin-bottom:20px;font-weight:700;display:block;margin-top:8px}
-.pb-icon{font-size:44px;display:block;margin-bottom:16px}
-.pb-title{font-family:'Playfair Display',serif;font-size:32px;color:#fff;font-weight:700;line-height:1.15;margin-bottom:6px}
-.pb-en{font-size:11px;color:rgba(201,169,97,.7);letter-spacing:2.5px;margin-bottom:22px;display:block;text-transform:uppercase}
-.pb-desc{font-size:14px;line-height:1.85;color:rgba(255,255,255,.8);margin-bottom:28px}
-.pb-features{display:flex;flex-direction:column;gap:16px;margin-bottom:32px}
-.pb-feature{display:flex;align-items:flex-start;gap:14px}
-.pb-feat-icon{width:40px;height:40px;border:1px solid rgba(201,169,97,.35);display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0}
-.pb-feat-label{font-size:9px;color:var(--gold);letter-spacing:1.5px;text-transform:uppercase;display:block;margin-bottom:2px}
-.pb-feat-text{font-size:13px;color:rgba(255,255,255,.85);line-height:1.55}
-.pb-feat-note{font-size:10px;color:rgba(201,169,97,.55);font-style:italic;margin-top:2px}
-.pb-note{font-size:11px;color:rgba(201,169,97,.6);border-top:1px solid rgba(255,255,255,.1);padding-top:18px;margin-bottom:20px;line-height:1.6}
-.pb-cta{display:inline-block;background:var(--gold);color:var(--crd);padding:13px 28px;font-size:11px;letter-spacing:2px;text-transform:uppercase;border:none;cursor:pointer;font-family:'DM Sans',sans-serif;font-weight:700;transition:all .25s}
+
+/* Product 1 — Deep Red (flagship) */
+.pb-left-1{background:var(--cr);padding:52px 44px;position:relative;overflow:hidden}
+.pb-left-1::before{content:'';position:absolute;top:-80px;right:-80px;width:280px;height:280px;border-radius:50%;background:rgba(255,255,255,.03)}
+/* Product 2 — Deep Teal/Navy (AI/tech) */
+.pb-left-2{background:#1a3a4a;padding:52px 44px;position:relative;overflow:hidden}
+.pb-left-2::before{content:'';position:absolute;bottom:-80px;left:-60px;width:240px;height:240px;border-radius:50%;background:rgba(255,255,255,.025)}
+/* Product 3 — Deep Warm Brown (academic) */
+.pb-left-3{background:#3d2b1f;padding:52px 44px;position:relative;overflow:hidden}
+.pb-left-3::before{content:'';position:absolute;top:-60px;right:-40px;width:200px;height:200px;border-radius:50%;background:rgba(255,255,255,.025)}
+
+.pb-status{display:inline-block;font-size:9px;letter-spacing:2px;text-transform:uppercase;padding:4px 12px;font-weight:700;margin-bottom:8px}
+.pb-status-open{background:rgba(201,169,97,.25);color:var(--gold);border:1px solid rgba(201,169,97,.5)}
+.pb-status-soon{background:rgba(100,200,220,.15);color:#7ecfdf;border:1px solid rgba(100,200,220,.3)}
+.pb-status-dev{background:rgba(201,169,97,.12);color:rgba(201,169,97,.7);border:1px solid rgba(201,169,97,.25)}
+
+.pb-badge{display:inline-block;font-size:9px;letter-spacing:2px;text-transform:uppercase;background:var(--gold);color:#1a0a0c;padding:5px 14px;margin-bottom:20px;font-weight:700;display:block;margin-top:8px}
+
+/* Text label replacing icon */
+.pb-wordmark{font-family:'Playfair Display',serif;font-size:11px;letter-spacing:4px;text-transform:uppercase;color:rgba(255,255,255,.25);margin-bottom:12px;display:block}
+
+.pb-title{font-family:'Playfair Display',serif;font-size:30px;color:#fff;font-weight:700;line-height:1.15;margin-bottom:6px}
+.pb-en{font-size:11px;color:rgba(201,169,97,.65);letter-spacing:2.5px;margin-bottom:22px;display:block;text-transform:uppercase}
+.pb-desc{font-size:14px;line-height:1.85;color:rgba(255,255,255,.78);margin-bottom:28px}
+
+.pb-features{display:flex;flex-direction:column;gap:18px;margin-bottom:32px}
+.pb-feature{display:flex;align-items:flex-start;gap:16px}
+.pb-feat-label-wrap{flex-shrink:0;width:36px;padding-top:2px}
+.pb-feat-label{font-family:'Playfair Display',serif;font-size:22px;font-weight:700;color:rgba(201,169,97,.35);line-height:1}
+.pb-feat-content{}
+.pb-feat-title{font-size:10px;color:var(--gold);letter-spacing:1.5px;text-transform:uppercase;display:block;margin-bottom:3px}
+.pb-feat-text{font-size:13px;color:rgba(255,255,255,.82);line-height:1.6}
+.pb-feat-note{font-size:10px;color:rgba(201,169,97,.5);font-style:italic;margin-top:2px}
+
+.pb-note{font-size:11px;color:rgba(201,169,97,.55);border-top:1px solid rgba(255,255,255,.08);padding-top:18px;margin-bottom:20px;line-height:1.7}
+.pb-cta{display:inline-block;background:var(--gold);color:#1a0a0c;padding:13px 28px;font-size:11px;letter-spacing:2px;text-transform:uppercase;border:none;cursor:pointer;font-family:'DM Sans',sans-serif;font-weight:700;transition:all .25s}
 .pb-cta:hover{background:#dfc285;transform:translateY(-2px)}
+
 .pb-right{padding:52px 44px;background:#fff;display:flex;flex-direction:column;justify-content:center}
 .pb-process-label{font-size:9px;letter-spacing:3px;text-transform:uppercase;color:var(--gold);margin-bottom:24px}
-.pb-step{display:flex;gap:16px;margin-bottom:22px;padding-bottom:22px;border-bottom:1px solid var(--lg)}
+.pb-step{display:flex;gap:16px;margin-bottom:20px;padding-bottom:20px;border-bottom:1px solid var(--lg)}
 .pb-step:last-child{border-bottom:none;margin-bottom:0;padding-bottom:0}
-.pb-step-num{width:34px;height:34px;background:var(--cr);color:#fff;display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:700;flex-shrink:0;font-family:'Playfair Display',serif}
+.pb-step-num{width:34px;height:34px;color:#fff;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:700;flex-shrink:0;font-family:'Playfair Display',serif}
+.pb-step-num-1{background:var(--cr)}
+.pb-step-num-2{background:#1a3a4a}
+.pb-step-num-3{background:#3d2b1f}
 .pb-step-title{font-size:14px;font-weight:600;color:var(--dark);margin-bottom:4px}
 .pb-step-desc{font-size:12px;color:var(--gray);line-height:1.75}
-.pb-who{margin-top:28px;padding:20px 22px;background:var(--creamd);border-left:2px solid var(--gold)}
+.pb-who{margin-top:24px;padding:20px 22px;background:var(--creamd)}
 .pb-who-label{font-size:9px;letter-spacing:2px;text-transform:uppercase;color:var(--gold);margin-bottom:8px}
-.pb-who-text{font-size:13px;color:var(--dark);line-height:1.75}
-.pb-quote{margin-top:18px;font-family:'Playfair Display',serif;font-size:13px;font-style:italic;color:var(--cr);line-height:1.7;border-top:1px solid var(--lg);padding-top:18px}
-@media(max-width:900px){.page-hero{padding:110px 24px 60px}.page-hero h1{font-size:36px}section{padding:60px 24px}.pb-inner{grid-template-columns:1fr}.pb-left,.pb-right{padding:40px 28px}}
+.pb-who-label-2{color:#2a7a8a}
+.pb-who-label-3{color:#7a5a3a}
+.pb-who-text{font-size:13px;color:var(--dark);line-height:1.8}
+.pb-quote{margin-top:16px;font-family:'Playfair Display',serif;font-size:13px;font-style:italic;color:var(--cr);line-height:1.7;border-top:1px solid var(--lg);padding-top:16px}
+.pb-quote-2{color:#1a3a4a}
+.pb-quote-3{color:#3d2b1f}
+
+@media(max-width:900px){.page-hero{padding:110px 24px 60px}.page-hero h1{font-size:36px}section{padding:60px 24px}.pb-inner{grid-template-columns:1fr}.pb-left-1,.pb-left-2,.pb-left-3,.pb-right{padding:40px 28px}}
 
 </style>
 </head>
@@ -121,88 +146,89 @@ footer{background:#1a0a0c;padding:44px 60px}
   <p class="en-only">Three products, three tiers, one evidence-based framework — every design decision backed by lab research</p>
 </div>
 
-<section style="background:var(--cream)" class="fi">
+<section style="background:var(--cream)">
   <div style="text-align:center;margin-bottom:52px">
-    <div class="lab-badge"><span class="lab-dot"></span><span class="zh-only">所有产品均基于 MTSS 循证框架 · JHU + Harvard 实验室研究</span><span class="en-only">All products grounded in MTSS framework · JHU + Harvard lab research</span><span class="lab-dot"></span></div>
-    <p style="font-family:'Playfair Display',serif;font-size:18px;font-style:italic;color:var(--dark);line-height:1.7;max-width:660px;margin:0 auto;opacity:.8">
+    <div class="lab-badge" style="margin:0 auto 28px"><span class="lab-dot"></span><span class="zh-only">所有产品均基于 MTSS 循证框架 · JHU + Harvard 实验室研究</span><span class="en-only">All products grounded in MTSS framework · JHU + Harvard lab research</span><span class="lab-dot"></span></div>
+    <p style="font-family:'Playfair Display',serif;font-size:18px;font-style:italic;color:var(--dark);line-height:1.7;max-width:640px;margin:0 auto;opacity:.8">
       <span class="zh-only">我们不问孩子想去哪所学校。<br>我们先问：这个孩子是谁？他的内驱力在哪里？</span>
       <span class="en-only">We don't ask which school your child wants to attend.<br>We ask first: Who is this child? Where does their drive come from?</span>
     </p>
   </div>
 
-  <!-- PRODUCT 1: 家庭未来力实验室 -->
+  <!-- PRODUCT 1: 家庭未来力实验室 — Deep Red -->
   <div class="product-block fi">
     <div class="pb-inner">
-      <div class="pb-left">
-        <span class="pb-status pb-status-open zh-only">&#10022; 现已开放申请</span>
-        <span class="pb-status pb-status-open en-only">&#10022; Now Accepting Applications</span>
+      <div class="pb-left-1">
+        <span class="pb-status pb-status-open zh-only">现已开放申请</span>
+        <span class="pb-status pb-status-open en-only">Now Accepting Applications</span>
         <span class="pb-badge">MTSS Tier 3 · <span class="zh-only">精品家庭服务</span><span class="en-only">Premium Family Service</span></span>
-        <span class="pb-icon">&#128293;</span>
-        <div class="pb-title zh-only">家庭未来力实验室</div>
-        <div class="pb-title en-only">Family Future Readiness Lab</div>
+        <span class="pb-wordmark zh-only">家庭未来力实验室</span>
+        <span class="pb-wordmark en-only">Future Readiness Lab</span>
+        <div class="pb-title zh-only">家庭未来力<br>实验室</div>
+        <div class="pb-title en-only">Family Future<br>Readiness Lab</div>
         <span class="pb-en">Future Readiness Lab</span>
-        <p class="pb-desc zh-only">基于 JHU 与 Harvard 实验室研究，用AI与脑科学帮孩子建立真正属于自己的内在系统——让他成为在AI时代能真正站稳的人。每一个评估结论，都有研究文献支撑，不是经验，是科学。</p>
-        <p class="pb-desc en-only">Grounded in JHU and Harvard lab research, using AI and neuroscience to help each child build their own inner system — becoming someone who can truly thrive in the AI era. Every assessment conclusion is backed by research evidence — not intuition, but science.</p>
+        <p class="pb-desc zh-only">基于 JHU 与 Harvard 实验室研究，用AI与脑科学帮孩子建立真正属于自己的内在系统。每一个评估结论，都有研究文献支撑——不是经验，是科学。</p>
+        <p class="pb-desc en-only">Grounded in JHU and Harvard lab research, using AI and neuroscience to help each child build their inner system. Every conclusion is backed by research — not intuition, but science.</p>
         <div class="pb-features">
           <div class="pb-feature">
-            <div class="pb-feat-icon">&#128293;</div>
-            <div>
-              <span class="pb-feat-label zh-only">支柱一 · 内驱力</span><span class="pb-feat-label en-only">Pillar 1 · Intrinsic Drive</span>
+            <div class="pb-feat-label-wrap"><div class="pb-feat-label">一</div></div>
+            <div class="pb-feat-content">
+              <span class="pb-feat-title zh-only">内驱力</span><span class="pb-feat-title en-only">Intrinsic Drive</span>
               <div class="pb-feat-text zh-only">找到真正属于孩子的动力内核与兴趣锚点，绘制专属《动力地图》</div>
               <div class="pb-feat-text en-only">Uncovering the child's authentic motivation core and interest anchors, producing a bespoke Motivation Map</div>
-              <div class="pb-feat-note zh-only">研究支撑：内驱力神经科学 · JHU</div><div class="pb-feat-note en-only">Research: Motivational Neuroscience · JHU</div>
+              <div class="pb-feat-note zh-only">研究：内驱力神经科学 · JHU</div><div class="pb-feat-note en-only">Research: Motivational Neuroscience · JHU</div>
             </div>
           </div>
           <div class="pb-feature">
-            <div class="pb-feat-icon">&#129504;</div>
-            <div>
-              <span class="pb-feat-label zh-only">支柱二 · 情绪管理</span><span class="pb-feat-label en-only">Pillar 2 · Emotional Regulation</span>
+            <div class="pb-feat-label-wrap"><div class="pb-feat-label">二</div></div>
+            <div class="pb-feat-content">
+              <span class="pb-feat-title zh-only">情绪管理</span><span class="pb-feat-title en-only">Emotional Regulation</span>
               <div class="pb-feat-text zh-only">建立可持续的情绪韧性与自我调节系统，应对AI时代的焦虑与不确定性</div>
-              <div class="pb-feat-text en-only">Building sustainable emotional resilience and self-regulation to navigate AI-era anxiety and uncertainty</div>
-              <div class="pb-feat-note zh-only">研究支撑：情绪神经科学与韧性发展 · 1000+小时临床数据</div><div class="pb-feat-note en-only">Research: Emotional Neuroscience & Resilience · 1,000+ clinical hours</div>
+              <div class="pb-feat-text en-only">Building sustainable emotional resilience and self-regulation to navigate AI-era anxiety</div>
+              <div class="pb-feat-note zh-only">研究：情绪神经科学 · 1000+小时临床数据</div><div class="pb-feat-note en-only">Research: Emotional Neuroscience · 1,000+ clinical hours</div>
             </div>
           </div>
           <div class="pb-feature">
-            <div class="pb-feat-icon">&#9889;</div>
-            <div>
-              <span class="pb-feat-label zh-only">支柱三 · AI竞争力</span><span class="pb-feat-label en-only">Pillar 3 · AI Competitiveness</span>
+            <div class="pb-feat-label-wrap"><div class="pb-feat-label">三</div></div>
+            <div class="pb-feat-content">
+              <span class="pb-feat-title zh-only">AI竞争力</span><span class="pb-feat-title en-only">AI Competitiveness</span>
               <div class="pb-feat-text zh-only">定制AI时代个人成长路线图，培养批判性思维与人机协作能力</div>
-              <div class="pb-feat-text en-only">Tailored AI-era growth roadmap, cultivating critical thinking and human-AI collaboration skills</div>
-              <div class="pb-feat-note zh-only">研究支撑：AI辅助个性化教育技术</div><div class="pb-feat-note en-only">Research: AI-Assisted Personalized Education</div>
+              <div class="pb-feat-text en-only">Tailored AI-era growth roadmap, cultivating critical thinking and human-AI collaboration</div>
+              <div class="pb-feat-note zh-only">研究：AI辅助个性化教育技术</div><div class="pb-feat-note en-only">Research: AI-Assisted Personalized Education</div>
             </div>
           </div>
         </div>
-        <div class="pb-note zh-only">&#10022; 每季度限接 3 个新家庭 · 申请制 · 全程签署保密协议<br>价格不公开展示，预约咨询后告知</div>
-        <div class="pb-note en-only">&#10022; Limited to 3 new families per quarter · Application-based · Full confidentiality agreement<br>Pricing shared during consultation</div>
+        <div class="pb-note zh-only">每季度限接 3 个新家庭 · 申请制 · 全程签署保密协议<br>价格不公开展示，预约咨询后告知</div>
+        <div class="pb-note en-only">Limited to 3 new families per quarter · Application-based · Full confidentiality<br>Pricing shared during consultation</div>
         <button class="pb-cta" onclick="openWechat()"><span class="zh-only">申请入营 →</span><span class="en-only">Apply Now →</span></button>
       </div>
       <div class="pb-right">
-        <div class="pb-process-label zh-only">服务流程 · 基于 MTSS Tier 3 循证标准</div>
-        <div class="pb-process-label en-only">Our Process · MTSS Tier 3 Evidence-Based Standards</div>
-        <div class="pb-step"><div class="pb-step-num">01</div><div>
+        <div class="pb-process-label zh-only">服务流程 · MTSS Tier 3 循证标准</div>
+        <div class="pb-process-label en-only">Our Process · MTSS Tier 3 Standards</div>
+        <div class="pb-step"><div class="pb-step-num pb-step-num-1">01</div><div>
           <div class="pb-step-title zh-only">深度入营评估（2–3 小时）</div><div class="pb-step-title en-only">Deep Intake Assessment (2–3 hrs)</div>
-          <div class="pb-step-desc zh-only">孩子单独会谈 + 父母coaching session + AI辅助多维心理测评。产出《家庭初诊报告》，包含动力地图、情绪模式分析与AI适应性评估三大模块。</div>
-          <div class="pb-step-desc en-only">Individual child session + parent coaching session + AI-assisted multidimensional psychological assessment. Produces a Family Diagnostic Report with Motivation Map, Emotional Pattern Analysis, and AI Adaptability Assessment.</div>
+          <div class="pb-step-desc zh-only">孩子单独会谈 + 父母coaching session + AI辅助多维心理测评，产出含动力地图、情绪模式分析与AI适应性评估的《家庭初诊报告》</div>
+          <div class="pb-step-desc en-only">Individual child session + parent coaching + AI-assisted assessment. Produces a Family Diagnostic Report with Motivation Map, Emotional Pattern Analysis, and AI Adaptability Assessment.</div>
         </div></div>
-        <div class="pb-step"><div class="pb-step-num">02</div><div>
+        <div class="pb-step"><div class="pb-step-num pb-step-num-1">02</div><div>
           <div class="pb-step-title zh-only">定制六个月成长方案</div><div class="pb-step-title en-only">Six-Month Customized Growth Plan</div>
-          <div class="pb-step-desc zh-only">每月1次孩子深度session（60分钟）+ 每月1次父母coaching（45分钟）+ PsychLab.AI Bot全程日常情绪追踪与支持。</div>
-          <div class="pb-step-desc en-only">Monthly child deep session (60 min) + monthly parent coaching (45 min) + PsychLab.AI Bot for daily emotional tracking and support throughout.</div>
+          <div class="pb-step-desc zh-only">每月1次孩子深度session（60分钟）+ 每月1次父母coaching（45分钟）+ PsychLab.AI Bot全程日常情绪追踪</div>
+          <div class="pb-step-desc en-only">Monthly child session (60 min) + parent coaching (45 min) + PsychLab.AI Bot daily emotional tracking throughout.</div>
         </div></div>
-        <div class="pb-step"><div class="pb-step-num">03</div><div>
+        <div class="pb-step"><div class="pb-step-num pb-step-num-1">03</div><div>
           <div class="pb-step-title zh-only">季度成长研究报告</div><div class="pb-step-title en-only">Quarterly Growth Research Report</div>
-          <div class="pb-step-desc zh-only">每季度产出研究级别的成长数据报告，追踪三大支柱量化进展。专属档案可长期留存，记录孩子每一个成长节点。</div>
-          <div class="pb-step-desc en-only">Quarterly research-grade growth data reports tracking quantified progress across all three pillars. A bespoke archive documenting every milestone of the child's development journey.</div>
+          <div class="pb-step-desc zh-only">研究级别数据追踪三大支柱量化进展，专属档案长期留存，记录每一个成长节点</div>
+          <div class="pb-step-desc en-only">Research-grade data tracking quantified progress across all three pillars. Bespoke archive documenting every milestone.</div>
         </div></div>
-        <div class="pb-step"><div class="pb-step-num">04</div><div>
-          <div class="pb-step-title zh-only">年度复盘与续约规划</div><div class="pb-step-title en-only">Annual Review & Renewal Planning</div>
-          <div class="pb-step-desc zh-only">与入营基线数据深度对比，重新校准下一年成长方向。可选择续约或转入PsychLab.AI Bot日常维护阶段。</div>
-          <div class="pb-step-desc en-only">In-depth comparison against intake baseline data, recalibrating the next year's growth direction. Option to renew or transition to PsychLab.AI Bot maintenance phase.</div>
+        <div class="pb-step"><div class="pb-step-num pb-step-num-1">04</div><div>
+          <div class="pb-step-title zh-only">年度复盘与续约规划</div><div class="pb-step-title en-only">Annual Review & Renewal</div>
+          <div class="pb-step-desc zh-only">与入营基线数据深度对比，重新校准成长方向。可续约或转入PsychLab.AI Bot日常维护</div>
+          <div class="pb-step-desc en-only">In-depth comparison against baseline data, recalibrating growth direction. Option to renew or transition to PsychLab.AI Bot maintenance.</div>
         </div></div>
         <div class="pb-who">
           <div class="pb-who-label zh-only">适合你，如果——</div><div class="pb-who-label en-only">This Is For You If —</div>
-          <div class="pb-who-text zh-only">· 孩子的问题让你感到困惑，说不清楚，但感觉不对<br>· 你希望得到有科学依据的答案，而不是泛泛的建议<br>· 你愿意投入时间，陪伴孩子经历一次真正的改变</div>
-          <div class="pb-who-text en-only">· Your child's situation feels unclear — you sense something's off but can't name it<br>· You want scientifically-grounded answers, not vague suggestions<br>· You're willing to invest the time for a genuine, lasting transformation</div>
+          <div class="pb-who-text zh-only">· 孩子的状态让你困惑，说不清楚，但感觉不对<br>· 你希望有科学依据的答案，不是泛泛的建议<br>· 你愿意投入时间，陪伴孩子经历一次真正的改变</div>
+          <div class="pb-who-text en-only">· Your child's situation feels unclear — you sense something's off but can't name it<br>· You want scientifically-grounded answers, not vague suggestions<br>· You're willing to invest the time for genuine, lasting transformation</div>
         </div>
         <div class="pb-quote zh-only">「我们不是在提供服务——我们在用实验室的标准，陪伴一个家庭走过孩子最关键的成长阶段。」</div>
         <div class="pb-quote en-only">"We are not simply providing a service — we are applying lab-grade standards to accompany a family through the most critical chapter of their child's growth."</div>
@@ -210,160 +236,158 @@ footer{background:#1a0a0c;padding:44px 60px}
     </div>
   </div>
 
-  <!-- PRODUCT 2: PsychLab.AI Bot -->
+  <!-- PRODUCT 2: PsychLab.AI Bot — Deep Teal -->
   <div class="product-block fi">
     <div class="pb-inner">
-      <div class="pb-left">
-        <span class="pb-status pb-status-soon zh-only">&#9702; 即将上线</span>
-        <span class="pb-status pb-status-soon en-only">&#9702; Coming Soon</span>
-        <span class="pb-badge">MTSS Tier 2 · <span class="zh-only">日常AI支持工具</span><span class="en-only">Daily AI Support</span></span>
-        <span class="pb-icon">&#129302;</span>
-        <div class="pb-title">PsychLab.AI Bot</div>
-        <span class="pb-en">AI Psychological Companion · 24/7</span>
-        <p class="pb-desc zh-only">基于 AI Psych Lab 实验室研究框架开发的智能心理支持助手。不替代专业咨询师——而是在你需要的每一个时刻，提供有科学依据的情绪引导与心理支持，随时可用，24小时不打烊。</p>
-        <p class="pb-desc en-only">An intelligent psychological support companion developed from AI Psych Lab's research framework. Not a replacement for professional counselors — but a scientifically-grounded source of emotional guidance and psychological support available in every moment you need it, 24 hours a day.</p>
+      <div class="pb-left-2">
+        <span class="pb-status pb-status-soon zh-only">即将上线</span>
+        <span class="pb-status pb-status-soon en-only">Coming Soon</span>
+        <span class="pb-badge" style="background:#7ecfdf;color:#0a2030">MTSS Tier 2 · <span class="zh-only">日常AI支持</span><span class="en-only">Daily AI Support</span></span>
+        <span class="pb-wordmark">PsychLab.AI Bot</span>
+        <div class="pb-title">PsychLab<br>.AI Bot</div>
+        <span class="pb-en" style="color:rgba(126,207,223,.65)">AI Psychological Companion · 24/7</span>
+        <p class="pb-desc zh-only">不替代专业咨询师——而是在你需要的每一个时刻，提供有科学依据的情绪引导与心理支持。基于 AI Psych Lab 实验室研究框架，24小时不打烊。</p>
+        <p class="pb-desc en-only">Not a replacement for professional counselors — but a scientifically-grounded source of emotional guidance available in every moment you need it. Based on AI Psych Lab's research framework, available 24/7.</p>
         <div class="pb-features">
           <div class="pb-feature">
-            <div class="pb-feat-icon">&#128172;</div>
-            <div>
-              <span class="pb-feat-label zh-only">核心功能 · 24/7 情绪支持</span><span class="pb-feat-label en-only">Core · 24/7 Emotional Support</span>
+            <div class="pb-feat-label-wrap"><div class="pb-feat-label" style="color:rgba(126,207,223,.3)">AI</div></div>
+            <div class="pb-feat-content">
+              <span class="pb-feat-title" style="color:#7ecfdf">24/7 <span class="zh-only">情绪支持</span><span class="en-only">Emotional Support</span></span>
               <div class="pb-feat-text zh-only">随时倾诉情绪状态，获得基于研究框架的心理引导。不评判，不说教，像一个真正懂你的陪伴者</div>
-              <div class="pb-feat-text en-only">Share your emotional state anytime and receive guidance grounded in research. Non-judgmental, never preachy — like a companion who truly understands</div>
-              <div class="pb-feat-note zh-only">研究支撑：情绪神经科学 · AI教育技术</div><div class="pb-feat-note en-only">Research: Emotional Neuroscience · AI Education Tech</div>
+              <div class="pb-feat-text en-only">Share your emotional state anytime and receive research-grounded guidance. Non-judgmental — like a companion who truly understands</div>
+              <div class="pb-feat-note" style="color:rgba(126,207,223,.5)">研究：情绪神经科学 · AI教育技术 / Emotional Neuroscience · AI Education</div>
             </div>
           </div>
           <div class="pb-feature">
-            <div class="pb-feat-icon">&#128200;</div>
-            <div>
-              <span class="pb-feat-label zh-only">情绪状态追踪</span><span class="pb-feat-label en-only">Emotional State Tracking</span>
+            <div class="pb-feat-label-wrap"><div class="pb-feat-label" style="color:rgba(126,207,223,.3)">追</div></div>
+            <div class="pb-feat-content">
+              <span class="pb-feat-title" style="color:#7ecfdf"><span class="zh-only">情绪状态追踪</span><span class="en-only">Emotional State Tracking</span></span>
               <div class="pb-feat-text zh-only">持续记录情绪变化趋势，识别压力节点与情绪模式，生成可视化情绪档案</div>
-              <div class="pb-feat-text en-only">Continuously tracks emotional change trends, identifies stress nodes and emotional patterns, generating a visual emotional profile</div>
-              <div class="pb-feat-note zh-only">研究支撑：情绪神经科学与韧性发展</div><div class="pb-feat-note en-only">Research: Emotional Neuroscience & Resilience</div>
+              <div class="pb-feat-text en-only">Continuously tracks emotional trends, identifies stress nodes and patterns, generating a visual emotional profile</div>
+              <div class="pb-feat-note" style="color:rgba(126,207,223,.5)">研究：情绪韧性发展 / Resilience Research</div>
             </div>
           </div>
           <div class="pb-feature">
-            <div class="pb-feat-icon">&#128101;</div>
-            <div>
-              <span class="pb-feat-label zh-only">家长端联动</span><span class="pb-feat-label en-only">Parent Connection</span>
-              <div class="pb-feat-text zh-only">为家长提供孩子情绪状态的周度摘要与沟通建议，架起亲子之间的理解桥梁</div>
-              <div class="pb-feat-text en-only">Provides parents with weekly emotional summaries and communication suggestions, bridging understanding between parent and child</div>
-              <div class="pb-feat-note zh-only">研究支撑：家庭系统理论</div><div class="pb-feat-note en-only">Research: Family Systems Theory</div>
+            <div class="pb-feat-label-wrap"><div class="pb-feat-label" style="color:rgba(126,207,223,.3)">转</div></div>
+            <div class="pb-feat-content">
+              <span class="pb-feat-title" style="color:#7ecfdf"><span class="zh-only">专业转介</span><span class="en-only">Professional Referral</span></span>
+              <div class="pb-feat-text zh-only">当识别到超出AI范围的需求时，主动建议转介至家庭未来力实验室真人服务</div>
+              <div class="pb-feat-text en-only">When needs exceed AI support scope, proactively suggests transitioning to Family Future Readiness Lab human services</div>
+              <div class="pb-feat-note" style="color:rgba(126,207,223,.5)">Tier 2 → Tier 3 无缝衔接 / Seamless upgrade path</div>
             </div>
           </div>
         </div>
-        <div class="pb-note zh-only">&#9702; 当Bot识别到需要专业介入时，会主动建议联系真人咨询师<br>基于AI Psych Lab实验室研究框架开发，持续迭代</div>
-        <div class="pb-note en-only">&#9702; When the Bot identifies a need for professional intervention, it proactively suggests connecting with a human counselor<br>Developed from AI Psych Lab's lab research framework, continuously iterated</div>
-        <button class="pb-cta" onclick="openWechat()"><span class="zh-only">加入候补名单 →</span><span class="en-only">Join the Waitlist →</span></button>
+        <div class="pb-note" style="color:rgba(126,207,223,.5);border-color:rgba(255,255,255,.08)">基于AI Psych Lab实验室研究框架开发，持续迭代<br>当Bot识别到需专业介入时，会主动建议联系真人咨询师</div>
+        <button class="pb-cta" style="background:#7ecfdf;color:#0a2030" onclick="openWechat()"><span class="zh-only">加入候补名单 →</span><span class="en-only">Join the Waitlist →</span></button>
       </div>
       <div class="pb-right">
-        <div class="pb-process-label zh-only">使用流程 · 基于 MTSS Tier 2 定向支持标准</div>
-        <div class="pb-process-label en-only">How It Works · MTSS Tier 2 Targeted Support</div>
-        <div class="pb-step"><div class="pb-step-num">01</div><div>
+        <div class="pb-process-label" style="color:#2a7a8a">How It Works · MTSS Tier 2 Targeted Support</div>
+        <div class="pb-step"><div class="pb-step-num pb-step-num-2">01</div><div>
           <div class="pb-step-title zh-only">建立专属心理档案</div><div class="pb-step-title en-only">Build Your Psychological Profile</div>
-          <div class="pb-step-desc zh-only">初次使用完成基础心理问卷，Bot据此建立专属档案——了解你的情绪模式、压力触发点与沟通风格，提供真正个性化的支持。</div>
-          <div class="pb-step-desc en-only">Complete a foundational psychological questionnaire on first use. The Bot builds a bespoke profile — understanding your emotional patterns, stress triggers, and communication style for truly personalized support.</div>
+          <div class="pb-step-desc zh-only">初次使用完成基础心理问卷，Bot据此建立专属档案——了解你的情绪模式、压力触发点与沟通风格，从第一天起就真正个性化</div>
+          <div class="pb-step-desc en-only">Complete a foundational psychological questionnaire on first use. The Bot builds a bespoke profile — understanding your emotional patterns, stress triggers, and communication style for truly personalized support from day one.</div>
         </div></div>
-        <div class="pb-step"><div class="pb-step-num">02</div><div>
+        <div class="pb-step"><div class="pb-step-num pb-step-num-2">02</div><div>
           <div class="pb-step-title zh-only">24/7 AI 心理对话</div><div class="pb-step-title en-only">24/7 AI Psychological Dialogue</div>
-          <div class="pb-step-desc zh-only">随时开启对话，倾诉当下情绪，探索心理困惑，获得有研究依据的引导和支持。不限时间，不限次数。</div>
-          <div class="pb-step-desc en-only">Start a conversation anytime — share current emotions, explore psychological questions, and receive research-grounded guidance and support. No time limits, no session caps.</div>
+          <div class="pb-step-desc zh-only">随时开启对话，倾诉当下情绪，探索心理困惑，获得有研究依据的引导。不限时间，不限次数</div>
+          <div class="pb-step-desc en-only">Start a conversation anytime — share emotions, explore questions, receive research-grounded guidance. No time limits, no session caps.</div>
         </div></div>
-        <div class="pb-step"><div class="pb-step-num">03</div><div>
+        <div class="pb-step"><div class="pb-step-num pb-step-num-2">03</div><div>
           <div class="pb-step-title zh-only">周度情绪分析报告</div><div class="pb-step-title en-only">Weekly Emotional Analysis Report</div>
-          <div class="pb-step-desc zh-only">每周自动生成情绪趋势分析，识别当周情绪高低点与压力节点，提供有针对性的调整建议。</div>
-          <div class="pb-step-desc en-only">Automatically generates weekly emotional trend analysis, identifying highs, lows, and stress nodes, with targeted adjustment suggestions.</div>
+          <div class="pb-step-desc zh-only">每周自动生成情绪趋势分析，识别当周情绪高低点与压力节点，提供有针对性的调整建议</div>
+          <div class="pb-step-desc en-only">Automatically generates weekly emotional trend analysis, identifying highs, lows, and stress nodes with targeted suggestions.</div>
         </div></div>
-        <div class="pb-step"><div class="pb-step-num">04</div><div>
-          <div class="pb-step-title zh-only">专业转介 · 无缝衔接</div><div class="pb-step-title en-only">Professional Referral · Seamless Transition</div>
-          <div class="pb-step-desc zh-only">当Bot识别到超出AI支持范围的需求时，主动建议转介至家庭未来力实验室的真人咨询服务，实现Tier 2到Tier 3的无缝升级。</div>
-          <div class="pb-step-desc en-only">When the Bot identifies needs beyond AI support, it proactively suggests transitioning to the Family Future Readiness Lab's human counseling services — a seamless Tier 2 to Tier 3 upgrade.</div>
+        <div class="pb-step"><div class="pb-step-num pb-step-num-2">04</div><div>
+          <div class="pb-step-title zh-only">家长端联动 · 亲子理解桥梁</div><div class="pb-step-title en-only">Parent Connection · Bridging Understanding</div>
+          <div class="pb-step-desc zh-only">为家长提供孩子情绪状态的周度摘要与沟通建议，让父母真正看见孩子的内心世界</div>
+          <div class="pb-step-desc en-only">Provides parents with weekly emotional summaries and communication suggestions, helping parents truly see their child's inner world.</div>
         </div></div>
         <div class="pb-who">
-          <div class="pb-who-label zh-only">适合你，如果——</div><div class="pb-who-label en-only">This Is For You If —</div>
+          <div class="pb-who-label pb-who-label-2 zh-only">适合你，如果——</div><div class="pb-who-label pb-who-label-2 en-only">This Is For You If —</div>
           <div class="pb-who-text zh-only">· 你希望随时有人聆听，但未必需要密集的一对一咨询<br>· 你是家长，想更好地理解孩子的情绪，改善亲子沟通<br>· 你是孩子，想在安全的空间探索自己的内心世界</div>
-          <div class="pb-who-text en-only">· You want someone to listen anytime, without needing intensive one-on-one sessions<br>· You're a parent wanting to better understand your child's emotions and improve communication<br>· You're a young person who wants a safe space to explore your inner world</div>
+          <div class="pb-who-text en-only">· You want someone to listen anytime without needing intensive sessions<br>· You're a parent wanting to better understand your child's emotions<br>· You're a young person who wants a safe space to explore your inner world</div>
         </div>
-        <div class="pb-quote zh-only">「专业支持不应该只在预约时才存在——我们希望让循证心理支持成为每个家庭随手可得的日常。」</div>
-        <div class="pb-quote en-only">"Professional support shouldn't only exist during scheduled appointments — we want evidence-based psychological support to become an everyday resource for every family."</div>
+        <div class="pb-quote pb-quote-2 zh-only">「专业支持不应该只在预约时才存在——我们希望让循证心理支持成为每个家庭随手可得的日常。」</div>
+        <div class="pb-quote pb-quote-2 en-only">"Professional support shouldn't only exist during scheduled appointments — we want evidence-based support to become an everyday resource for every family."</div>
       </div>
     </div>
   </div>
 
-  <!-- PRODUCT 3: 未来心智计划 -->
+  <!-- PRODUCT 3: 未来心智计划 — Deep Warm Brown -->
   <div class="product-block fi">
     <div class="pb-inner">
-      <div class="pb-left">
-        <span class="pb-status pb-status-dev zh-only">&#9675; 筹备开放合作</span>
-        <span class="pb-status pb-status-dev en-only">&#9675; Seeking School Partners</span>
-        <span class="pb-badge">MTSS Tier 1 · <span class="zh-only">学校系统合作</span><span class="en-only">School System Partnership</span></span>
-        <span class="pb-icon">&#127979;</span>
-        <div class="pb-title zh-only">未来心智计划</div><div class="pb-title en-only">Future Mind Program</div>
-        <span class="pb-en">Future Mind Program · School Partnership</span>
-        <p class="pb-desc zh-only">面向顶级国际学校与双语学校的系统性AI心理教育合作方案。基于MTSS Tier 1全体预防支持理念，将AI Psych Lab的实验室研究成果转化为可在学校落地的课程体系，覆盖学生、教师、家长三方生态。</p>
-        <p class="pb-desc en-only">A systematic AI psychology education partnership for top international and bilingual schools. Grounded in MTSS Tier 1 universal preventive support principles, translating AI Psych Lab's lab research into implementable school curriculum — covering students, teachers, and parents across the entire school ecosystem.</p>
+      <div class="pb-left-3">
+        <span class="pb-status pb-status-dev zh-only">筹备开放合作</span>
+        <span class="pb-status pb-status-dev en-only">Seeking School Partners</span>
+        <span class="pb-badge" style="background:#c9a961;color:#1a0a0c">MTSS Tier 1 · <span class="zh-only">学校系统合作</span><span class="en-only">School Partnership</span></span>
+        <span class="pb-wordmark zh-only">未来心智计划</span>
+        <span class="pb-wordmark en-only">Future Mind Program</span>
+        <div class="pb-title zh-only">未来心智<br>计划</div>
+        <div class="pb-title en-only">Future Mind<br>Program</div>
+        <span class="pb-en" style="color:rgba(201,169,97,.55)">School Partnership · System-Wide</span>
+        <p class="pb-desc zh-only">面向顶级国际学校与双语学校的系统性AI心理教育合作方案。将 AI Psych Lab 实验室研究成果转化为可在学校落地的课程体系，覆盖学生、教师、家长三方生态。</p>
+        <p class="pb-desc en-only">A systematic AI psychology education partnership for top international and bilingual schools. Translating AI Psych Lab's lab research into implementable curriculum covering students, teachers, and parents across the entire school ecosystem.</p>
         <div class="pb-features">
           <div class="pb-feature">
-            <div class="pb-feat-icon">&#127979;</div>
-            <div>
-              <span class="pb-feat-label zh-only">学生课程体系</span><span class="pb-feat-label en-only">Student Curriculum</span>
+            <div class="pb-feat-label-wrap"><div class="pb-feat-label" style="color:rgba(201,169,97,.25)">生</div></div>
+            <div class="pb-feat-content">
+              <span class="pb-feat-title" style="color:rgba(201,169,97,.9)"><span class="zh-only">学生课程体系</span><span class="en-only">Student Curriculum</span></span>
               <div class="pb-feat-text zh-only">AI时代心理健康素养课、内驱力与情绪管理工作坊、前额叶发育科普课程</div>
               <div class="pb-feat-text en-only">AI-era psychological literacy classes, intrinsic drive and emotional regulation workshops, prefrontal cortex development education</div>
-              <div class="pb-feat-note zh-only">研究支撑：三大研究方向全覆盖</div><div class="pb-feat-note en-only">Research: All three core research areas</div>
+              <div class="pb-feat-note" style="color:rgba(201,169,97,.4)">研究：三大研究方向全覆盖 / All three core research areas</div>
             </div>
           </div>
           <div class="pb-feature">
-            <div class="pb-feat-icon">&#128101;</div>
-            <div>
-              <span class="pb-feat-label zh-only">教师团队培训</span><span class="pb-feat-label en-only">Teacher Training</span>
-              <div class="pb-feat-text zh-only">MTSS框架实操培训、神经多样性学生识别与支持技巧、AI辅助教学心理评估工具使用</div>
+            <div class="pb-feat-label-wrap"><div class="pb-feat-label" style="color:rgba(201,169,97,.25)">师</div></div>
+            <div class="pb-feat-content">
+              <span class="pb-feat-title" style="color:rgba(201,169,97,.9)"><span class="zh-only">教师团队培训</span><span class="en-only">Teacher Training</span></span>
+              <div class="pb-feat-text zh-only">MTSS框架实操培训、神经多样性学生识别与支持技巧、AI辅助教学心理评估工具</div>
               <div class="pb-feat-text en-only">MTSS framework practical training, neurodiversity identification and support skills, AI-assisted psychological assessment tools for educators</div>
-              <div class="pb-feat-note zh-only">研究支撑：MTSS循证框架 · 神经教育学</div><div class="pb-feat-note en-only">Research: MTSS Framework · Neuroeducation</div>
+              <div class="pb-feat-note" style="color:rgba(201,169,97,.4)">研究：MTSS循证框架 · 神经教育学 / MTSS · Neuroeducation</div>
             </div>
           </div>
           <div class="pb-feature">
-            <div class="pb-feat-icon">&#127968;</div>
-            <div>
-              <span class="pb-feat-label zh-only">家长社群赋能</span><span class="pb-feat-label en-only">Parent Community Empowerment</span>
+            <div class="pb-feat-label-wrap"><div class="pb-feat-label" style="color:rgba(201,169,97,.25)">家</div></div>
+            <div class="pb-feat-content">
+              <span class="pb-feat-title" style="color:rgba(201,169,97,.9)"><span class="zh-only">家长社群赋能</span><span class="en-only">Parent Community</span></span>
               <div class="pb-feat-text zh-only">AI时代养育讲座、亲子沟通工作坊、家庭系统与依附关系科普</div>
-              <div class="pb-feat-text en-only">AI-era parenting lectures, parent-child communication workshops, family systems and attachment relationship education</div>
-              <div class="pb-feat-note zh-only">研究支撑：家庭系统理论</div><div class="pb-feat-note en-only">Research: Family Systems Theory</div>
+              <div class="pb-feat-text en-only">AI-era parenting lectures, parent-child communication workshops, family systems and attachment education</div>
+              <div class="pb-feat-note" style="color:rgba(201,169,97,.4)">研究：家庭系统理论 / Family Systems Theory</div>
             </div>
           </div>
         </div>
-        <div class="pb-note zh-only">&#9675; 同时，每完成一个学校合作项目，AI Psych Lab 将把部分收入专项捐助至云南山区小学教育建设<br>&#8594; 了解更多：<a href="impact.html" style="color:var(--gold)">AI Psych Lab 公益计划</a></div>
-        <div class="pb-note en-only">&#9675; For every school partnership completed, AI Psych Lab donates a portion of the proceeds to rural education in Yunnan mountain schools<br>&#8594; Learn more: <a href="impact.html" style="color:var(--gold)">AI Psych Lab Impact Initiative</a></div>
-        <button class="pb-cta" onclick="openWechat()"><span class="zh-only">了解学校合作 →</span><span class="en-only">School Partnership Inquiry →</span></button>
+        <div class="pb-note" style="color:rgba(201,169,97,.5);border-color:rgba(255,255,255,.08)">每完成一个学校合作，AI Psych Lab 将专项捐助云南山区小学教育建设<br><a href="impact.html" style="color:var(--gold)">了解公益计划 →</a></div>
+        <button class="pb-cta" style="background:#c9a961;color:#1a0a0c" onclick="openWechat()"><span class="zh-only">了解学校合作 →</span><span class="en-only">School Partnership Inquiry →</span></button>
       </div>
       <div class="pb-right">
-        <div class="pb-process-label zh-only">合作流程 · 基于 MTSS Tier 1 全体支持标准</div>
-        <div class="pb-process-label en-only">Partnership Process · MTSS Tier 1 Universal Support</div>
-        <div class="pb-step"><div class="pb-step-num">01</div><div>
+        <div class="pb-process-label" style="color:#7a5a3a">合作流程 · MTSS Tier 1 全体支持标准</div>
+        <div class="pb-step"><div class="pb-step-num pb-step-num-3">01</div><div>
           <div class="pb-step-title zh-only">学校需求深度评估</div><div class="pb-step-title en-only">School Needs Deep Assessment</div>
-          <div class="pb-step-desc zh-only">与学校管理层进行深度访谈，了解学生群体构成、现有心理支持系统、教师团队状态与家长社群特点，产出《学校心理生态诊断报告》。</div>
-          <div class="pb-step-desc en-only">In-depth interviews with school leadership to understand student demographics, existing psychological support systems, teacher team dynamics, and parent community characteristics — producing a School Psychological Ecosystem Diagnostic Report.</div>
+          <div class="pb-step-desc zh-only">与学校管理层深度访谈，了解学生群体、现有支持系统、教师团队与家长社群特点，产出《学校心理生态诊断报告》</div>
+          <div class="pb-step-desc en-only">In-depth interviews with school leadership to understand student demographics, existing support systems, and parent community — producing a School Psychological Ecosystem Diagnostic Report.</div>
         </div></div>
-        <div class="pb-step"><div class="pb-step-num">02</div><div>
-          <div class="pb-step-title zh-only">定制课程体系设计</div><div class="pb-step-title en-only">Customized Curriculum Design</div>
-          <div class="pb-step-desc zh-only">基于诊断报告，为学校量身设计涵盖学生课程、教师培训与家长讲座的三方系统方案，确保课程内容与学校文化高度融合。</div>
-          <div class="pb-step-desc en-only">Based on the diagnostic report, designing a three-tier system covering student curriculum, teacher training, and parent lectures — ensuring curriculum content is deeply integrated with the school's culture.</div>
+        <div class="pb-step"><div class="pb-step-num pb-step-num-3">02</div><div>
+          <div class="pb-step-title zh-only">定制三方课程体系设计</div><div class="pb-step-title en-only">Customized Three-Tier Curriculum Design</div>
+          <div class="pb-step-desc zh-only">为学校量身设计涵盖学生课程、教师培训与家长讲座的三方系统方案，与学校文化高度融合</div>
+          <div class="pb-step-desc en-only">Designing a three-tier system covering student curriculum, teacher training, and parent lectures — deeply integrated with the school's culture.</div>
         </div></div>
-        <div class="pb-step"><div class="pb-step-num">03</div><div>
+        <div class="pb-step"><div class="pb-step-num pb-step-num-3">03</div><div>
           <div class="pb-step-title zh-only">驻校落地执行</div><div class="pb-step-title en-only">On-Site Implementation</div>
-          <div class="pb-step-desc zh-only">AI Psych Lab团队进驻学校，完成课程教学、工作坊带领与教师培训。全程可结合PsychLab.AI Bot为学生提供课后情绪追踪支持。</div>
-          <div class="pb-step-desc en-only">AI Psych Lab team on-site for curriculum delivery, workshop facilitation, and teacher training. PsychLab.AI Bot can be integrated for post-session emotional tracking support for students.</div>
+          <div class="pb-step-desc zh-only">AI Psych Lab团队进驻完成课程教学、工作坊带领与教师培训，可结合PsychLab.AI Bot为学生提供课后情绪追踪</div>
+          <div class="pb-step-desc en-only">AI Psych Lab team on-site for curriculum delivery, workshops, and teacher training. PsychLab.AI Bot can be integrated for post-session student emotional tracking.</div>
         </div></div>
-        <div class="pb-step"><div class="pb-step-num">04</div><div>
-          <div class="pb-step-title zh-only">效果追踪与持续迭代</div><div class="pb-step-title en-only">Outcome Tracking & Continuous Iteration</div>
-          <div class="pb-step-desc zh-only">项目结束后持续追踪学校心理健康指标变化，产出《年度效果研究报告》，作为学校心理教育体系的长期数据支撑。</div>
-          <div class="pb-step-desc en-only">Post-project ongoing tracking of school mental health indicators, producing an Annual Outcome Research Report as long-term data support for the school's psychological education system.</div>
+        <div class="pb-step"><div class="pb-step-num pb-step-num-3">04</div><div>
+          <div class="pb-step-title zh-only">效果追踪与持续迭代</div><div class="pb-step-title en-only">Outcome Tracking & Iteration</div>
+          <div class="pb-step-desc zh-only">项目结束后持续追踪学校心理健康指标，产出《年度效果研究报告》，作为学校心理教育体系的长期数据支撑</div>
+          <div class="pb-step-desc en-only">Post-project tracking of school mental health indicators, producing an Annual Outcome Research Report as long-term data support for the school's psychological education system.</div>
         </div></div>
         <div class="pb-who">
-          <div class="pb-who-label zh-only">适合你的学校，如果——</div><div class="pb-who-label en-only">This Is For Your School If —</div>
-          <div class="pb-who-text zh-only">· 你们重视学生的心理健康，但缺乏系统化、有科学依据的支持方案<br>· 你们希望在AI时代提前布局，培养真正具备未来竞争力的学生<br>· 你们相信教育不只是成绩，更是一个人真正的成长</div>
-          <div class="pb-who-text en-only">· Your school values student mental health but lacks a systematic, evidence-based support framework<br>· You want to be ahead of the curve in the AI era, cultivating students with genuine future competitiveness<br>· You believe education is more than grades — it's a person's true development</div>
+          <div class="pb-who-label pb-who-label-3 zh-only">适合你的学校，如果——</div><div class="pb-who-label pb-who-label-3 en-only">This Is For Your School If —</div>
+          <div class="pb-who-text zh-only">· 重视学生心理健康，但缺乏系统化、有科学依据的支持方案<br>· 希望在AI时代提前布局，培养真正具备未来竞争力的学生<br>· 相信教育不只是成绩，更是一个人真正的成长</div>
+          <div class="pb-who-text en-only">· You value student mental health but lack a systematic, evidence-based framework<br>· You want to be ahead of the curve in the AI era<br>· You believe education is more than grades — it's a person's true development</div>
         </div>
-        <div class="pb-quote zh-only">「让整个学校生态系统具备AI时代的心理教育能力——这不是选项，这是每所好学校的责任。」</div>
-        <div class="pb-quote en-only">"Equipping the entire school ecosystem with AI-era psychological education capacity — this isn't optional, it's the responsibility of every good school."</div>
+        <div class="pb-quote pb-quote-3 zh-only">「让整个学校生态具备AI时代的心理教育能力——这不是选项，这是每所好学校的责任。」</div>
+        <div class="pb-quote pb-quote-3 en-only">"Equipping the entire school ecosystem with AI-era psychological education capacity — this isn't optional, it's the responsibility of every good school."</div>
       </div>
     </div>
   </div>
