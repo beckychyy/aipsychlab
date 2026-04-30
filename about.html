@@ -58,7 +58,7 @@ footer{background:#1a0a0c;padding:44px 60px}
 .page-hero p{font-size:15px;color:rgba(255,255,255,.75);max-width:580px;margin:0 auto;line-height:1.75}
 .about-grid{display:grid;grid-template-columns:1fr 1.6fr;gap:72px;align-items:start;max-width:1060px;margin:0 auto}
 .about-photo{width:100%;aspect-ratio:3/4;object-fit:cover;object-position:top}
-.about-photo-ph{width:100%;aspect-ratio:3/4;background:linear-gradient(135deg,var(--cr),#9B4D5E);display:flex;align-items:center;justify-content:center;color:rgba(255,255,255,.4);font-size:13px;letter-spacing:2px;text-align:center;padding:20px}
+.about-photo-ph{width:100%;aspect-ratio:3/4;background:linear-gradient(135deg,var(--cr),#9B4D5E);display:flex;align-items:center;justify-content:center;color:rgba(255,255,255,.4);font-size:13px;text-align:center;padding:20px}
 .about-quote{font-family:'Playfair Display',serif;font-size:20px;font-style:italic;color:var(--cr);line-height:1.6;padding-left:20px;border-left:2px solid var(--gold);margin-bottom:22px}
 .about-intro{font-size:14px;line-height:1.95;color:var(--gray);margin-bottom:28px}
 .about-intro p{margin-bottom:14px}
@@ -66,19 +66,28 @@ footer{background:#1a0a0c;padding:44px 60px}
 .cred-block:last-child{border-bottom:none;margin-bottom:0;padding-bottom:0}
 .cred-cat{font-size:10px;letter-spacing:3px;text-transform:uppercase;color:var(--gold);margin-bottom:10px}
 .cred-list{list-style:none;display:flex;flex-direction:column;gap:7px}
-.cred-list li{font-size:13px;color:var(--dark);padding-left:16px;position:relative;line-height:1.55}
-.cred-list li::before{content:'—';position:absolute;left:0;color:var(--gold);font-size:10px;top:3px}
+.cred-list li{font-size:13px;color:var(--dark);padding-left:16px;position:relative;line-height:1.6}
+.cred-list li::before{content:'\2014';position:absolute;left:0;color:var(--gold);font-size:10px;top:3px}
+
+/* TEAM */
 .team-section{background:var(--creamd);padding:80px 60px}
-.team-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;max-width:1060px;margin:24px auto 0}
-.team-card{background:#fff;border:1px solid var(--lg);padding:32px;text-align:center;transition:all .25s}
-.team-card:hover{transform:translateY(-4px);box-shadow:0 8px 32px rgba(107,28,35,.08)}
-.team-card.placeholder{opacity:.6;border-style:dashed}.team-card.placeholder:hover{transform:none;box-shadow:none}
-.team-photo{width:84px;height:84px;border-radius:50%;background:linear-gradient(135deg,var(--creamd),var(--lg));margin:0 auto 16px;display:flex;align-items:center;justify-content:center;font-size:30px}
-.team-name{font-family:'Playfair Display',serif;font-size:18px;color:var(--cr);font-weight:600;margin-bottom:4px}
-.team-title{font-size:10px;letter-spacing:1.5px;text-transform:uppercase;color:var(--gold);margin-bottom:12px}
-.team-tags{display:flex;gap:5px;flex-wrap:wrap;justify-content:center;margin-bottom:12px}
-.team-tag{background:var(--creamd);color:var(--gray);font-size:9px;padding:3px 9px;border-radius:20px}
-.team-bio{font-size:12px;line-height:1.75;color:var(--gray)}
+.team-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;max-width:1060px;margin:36px auto 0}
+.member-card{background:#fff;border:1px solid var(--lg);overflow:hidden;transition:all .25s}
+.member-card:hover{transform:translateY(-4px);box-shadow:0 12px 40px rgba(107,28,35,.09)}
+.member-card.empty{opacity:.5;border-style:dashed}.member-card.empty:hover{transform:none;box-shadow:none}
+.mc-top{padding:28px 28px 20px;border-bottom:1px solid var(--lg)}
+.mc-photo{width:100%;height:280px;margin:0 0 0 0;overflow:hidden}.mc-photo img{width:100%;height:100%;object-fit:cover;object-position:top center}
+.mc-name{font-family:'Playfair Display',serif;font-size:19px;color:var(--cr);font-weight:700;text-align:center;margin-bottom:4px}
+.mc-role{font-size:9px;letter-spacing:2px;text-transform:uppercase;color:var(--gold);text-align:center;margin-bottom:14px}
+.mc-edu{background:var(--creamd);padding:10px 14px;font-size:11px;color:var(--gray);line-height:1.7;border-left:2px solid var(--gold)}
+.mc-bottom{padding:20px 28px}
+.mc-section-label{font-size:9px;letter-spacing:2.5px;text-transform:uppercase;color:var(--gold);margin-bottom:12px;margin-top:16px;display:block}
+.mc-section-label:first-child{margin-top:0}
+.mc-tags{display:flex;gap:7px;flex-wrap:wrap;margin-bottom:6px}
+.mc-tag{background:var(--cr);color:#fff;font-size:11px;font-weight:500;padding:6px 14px;border-radius:4px;line-height:1.5;letter-spacing:.3px}
+.mc-bio{font-size:12px;line-height:1.85;color:var(--gray)}
+
+/* SPEAKING */
 .speaking-section{background:#fff;padding:80px 60px}
 .speaking-list{max-width:900px;margin:48px auto 0}
 .si{display:grid;grid-template-columns:90px 1fr auto;gap:28px;align-items:start;padding:22px 0;border-bottom:1px solid var(--lg);transition:padding-left .2s}
@@ -87,7 +96,7 @@ footer{background:#1a0a0c;padding:44px 60px}
 .si-title{font-family:'Playfair Display',serif;font-size:16px;color:var(--cr);margin-bottom:4px;font-weight:600}
 .si-org{font-size:13px;color:var(--gray)}
 .si-role{font-size:9px;letter-spacing:1.5px;text-transform:uppercase;color:var(--gold);border:1px solid var(--gold);padding:5px 10px;white-space:nowrap;align-self:center}
-@media(max-width:900px){.page-hero{padding:110px 24px 60px}.page-hero h1{font-size:36px}.about-grid{grid-template-columns:1fr}.team-section{padding:60px 24px}.team-grid{grid-template-columns:1fr 1fr}.speaking-section{padding:60px 24px}.si{grid-template-columns:1fr;gap:6px}.si-role{display:none}}
+@media(max-width:900px){.page-hero{padding:110px 24px 60px}.page-hero h1{font-size:36px}.about-grid{grid-template-columns:1fr}.team-section,.speaking-section{padding:60px 24px}.team-grid{grid-template-columns:1fr 1fr}.si{grid-template-columns:1fr;gap:6px}.si-role{display:none}}
 @media(max-width:500px){.team-grid{grid-template-columns:1fr}}
 
 </style>
@@ -111,7 +120,7 @@ footer{background:#1a0a0c;padding:44px 60px}
 
 <div class="page-hero">
   <span class="page-hero-eye">About · Founder</span>
-  <h1 class="zh-only">Becky Chen</h1><h1 class="en-only">Becky Chen</h1>
+  <h1>Becky Chen</h1>
   <p class="zh-only">JHU 教育博士在读 · Harvard HGSE 校友 · AI Psych Lab 创始人</p>
   <p class="en-only">JHU EdD Candidate · Harvard HGSE Alumna · Founder of AI Psych Lab</p>
 </div>
@@ -119,12 +128,15 @@ footer{background:#1a0a0c;padding:44px 60px}
 <section style="background:#fff" class="fi">
   <div class="about-grid">
     <div>
-      <img src="becky.jpg" alt="Becky Chen" class="about-photo" onerror="this.style.display='none';document.getElementById('apholder').style.display='flex'">
-      <div id="apholder" class="about-photo-ph" style="display:none"><div>&#128247;<br><br>becky.jpg</div></div>
+      <img src="becky.jpg" alt="Becky Chen" class="about-photo"
+        onerror="this.style.display='none';document.getElementById('apholder').style.display='flex'">
+      <div id="apholder" class="about-photo-ph" style="display:none">
+        <div>&#128247;<br><br>becky.jpg</div>
+      </div>
     </div>
     <div>
-      <div class="about-quote zh-only">"学术根基 × 临床深度 × 人文温度"</div>
-      <div class="about-quote en-only">"Academic Rigor × Clinical Depth × Human Warmth"</div>
+      <div class="about-quote zh-only">"学术根基 &times; 临床深度 &times; 人文温度"</div>
+      <div class="about-quote en-only">"Academic Rigor &times; Clinical Depth &times; Human Warmth"</div>
       <div class="about-intro zh-only">
         <p>她是一位令人瞩目的00后。早年曾担任<strong>联合国UNICEF咨询顾问</strong>，深耕国际公共政策领域；同时身兼<strong>企业家助残论坛主席</strong>，以行动推动社会融合与包容性发展。</p>
         <p>如今，她以<strong>哈佛大学教育学院全球校友会主席</strong>的身份持续链接全球教育资源，并以<strong>约翰霍普金斯大学教育博士研究员</strong>的角色深耕学术前沿——研究方向聚焦于<strong>中国家庭养育与AI时代儿童心理发展</strong>的交叉议题。</p>
@@ -132,19 +144,19 @@ footer{background:#1a0a0c;padding:44px 60px}
       </div>
       <div class="about-intro en-only">
         <p>A remarkable member of Gen-Z, Becky began her career as a <strong>UNICEF Consultant</strong>, working at the intersection of international policy and human development. She also served as <strong>Chair of the Entrepreneurs for Disability Forum</strong>, championing social inclusion and accessibility.</p>
-        <p>Today, she serves as <strong>President of the Harvard HGSE Global Alumni Association</strong> and as an <strong>EdD Researcher at Johns Hopkins University</strong>, where her work focuses on the intersection of <strong>Chinese family parenting and child psychological development in the AI era</strong>.</p>
+        <p>Today, she serves as <strong>President of the Harvard HGSE Global Alumni Association</strong> and as an <strong>EdD Researcher at Johns Hopkins University</strong>, where her work focuses on <strong>Chinese family parenting and child psychological development in the AI era</strong>.</p>
         <p>She believes that true educational transformation requires not just technology, but the wisdom to truly understand the human heart — the founding insight of AI Psych Lab.</p>
       </div>
       <div class="cred-block">
         <div class="cred-cat"><span class="zh-only">学历背景</span><span class="en-only">Education</span></div>
         <ul class="cred-list">
-          <li>JHU EdD · <span class="zh-only">教育博士，AI心理教育与神经教育（在读）</span><span class="en-only">Doctor of Education, AI Educational Psychology & Neuroeducation (in progress)</span></li>
+          <li>JHU EdD · <span class="zh-only">教育博士，AI心理教育与神经教育（在读）</span><span class="en-only">Doctor of Education, AI Educational Psychology &amp; Neuroeducation (in progress)</span></li>
           <li>Harvard HGSE Ed.M · <span class="zh-only">学校心理咨询</span><span class="en-only">School Counseling</span></li>
           <li>UC Berkeley BA · <span class="zh-only">心理学</span><span class="en-only">Psychology</span></li>
         </ul>
       </div>
       <div class="cred-block">
-        <div class="cred-cat"><span class="zh-only">专业资质</span><span class="en-only">Professional Credentials</span></div>
+        <div class="cred-cat"><span class="zh-only">专业资质</span><span class="en-only">Credentials</span></div>
         <ul class="cred-list">
           <li>APA Associate Member · <span class="zh-only">美国心理学协会准会员</span><span class="en-only">American Psychological Association</span></li>
           <li>IAAP · <span class="zh-only">国际分析心理学协会会员</span><span class="en-only">International Association for Analytical Psychology</span></li>
@@ -157,7 +169,7 @@ footer{background:#1a0a0c;padding:44px 60px}
           <li><span class="zh-only">HGSE全球校友会主席</span><span class="en-only">President, HGSE Global Alumni Association</span></li>
           <li><span class="zh-only">企业家助残论坛2025主席</span><span class="en-only">Chair, Entrepreneur for Disability Forum 2025</span></li>
           <li><span class="zh-only">哈佛中国教育论坛 14/16/17届负责人</span><span class="en-only">Harvard China Education Symposium, Lead Organizer (14th/16th/17th)</span></li>
-          <li>iOffer.AI <span class="zh-only">联创 COO</span><span class="en-only">Co-Founder & COO</span></li>
+          <li>iOffer.AI <span class="zh-only">联创 COO</span><span class="en-only">Co-Founder &amp; COO</span></li>
         </ul>
       </div>
       <div class="cred-block">
@@ -177,51 +189,165 @@ footer{background:#1a0a0c;padding:44px 60px}
     <span class="sec-eye">Lab Team</span>
     <h2 class="sec-h"><span class="zh-only">实验室成员</span><span class="en-only">Lab Members</span></h2>
     <div class="sec-bar"></div>
-    <p style="text-align:center;font-size:13px;color:var(--gray);margin-top:16px;line-height:1.8">
+    <p style="text-align:center;font-size:13px;color:var(--gray);margin-top:16px;line-height:1.8;max-width:560px;margin-left:auto;margin-right:auto">
       <span class="zh-only">一位创始人，一群实验室伙伴，共同推动AI时代的心理教育研究与实践</span>
-      <span class="en-only">One founder, a growing team of lab members — advancing psychological education research and practice in the AI era</span>
+      <span class="en-only">One founder, a growing team of lab members advancing psychological education research in the AI era</span>
     </p>
   </div>
   <div class="team-grid">
-    <div class="team-card placeholder fi">
-      <div class="team-photo">&#128100;</div>
-      <div class="team-name"><span class="zh-only">成员姓名</span><span class="en-only">Member Name</span></div>
-      <div class="team-title"><span class="zh-only">研究助理</span><span class="en-only">Research Associate</span></div>
-      <div class="team-tags"><span class="team-tag zh-only">研究方向</span><span class="team-tag zh-only">学历背景</span></div>
-      <div class="team-bio zh-only">工作时长 · 擅长领域 · 语言能力</div><div class="team-bio en-only">Experience · Specialty · Languages</div>
+
+    <!-- 戴小越 -->
+    <div class="member-card fi">
+      <div class="mc-top">
+        <div class="mc-photo"><img src="xiaoyue.jpg" alt="Xiaoyue Dai"></div>
+        <div class="mc-name">Xiaoyue Dai</div>
+        <div class="mc-role zh-only">AI Psych Lab Fellow · 哈佛教育学院</div>
+        <div class="mc-role en-only">AI Psych Lab Fellow · Harvard HGSE</div>
+        <div class="mc-edu zh-only">
+          哈佛教育学院 人类发展与教育 硕士<br>
+          哈佛教育学院 博士在读
+        </div>
+        <div class="mc-edu en-only">
+          Ed.M, Human Development &amp; Education · Harvard HGSE<br>
+          Doctoral Candidate · Harvard HGSE
+        </div>
+      </div>
+      <div class="mc-bottom">
+        <span class="mc-section-label zh-only">核心研究方向</span>
+        <span class="mc-section-label en-only">Research Focus</span>
+        <div class="mc-tags">
+          <span class="mc-tag zh-only">教师教育与专业发展</span>
+          <span class="mc-tag zh-only">家庭教育系统</span>
+          <span class="mc-tag zh-only">社会情感学习 SEL</span>
+          <span class="mc-tag zh-only">健康互动关系建立</span>
+          <span class="mc-tag en-only">Teacher Education</span>
+          <span class="mc-tag en-only">Family Education Systems</span>
+          <span class="mc-tag en-only">Social-Emotional Learning</span>
+          <span class="mc-tag en-only">Healthy Interaction</span>
+        </div>
+        <span class="mc-section-label zh-only">专业背景与擅长领域</span>
+        <span class="mc-section-label en-only">Expertise</span>
+        <div class="mc-bio zh-only">
+          专注于教师教育与家庭教育系统的交叉研究，深入探索教育者在学生心理健康发展中所扮演的关键角色。擅长社会情感学习（SEL）的理论建构与实践落地，研究如何在课堂与家庭场景中系统性建立健康的互动关系与情感联结。在AI Psych Lab，主导家庭系统理论模块的研究工作，并协助课程体系设计。
+        </div>
+        <div class="mc-bio en-only">
+          Focuses on the intersection of teacher education and family education systems, exploring the critical role educators play in students' psychological development. Expert in the theory and practice of Social-Emotional Learning (SEL), researching how to systematically build healthy interaction patterns and emotional bonds in both classroom and family contexts. At AI Psych Lab, leads research on family systems theory and supports curriculum design.
+        </div>
+      </div>
     </div>
-    <div class="team-card placeholder fi">
-      <div class="team-photo">&#128100;</div>
-      <div class="team-name"><span class="zh-only">成员姓名</span><span class="en-only">Member Name</span></div>
-      <div class="team-title"><span class="zh-only">研究助理</span><span class="en-only">Research Associate</span></div>
-      <div class="team-tags"><span class="team-tag zh-only">研究方向</span><span class="team-tag zh-only">学历背景</span></div>
-      <div class="team-bio zh-only">工作时长 · 擅长领域 · 语言能力</div><div class="team-bio en-only">Experience · Specialty · Languages</div>
+
+    <!-- Ruby Xiao -->
+    <div class="member-card fi">
+      <div class="mc-top">
+        <div class="mc-photo"><img src="ruby.jpg" alt="Ruby Xiao"></div>
+        <div class="mc-name">Ruby Xiao</div>
+        <div class="mc-role zh-only">AI Psych Lab Fellow · 哈佛教育学院</div>
+        <div class="mc-role en-only">AI Psych Lab Fellow · Harvard HGSE</div>
+        <div class="mc-edu zh-only">
+          曼荷莲学院 教育及心理学 本科<br>
+          哈佛教育学院 人类发展与教育 研究生
+        </div>
+        <div class="mc-edu en-only">
+          BA, Education &amp; Psychology · Mount Holyoke College <br>
+          Graduate Student, Human Dev. &amp; Education · Harvard HGSE 
+        </div>
+      </div>
+      <div class="mc-bottom">
+        <span class="mc-section-label zh-only">核心研究方向</span>
+        <span class="mc-section-label en-only">Research Focus</span>
+        <div class="mc-tags">
+          <span class="mc-tag zh-only">校园适应与过渡支持</span>
+          <span class="mc-tag zh-only">教练技术应用</span>
+          <span class="mc-tag zh-only">早期儿童发展</span>
+          <span class="mc-tag zh-only">Peer Pressure 与身份认同</span>
+          <span class="mc-tag en-only">Campus Adaptation</span>
+          <span class="mc-tag en-only">Coaching Techniques</span>
+          <span class="mc-tag en-only">Early Childhood Dev.</span>
+          <span class="mc-tag en-only">Identity &amp; Peer Pressure</span>
+        </div>
+        <span class="mc-section-label zh-only">专业背景与擅长领域</span>
+        <span class="mc-section-label en-only">Expertise</span>
+        <div class="mc-bio zh-only">
+          以自身战胜peer pressure、实现纯DIY申请哈佛的经历为基础，深入研究青少年在重要过渡期的心理适应机制。曾为30+名大一新生提供一对一校园适应指导，积累丰富的实践经验。修习"面对教育者与领导者的教练技术"80小时以上，将专业coaching方法论系统性融入青少年支持工作。哈佛附属幼儿园全职工作经历赋予其扎实的早期儿童发展视角，擅长从发展心理学角度理解不同年龄段的心理需求。在AI Psych Lab，主导青少年校园适应与身份认同研究模块。
+        </div>
+        <div class="mc-bio en-only">
+          Drawing on her own experience overcoming peer pressure and achieving a self-directed admission to Harvard, Ruby researches the psychological adaptation mechanisms of adolescents during key transitions. She has provided one-on-one campus adaptation coaching for 30+ first-year students. With 80+ hours of professional coaching techniques training for educators and leaders, she systematically integrates coaching methodology into youth support work. Her full-time experience at a Harvard-affiliated kindergarten provides a strong early childhood development perspective, enabling her to understand the psychological needs of different age groups. At AI Psych Lab, she leads the adolescent campus adaptation and identity research module.
+        </div>
+      </div>
     </div>
-    <div class="team-card placeholder fi" style="display:flex;flex-direction:column;align-items:center;justify-content:center;min-height:200px">
-      <div style="font-size:36px;opacity:.35;margin-bottom:14px">&#10022;</div>
-      <div class="team-name" style="font-size:15px"><span class="zh-only">持续招募中</span><span class="en-only">Growing Our Team</span></div>
-      <div class="team-bio" style="margin-top:8px"><span class="zh-only">欢迎联系加入</span><span class="en-only">Reach out to join us</span></div>
+
+    <!-- Kepei Yi -->
+    <div class="member-card fi">
+      <div class="mc-photo"><img src="kepei.jpg" alt="Kepei Yi"></div>
+      <div class="mc-top">
+        <div class="mc-name">Kepei Yi</div>
+        <div class="mc-role zh-only">AI Psych Lab Fellow · 临床心理治疗师</div>
+        <div class="mc-role en-only">AI Psych Lab Fellow · Licensed Psychotherapist</div>
+        <div class="mc-edu zh-only">
+          西南大学 心理学 本科<br>
+          波士顿大学 咨询心理学 硕士
+        </div>
+        <div class="mc-edu en-only">
+          BA, Psychology · Southwest University<br>
+          MA, Counseling Psychology · Boston University
+        </div>
+      </div>
+      <div class="mc-bottom">
+        <span class="mc-section-label zh-only">核心研究方向</span>
+        <span class="mc-section-label en-only">Research Focus</span>
+        <div class="mc-tags">
+          <span class="mc-tag zh-only">焦虑与相关障碍</span>
+          <span class="mc-tag zh-only">门诊心理治疗</span>
+          <span class="mc-tag zh-only">跨文化临床实践</span>
+          <span class="mc-tag zh-only">神经多样性支持</span>
+          <span class="mc-tag en-only">Anxiety &amp; Related Disorders</span>
+          <span class="mc-tag en-only">Outpatient Psychotherapy</span>
+          <span class="mc-tag en-only">Cross-Cultural Clinical Practice</span>
+          <span class="mc-tag en-only">Neurodiversity Support</span>
+        </div>
+        <span class="mc-section-label zh-only">专业背景与擅长领域</span>
+        <span class="mc-section-label en-only">Expertise</span>
+        <div class="mc-bio zh-only">
+          目前于美国麻省第二大医疗平台 <strong>Beth Israel Lahey Health</strong> 担任全职门诊心理治疗师，具备扎实的临床实战经验。曾于波士顿精神专科医院 HRI Hospital 任实习心理治疗师，并在波士顿大学<strong>焦虑及相关障碍研究中心（CARD）</strong>完成受督临床工作，专攻焦虑谱系障碍的循证干预。同时拥有中国三甲医院精神科（国家精神疾病医学中心）、公立学校及社会心理咨询机构的多元实习背景，深谙中美两国心理健康体系差异，擅长跨文化情境下的心理评估与治疗。在AI Psych Lab，主导临床评估工具开发与循证干预方案设计。
+        </div>
+        <div class="mc-bio en-only">
+          Currently a full-time outpatient psychotherapist at <strong>Beth Israel Lahey Health</strong>, the second-largest healthcare system in Massachusetts. Previously a psychology intern at HRI Hospital (Boston's psychiatric specialty hospital) and completed supervised clinical work at Boston University's <strong>Center for Anxiety and Related Disorders (CARD)</strong>, specializing in evidence-based interventions for anxiety spectrum disorders. Her diverse clinical background spans China's top-tier psychiatric hospitals (National Center for Mental Disorders), public schools, and community mental health agencies — giving her deep expertise in cross-cultural psychological assessment and treatment. At AI Psych Lab, she leads clinical assessment tool development and evidence-based intervention design.
+        </div>
+      </div>
     </div>
+
+    <!-- Recruiting -->
+    <div class="member-card empty fi" style="display:flex;flex-direction:column;align-items:center;justify-content:center;min-height:300px;padding:40px 28px;text-align:center">
+      <div style="font-family:'Playfair Display',serif;font-size:40px;color:var(--cr);opacity:.18;margin-bottom:18px">&#10022;</div>
+      <div style="font-family:'Playfair Display',serif;font-size:17px;color:var(--cr);font-weight:600;margin-bottom:10px">
+        <span class="zh-only">持续招募中</span><span class="en-only">Growing Our Team</span>
+      </div>
+      <div style="font-size:12px;color:var(--gray);line-height:1.8;max-width:180px">
+        <span class="zh-only">欢迎对AI时代心理教育感兴趣的研究者与实践者联系加入</span>
+        <span class="en-only">Researchers and practitioners interested in AI-era psychological education are welcome</span>
+      </div>
+    </div>
+
   </div>
 </div>
 
 <div class="speaking-section fi">
   <div class="sec-head">
     <span class="sec-eye">Speaking</span>
-    <h2 class="sec-h"><span class="zh-only">演讲与活动经历</span><span class="en-only">Speaking & Events</span></h2>
+    <h2 class="sec-h"><span class="zh-only">演讲与活动经历</span><span class="en-only">Speaking &amp; Events</span></h2>
     <div class="sec-bar"></div>
   </div>
   <div class="speaking-list">
-    <div class="si"><div class="si-date">04.2026</div><div><div class="si-title zh-only">哈佛中国教育研讨会 (CES) — AI 与心理学青年学者论坛</div><div class="si-title en-only">Harvard China Education Symposium — AI & Psychology Youth Scholar Forum</div><div class="si-org">Harvard China Education Symposium</div></div><div class="si-role zh-only">主旨演讲</div><div class="si-role en-only">Keynote</div></div>
-    <div class="si"><div class="si-date">12.2025</div><div><div class="si-title zh-only">企业家助残论坛 2025 — 推动40家企业残障融合</div><div class="si-title en-only">Entrepreneur for Disability Forum 2025 — Disability Inclusion in 40 Companies</div><div class="si-org">Entrepreneur for Disability Forum</div></div><div class="si-role zh-only">论坛主席</div><div class="si-role en-only">Forum Chair</div></div>
-    <div class="si"><div class="si-date">03.2025</div><div><div class="si-title zh-only">Zero Project 联合国维也纳 — 促进残障包容性 DEI</div><div class="si-title en-only">Zero Project, UN Vienna — Advancing Disability-Inclusive DEI</div><div class="si-org">Zero Project, UN Vienna</div></div><div class="si-role zh-only">圆桌嘉宾</div><div class="si-role en-only">Panelist</div></div>
-    <div class="si"><div class="si-date">10.2024</div><div><div class="si-title zh-only">美国驻华大使馆 — 常春藤学校志愿者博览会</div><div class="si-title en-only">U.S. Embassy Beijing — Ivy League School Volunteer Fair</div><div class="si-org">U.S. Embassy Beijing</div></div><div class="si-role zh-only">总执行策划</div><div class="si-role en-only">Lead Organizer</div></div>
-    <div class="si"><div class="si-date">07.2024</div><div><div class="si-title zh-only">EducationUSA Mindful Adventure Camp — 课程设计与教学</div><div class="si-title en-only">EducationUSA Mindful Adventure Camp — Curriculum Design & Teaching</div><div class="si-org">U.S. Consulate General Guangzhou</div></div><div class="si-role zh-only">组织者 / 讲师</div><div class="si-role en-only">Organizer / Instructor</div></div>
-    <div class="si"><div class="si-date">05.2024</div><div><div class="si-title zh-only">《在美留学的心理地图》</div><div class="si-title en-only">The Mental Map of Studying in America</div><div class="si-org">EducationUSA</div></div><div class="si-role zh-only">主旨演讲</div><div class="si-role en-only">Keynote</div></div>
-    <div class="si"><div class="si-date">04.2024</div><div><div class="si-title zh-only">《学校咨询中的学生心理健康优先》</div><div class="si-title en-only">Prioritizing Student Mental Health in School Counseling</div><div class="si-org">UC Santa Barbara · Child Studies Lab</div></div><div class="si-role zh-only">培训讲师</div><div class="si-role en-only">Trainer</div></div>
-    <div class="si"><div class="si-date">01.2024</div><div><div class="si-title zh-only">青少年心理健康讨论与分享会</div><div class="si-title en-only">Youth Mental Health Discussion & Forum</div><div class="si-org">U.S. Embassy Beijing</div></div><div class="si-role zh-only">圆桌嘉宾</div><div class="si-role en-only">Panelist</div></div>
-    <div class="si"><div class="si-date">10.2023</div><div><div class="si-title zh-only">哈佛中国教育研讨会 — 教育与非营利组织分论坛</div><div class="si-title en-only">Harvard China Education Symposium — Education & Nonprofit Forum</div><div class="si-org">Harvard China Education Symposium</div></div><div class="si-role zh-only">主旨演讲</div><div class="si-role en-only">Keynote</div></div>
-    <div class="si"><div class="si-date">05.2020</div><div><div class="si-title zh-only">德雷塞尔大学 — 第三届本科生心理研究年度研讨会</div><div class="si-title en-only">Drexel University — 3rd Annual Undergraduate Psychology Research Symposium</div><div class="si-org">Drexel University Psychology Department</div></div><div class="si-role zh-only">演讲者</div><div class="si-role en-only">Speaker</div></div>
+    <div class="si fi"><div class="si-date">04.2026</div><div><div class="si-title zh-only">哈佛中国教育研讨会 — AI 与心理学青年学者论坛</div><div class="si-title en-only">Harvard China Education Symposium — AI &amp; Psychology Youth Scholar Forum</div><div class="si-org">Harvard China Education Symposium</div></div><div class="si-role zh-only">主旨演讲</div><div class="si-role en-only">Keynote</div></div>
+    <div class="si fi"><div class="si-date">12.2025</div><div><div class="si-title zh-only">企业家助残论坛 2025 — 推动40家企业残障融合</div><div class="si-title en-only">Entrepreneur for Disability Forum 2025</div><div class="si-org">Entrepreneur for Disability Forum</div></div><div class="si-role zh-only">论坛主席</div><div class="si-role en-only">Forum Chair</div></div>
+    <div class="si fi"><div class="si-date">03.2025</div><div><div class="si-title zh-only">Zero Project 联合国维也纳 — 促进残障包容性 DEI</div><div class="si-title en-only">Zero Project, UN Vienna — Advancing Disability-Inclusive DEI</div><div class="si-org">Zero Project, UN Vienna</div></div><div class="si-role zh-only">圆桌嘉宾</div><div class="si-role en-only">Panelist</div></div>
+    <div class="si fi"><div class="si-date">10.2024</div><div><div class="si-title zh-only">美国驻华大使馆 — 常春藤学校志愿者博览会</div><div class="si-title en-only">U.S. Embassy Beijing — Ivy League School Volunteer Fair</div><div class="si-org">U.S. Embassy Beijing</div></div><div class="si-role zh-only">总执行策划</div><div class="si-role en-only">Lead Organizer</div></div>
+    <div class="si fi"><div class="si-date">07.2024</div><div><div class="si-title zh-only">EducationUSA Mindful Adventure Camp</div><div class="si-title en-only">EducationUSA Mindful Adventure Camp</div><div class="si-org">U.S. Consulate General Guangzhou</div></div><div class="si-role zh-only">组织者/讲师</div><div class="si-role en-only">Organizer/Instructor</div></div>
+    <div class="si fi"><div class="si-date">05.2024</div><div><div class="si-title zh-only">《在美留学的心理地图》</div><div class="si-title en-only">The Mental Map of Studying in America</div><div class="si-org">EducationUSA</div></div><div class="si-role zh-only">主旨演讲</div><div class="si-role en-only">Keynote</div></div>
+    <div class="si fi"><div class="si-date">04.2024</div><div><div class="si-title zh-only">《学校咨询中的学生心理健康优先》</div><div class="si-title en-only">Prioritizing Student Mental Health in School Counseling</div><div class="si-org">UC Santa Barbara · Child Studies Lab</div></div><div class="si-role zh-only">培训讲师</div><div class="si-role en-only">Trainer</div></div>
+    <div class="si fi"><div class="si-date">01.2024</div><div><div class="si-title zh-only">青少年心理健康讨论与分享会</div><div class="si-title en-only">Youth Mental Health Discussion &amp; Forum</div><div class="si-org">U.S. Embassy Beijing</div></div><div class="si-role zh-only">圆桌嘉宾</div><div class="si-role en-only">Panelist</div></div>
+    <div class="si fi"><div class="si-date">10.2023</div><div><div class="si-title zh-only">哈佛中国教育研讨会 — 教育与非营利组织分论坛</div><div class="si-title en-only">Harvard China Education Symposium — Education &amp; Nonprofit Forum</div><div class="si-org">Harvard China Education Symposium</div></div><div class="si-role zh-only">主旨演讲</div><div class="si-role en-only">Keynote</div></div>
+    <div class="si fi"><div class="si-date">05.2020</div><div><div class="si-title zh-only">德雷塞尔大学 — 第三届本科生心理研究年度研讨会</div><div class="si-title en-only">Drexel University — 3rd Annual Undergraduate Psychology Research Symposium</div><div class="si-org">Drexel University Psychology Department</div></div><div class="si-role zh-only">演讲者</div><div class="si-role en-only">Speaker</div></div>
   </div>
 </div>
 
