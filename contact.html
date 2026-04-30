@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>联系我们 | AI Psych Lab</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+
+:root{--cr:#6B1C23;--crd:#4d1219;--gold:#C9A961;--cream:#F5F1E8;--creamd:#EDE8DC;--dark:#2C2C2C;--gray:#7a7a7a;--lg:#E8E4DC}
+*{margin:0;padding:0;box-sizing:border-box}html{scroll-behavior:smooth}
+body{font-family:'DM Sans',sans-serif;background:var(--cream);color:var(--dark);overflow-x:hidden}
+.en-only{display:none}span.zh-only{display:inline}span.en-only{display:none}
+body.lang-en .zh-only{display:none!important}body.lang-en span.en-only{display:inline!important}
+body.lang-en .en-only{display:block}body.lang-en li.en-only{display:list-item}
+nav{position:fixed;top:0;left:0;right:0;z-index:999;display:flex;align-items:center;justify-content:space-between;padding:0 60px;height:64px;background:rgba(245,241,232,.97);backdrop-filter:blur(8px);border-bottom:1px solid var(--lg)}
+.logo{font-family:'Playfair Display',serif;font-size:18px;color:var(--cr);font-weight:700;text-decoration:none;white-space:nowrap}
+.nav-links{display:flex;gap:0;list-style:none;align-items:center;height:64px}
+.nav-links li a{display:flex;align-items:center;height:64px;padding:0 16px;text-decoration:none;font-size:11px;letter-spacing:1.5px;color:var(--dark);text-transform:uppercase;transition:color .2s;border-bottom:2px solid transparent;position:relative;top:1px}
+.nav-links li a:hover{color:var(--cr)}.nav-links li a.active{color:var(--cr);border-bottom-color:var(--cr)}
+.nav-cta-wrap{display:flex;align-items:center;gap:10px}
+.nav-cta{background:var(--cr);color:#fff!important;padding:9px 20px;font-size:11px;letter-spacing:1.5px;text-transform:uppercase;text-decoration:none;border:none;cursor:pointer;font-family:'DM Sans',sans-serif;white-space:nowrap;transition:background .2s}
+.nav-cta:hover{background:var(--crd)!important;color:#fff!important}
+.lang-btn{background:transparent;border:1px solid var(--gold);color:var(--gold);padding:6px 14px;font-size:11px;letter-spacing:2px;cursor:pointer;font-family:'DM Sans',sans-serif;transition:all .2s}
+.lang-btn:hover{background:var(--gold);color:#fff}
+.hbg{display:none;flex-direction:column;gap:5px;cursor:pointer;background:none;border:none;padding:4px}
+.hbg span{width:22px;height:1.5px;background:var(--cr);display:block}
+section{padding:80px 60px}.sec-eye{font-size:10px;letter-spacing:4px;text-transform:uppercase;color:var(--gold);margin-bottom:8px;display:block}
+.sec-h{font-family:'Playfair Display',serif;font-size:36px;color:var(--cr);font-weight:700;line-height:1.2}
+.sec-bar{width:44px;height:1px;background:var(--gold);margin:12px auto 0}.sec-head{text-align:center;margin-bottom:52px}
+footer{background:#1a0a0c;padding:44px 60px}
+.footer-inner{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:18px}
+.fb{font-family:'Playfair Display',serif;font-size:17px;color:var(--cream);font-weight:600}
+.fs{font-size:10px;color:rgba(255,255,255,.35);margin-top:4px;letter-spacing:1px}
+.fl{display:flex;gap:22px;flex-wrap:wrap}
+.fl a{text-decoration:none;font-size:10px;letter-spacing:2px;text-transform:uppercase;color:rgba(255,255,255,.35);transition:color .2s}
+.fl a:hover{color:var(--gold)}
+.fc{padding-top:20px;border-top:1px solid rgba(255,255,255,.06);font-size:10px;color:rgba(255,255,255,.2);letter-spacing:1px;margin-top:20px}
+.mov{display:none;position:fixed;inset:0;background:rgba(0,0,0,.55);z-index:2000;align-items:center;justify-content:center}
+.mov.on{display:flex}
+.wc-modal{background:#fff;border-radius:12px;padding:36px 32px;max-width:380px;width:92%;position:relative;animation:pop .2s ease;text-align:center}
+@keyframes pop{from{opacity:0;transform:scale(.95) translateY(-12px)}to{opacity:1;transform:scale(1) translateY(0)}}
+.mclose{position:absolute;top:12px;right:16px;font-size:22px;cursor:pointer;color:#aaa;border:none;background:none}
+.wc-title{font-family:'Playfair Display',serif;font-size:22px;color:var(--cr);margin-bottom:6px;font-weight:600}
+.wc-sub{font-size:13px;color:var(--gray);line-height:1.7;margin-bottom:18px}
+.wc-qr{width:200px;height:200px;margin:0 auto 14px;display:block;object-fit:contain;border:1px solid var(--lg);padding:8px;border-radius:4px}
+.wc-qr-ph{width:200px;height:200px;margin:0 auto 14px;background:var(--creamd);display:flex;align-items:center;justify-content:center;font-size:11px;color:var(--gray);border:1px dashed var(--lg);border-radius:4px}
+.wc-id{font-size:15px;font-weight:600;color:var(--dark);letter-spacing:1px;margin-bottom:12px;padding:10px 16px;background:var(--creamd);border-radius:4px;display:inline-block}
+.wc-email{font-size:12px;color:var(--gray);margin-top:14px}.wc-email a{color:var(--cr);text-decoration:none}
+.wc-divider{display:flex;align-items:center;gap:10px;margin:14px 0;color:var(--gray);font-size:11px}
+.wc-divider::before,.wc-divider::after{content:'';flex:1;height:1px;background:var(--lg)}
+.fi{opacity:0;transform:translateY(22px);transition:opacity .65s ease,transform .65s ease}.fi.vis{opacity:1;transform:translateY(0)}
+@media(max-width:900px){nav{padding:0 20px}.nav-links{display:none}.hbg{display:flex}section{padding:60px 24px}footer{padding:28px 20px}}
+
+
+.page-hero{padding:140px 60px 80px;background:linear-gradient(135deg,#2a0a0e,#6B1C23);text-align:center}
+.page-hero-eye{font-size:10px;letter-spacing:5px;text-transform:uppercase;color:var(--gold);margin-bottom:14px;display:block}
+.page-hero h1{font-family:'Playfair Display',serif;font-size:52px;color:#fff;font-weight:700;margin-bottom:16px}
+.page-hero p{font-size:15px;color:rgba(255,255,255,.75);max-width:540px;margin:0 auto;line-height:1.8}
+.contact-layout{display:grid;grid-template-columns:1fr 1.2fr;gap:72px;max-width:1060px;margin:0 auto}
+.contact-left{}
+.contact-quote{font-family:'Playfair Display',serif;font-size:20px;font-style:italic;color:var(--cr);line-height:1.65;padding-left:20px;border-left:2px solid var(--gold);margin-bottom:36px}
+.info-block{margin-bottom:32px}
+.info-label{font-size:10px;letter-spacing:3px;text-transform:uppercase;color:var(--gold);margin-bottom:14px;display:block}
+.info-item{display:flex;align-items:center;gap:12px;margin-bottom:12px}
+.info-icon{width:36px;height:36px;background:var(--gold);display:flex;align-items:center;justify-content:center;font-size:14px;flex-shrink:0;color:var(--crd)}
+.info-text{font-size:14px;color:var(--dark);line-height:1.5}
+.info-text a{color:var(--cr);text-decoration:none}.info-text a:hover{text-decoration:underline}
+.wechat-btn{display:inline-flex;align-items:center;gap:8px;background:var(--cr);color:#fff;padding:11px 22px;font-size:11px;letter-spacing:2px;text-transform:uppercase;border:none;cursor:pointer;font-family:'DM Sans',sans-serif;margin-top:8px;transition:all .25s}
+.wechat-btn:hover{background:var(--crd);transform:translateY(-2px)}
+.note-block{padding:20px 22px;background:var(--creamd);border-left:2px solid var(--gold);font-size:13px;color:var(--gray);line-height:1.8;margin-top:28px}
+.form-wrap{background:var(--crd);padding:48px 44px}
+.fg{margin-bottom:18px}
+.fg label{display:block;font-size:10px;letter-spacing:2px;text-transform:uppercase;color:rgba(245,241,232,.5);margin-bottom:7px}
+.fg input,.fg select,.fg textarea{width:100%;background:rgba(255,255,255,.07);border:1px solid rgba(245,241,232,.15);padding:13px 15px;font-size:13px;font-family:'DM Sans',sans-serif;color:var(--cream);outline:none;transition:border-color .25s;appearance:none}
+.fg input::placeholder,.fg textarea::placeholder{color:rgba(245,241,232,.3)}
+.fg input:focus,.fg select:focus,.fg textarea:focus{border-color:var(--gold)}
+.fg select option{background:var(--crd);color:var(--cream)}.fg textarea{resize:vertical;min-height:100px}
+.frow{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.sbtn{width:100%;background:var(--gold);color:var(--crd);border:none;padding:15px;font-size:11px;letter-spacing:3px;text-transform:uppercase;cursor:pointer;font-family:'DM Sans',sans-serif;font-weight:700;transition:background .25s}
+.sbtn:hover{background:#dfc285}
+.ok{display:none;background:rgba(201,169,97,.12);border:1px solid var(--gold);padding:14px;text-align:center;color:var(--gold);font-size:13px;margin-top:12px}
+.form-title{font-family:'Playfair Display',serif;font-size:22px;color:var(--cream);font-weight:600;margin-bottom:6px}
+.form-sub{font-size:12px;color:rgba(245,241,232,.5);margin-bottom:28px;letter-spacing:.5px}
+@media(max-width:900px){.page-hero{padding:110px 24px 60px}.page-hero h1{font-size:36px}section{padding:60px 24px}.contact-layout{grid-template-columns:1fr;gap:40px}.form-wrap{padding:36px 28px}.frow{grid-template-columns:1fr}}
+
+</style>
+</head>
+<body>
+<nav>
+  <a href="index.html" class="logo">AI Psych Lab</a>
+  <ul class="nav-links"><li><a href="index.html"><span class="zh-only">首页</span><span class="en-only">Home</span></a></li><li><a href="about.html"><span class="zh-only">关于我</span><span class="en-only">About</span></a></li><li><a href="research.html"><span class="zh-only">研究方向</span><span class="en-only">Research</span></a></li><li><a href="services.html"><span class="zh-only">产品</span><span class="en-only">Products</span></a></li><li><a href="impact.html"><span class="zh-only">公益</span><span class="en-only">Impact</span></a></li><li><a href="contact.html" class="active"><span class="zh-only">联系我们</span><span class="en-only">Contact</span></a></li></ul>
+  <div class="nav-cta-wrap">
+    <button class="lang-btn" onclick="toggleLang()">EN</button>
+    <a href="#" onclick="openWechat();return false;" class="nav-cta"><span class="zh-only">预约咨询</span><span class="en-only">Book Now</span></a>
+    <button class="hbg" onclick="toggleMob()"><span></span><span></span><span></span></button>
+  </div>
+</nav>
+<div id="mob" style="display:none;position:fixed;top:64px;left:0;right:0;background:var(--cream);padding:20px;border-bottom:1px solid var(--lg);z-index:998">
+  <div style="display:flex;flex-direction:column;gap:0">
+    <a href="index.html" style="text-decoration:none;font-size:13px;letter-spacing:1px;color:var(--dark);text-transform:uppercase;padding:12px 0;border-bottom:1px solid var(--lg)" onclick="closeMob()"><span class="zh-only">首页</span><span class="en-only">Home</span></a><a href="about.html" style="text-decoration:none;font-size:13px;letter-spacing:1px;color:var(--dark);text-transform:uppercase;padding:12px 0;border-bottom:1px solid var(--lg)" onclick="closeMob()"><span class="zh-only">关于我</span><span class="en-only">About</span></a><a href="research.html" style="text-decoration:none;font-size:13px;letter-spacing:1px;color:var(--dark);text-transform:uppercase;padding:12px 0;border-bottom:1px solid var(--lg)" onclick="closeMob()"><span class="zh-only">研究方向</span><span class="en-only">Research</span></a><a href="services.html" style="text-decoration:none;font-size:13px;letter-spacing:1px;color:var(--dark);text-transform:uppercase;padding:12px 0;border-bottom:1px solid var(--lg)" onclick="closeMob()"><span class="zh-only">产品</span><span class="en-only">Products</span></a><a href="impact.html" style="text-decoration:none;font-size:13px;letter-spacing:1px;color:var(--dark);text-transform:uppercase;padding:12px 0;border-bottom:1px solid var(--lg)" onclick="closeMob()"><span class="zh-only">公益</span><span class="en-only">Impact</span></a><a href="contact.html" style="text-decoration:none;font-size:13px;letter-spacing:1px;color:var(--dark);text-transform:uppercase;padding:12px 0;border-bottom:1px solid var(--lg)" onclick="closeMob()"><span class="zh-only">联系我们</span><span class="en-only">Contact</span></a>
+    <a href="#" onclick="closeMob();openWechat();return false;" style="text-decoration:none;font-size:13px;letter-spacing:1px;color:var(--cr);text-transform:uppercase;font-weight:600;padding:12px 0;margin-top:4px"><span class="zh-only">预约咨询</span><span class="en-only">Book Now</span></a>
+  </div>
+</div>
+
+<div class="page-hero">
+  <span class="page-hero-eye">Contact · 联系我们</span>
+  <h1 class="zh-only">开始对话</h1><h1 class="en-only">Start the Conversation</h1>
+  <p class="zh-only">每一个关于孩子的困惑，都值得被认真对待。<br>无论你是家长、学校，还是研究同行，我们都在这里。</p>
+  <p class="en-only">Every question about a child deserves to be taken seriously.<br>Whether you're a parent, a school, or a fellow researcher — we're here.</p>
+</div>
+
+<section style="background:#fff" class="fi">
+  <div class="contact-layout">
+    <div class="contact-left">
+      <div class="contact-quote zh-only">每一段成长的旅程，都需要科学与温暖同行。我们不只是服务提供者，我们是长期的成长伙伴。</div>
+      <div class="contact-quote en-only">Every journey of growth needs science and warmth as companions. We are not just service providers — we are long-term growth partners.</div>
+
+      <div class="info-block">
+        <span class="info-label zh-only">微信联系（推荐）</span>
+        <span class="info-label en-only">WeChat (Recommended)</span>
+        <div class="info-item">
+          <div class="info-icon">&#128172;</div>
+          <div class="info-text">Beckychyy</div>
+        </div>
+        <button onclick="openWechat()" class="wechat-btn"><span class="zh-only">&#128247; 扫码添加微信</span><span class="en-only">&#128247; Scan WeChat QR</span></button>
+      </div>
+
+      <div class="info-block">
+        <span class="info-label zh-only">邮件联系</span>
+        <span class="info-label en-only">Email</span>
+        <div class="info-item">
+          <div class="info-icon">&#9993;</div>
+          <div class="info-text"><a href="mailto:becky@aipsychlab.com">becky@aipsychlab.com</a></div>
+        </div>
+      </div>
+
+      <div class="info-block">
+        <span class="info-label zh-only">服务城市</span>
+        <span class="info-label en-only">Service Locations</span>
+        <div class="info-item">
+          <div class="info-icon">&#128205;</div>
+          <div class="info-text zh-only">北京 · 波士顿 · 全球远程</div>
+          <div class="info-text en-only">Beijing · Boston · Global Remote</div>
+        </div>
+      </div>
+
+      <div class="info-block">
+        <span class="info-label zh-only">我们能帮你的</span>
+        <span class="info-label en-only">How We Can Help</span>
+        <div class="info-item"><div class="info-icon">&#128293;</div><div class="info-text zh-only">家庭未来力实验室 申请咨询</div><div class="info-text en-only">Family Future Readiness Lab Application</div></div>
+        <div class="info-item"><div class="info-icon">&#129302;</div><div class="info-text">PsychLab.AI Bot <span class="zh-only">候补名单</span><span class="en-only">Waitlist</span></div></div>
+        <div class="info-item"><div class="info-icon">&#127979;</div><div class="info-text zh-only">学校合作洽谈</div><div class="info-text en-only">School Partnership Inquiry</div></div>
+        <div class="info-item"><div class="info-icon">&#127760;</div><div class="info-text zh-only">学术研究合作</div><div class="info-text en-only">Academic Research Collaboration</div></div>
+        <div class="info-item"><div class="info-icon">&#129657;</div><div class="info-text zh-only">公益合作（云南山区教育）</div><div class="info-text en-only">Impact Partnership (Yunnan Rural Education)</div></div>
+      </div>
+
+      <div class="note-block">
+        <span class="zh-only">&#10022; 所有咨询均签署保密协议，严守职业伦理<br>&#10022; 提交表单后24小时内回复<br>&#10022; 家庭未来力实验室每季度仅接受3个新家庭申请</span>
+        <span class="en-only">&#10022; All consultations subject to confidentiality agreements<br>&#10022; Response within 24 hours of form submission<br>&#10022; Family Future Readiness Lab accepts only 3 new families per quarter</span>
+      </div>
+    </div>
+
+    <div>
+      <div class="form-wrap">
+        <div class="form-title zh-only">发送申请</div>
+        <div class="form-title en-only">Send Your Inquiry</div>
+        <div class="form-sub zh-only">填写后24小时内回复 · 保密协议保障</div>
+        <div class="form-sub en-only">Response within 24 hours · Confidentiality guaranteed</div>
+        <form onsubmit="submitForm(event)">
+          <div class="frow">
+            <div class="fg"><label><span class="zh-only">姓名 *</span><span class="en-only">Name *</span></label><input type="text" required placeholder="Your name"></div>
+            <div class="fg"><label><span class="zh-only">联系方式 *</span><span class="en-only">Contact *</span></label><input type="text" required placeholder="Phone or email"></div>
+          </div>
+          <div class="fg">
+            <label><span class="zh-only">您的身份 *</span><span class="en-only">You Are *</span></label>
+            <select required>
+              <option value=""><span class="zh-only">请选择</span><span class="en-only">Please select</span></option>
+              <option value="parent">&#128106; <span class="zh-only">家长</span><span class="en-only">Parent</span></option>
+              <option value="school">&#127979; <span class="zh-only">学校 / 教育机构</span><span class="en-only">School / Education Institution</span></option>
+              <option value="researcher">&#128300; <span class="zh-only">研究者 / 学者</span><span class="en-only">Researcher / Academic</span></option>
+              <option value="other">&#128100; <span class="zh-only">其他</span><span class="en-only">Other</span></option>
+            </select>
+          </div>
+          <div class="fg">
+            <label><span class="zh-only">感兴趣的方向 *</span><span class="en-only">Area of Interest *</span></label>
+            <select required>
+              <option value=""><span class="zh-only">请选择</span><span class="en-only">Please select</span></option>
+              <option>&#128293; <span class="zh-only">家庭未来力实验室</span><span class="en-only">Family Future Readiness Lab</span></option>
+              <option>&#129302; PsychLab.AI Bot <span class="zh-only">候补名单</span><span class="en-only">Waitlist</span></option>
+              <option>&#127979; <span class="zh-only">未来心智计划（学校合作）</span><span class="en-only">Future Mind Program (School Partnership)</span></option>
+              <option>&#127760; <span class="zh-only">学术研究合作</span><span class="en-only">Academic Research Collaboration</span></option>
+              <option>&#129657; <span class="zh-only">公益合作</span><span class="en-only">Impact Partnership</span></option>
+            </select>
+          </div>
+          <div class="fg"><label><span class="zh-only">孩子年龄（如适用）</span><span class="en-only">Child's Age (if applicable)</span></label><input type="text" placeholder="e.g. 8 / 12-14 / N/A"></div>
+          <div class="fg"><label><span class="zh-only">希望的联系时间</span><span class="en-only">Preferred Contact Time</span></label><input type="text" placeholder="e.g. weekday afternoons / weekend mornings"></div>
+          <div class="fg"><label><span class="zh-only">简要说明（选填）</span><span class="en-only">Brief Description (optional)</span></label><textarea placeholder="Please briefly share what brings you here..."></textarea></div>
+          <button type="submit" class="sbtn"><span class="zh-only">提交申请</span><span class="en-only">Submit Inquiry</span></button>
+          <div class="ok" id="ok">&#10003; <span class="zh-only">已收到，24小时内与您联系。</span><span class="en-only">Received. We'll be in touch within 24 hours.</span></div>
+        </form>
+      </div>
+    </div>
+  </div>
+</section>
+<script>
+function submitForm(e){
+  e.preventDefault();
+  document.getElementById('ok').style.display='block';
+  e.target.reset();
+  setTimeout(function(){document.getElementById('ok').style.display='none'},6000);
+}
+</script>
+
+<footer>
+  <div class="footer-inner">
+    <div><div class="fb">AI Psych Lab</div><div class="fs">AIPSYCHLAB.COM · BECKY@AIPSYCHLAB.COM</div></div>
+    <div class="fl">
+      <a href="index.html"><span class="zh-only">首页</span><span class="en-only">Home</span></a>
+      <a href="about.html"><span class="zh-only">关于我</span><span class="en-only">About</span></a>
+      <a href="research.html"><span class="zh-only">研究</span><span class="en-only">Research</span></a>
+      <a href="services.html"><span class="zh-only">产品</span><span class="en-only">Products</span></a>
+      <a href="impact.html"><span class="zh-only">公益</span><span class="en-only">Impact</span></a>
+      <a href="contact.html"><span class="zh-only">联系</span><span class="en-only">Contact</span></a>
+    </div>
+  </div>
+  <div class="fc">&#169; 2025 AI Psych Lab · Becky Chen · Harvard Innovation Labs Incubated · MTSS Framework · All rights reserved</div>
+</footer>
+<div class="mov" id="wechat-modal" onclick="if(event.target===this)closeWechat()">
+  <div class="wc-modal">
+    <button class="mclose" onclick="closeWechat()">&#215;</button>
+    <div class="wc-title zh-only">微信预约</div><div class="wc-title en-only">Book via WeChat</div>
+    <div class="wc-sub zh-only">扫描二维码，添加微信后即可预约</div><div class="wc-sub en-only">Scan the QR code to connect on WeChat</div>
+    <img src="wechat-qr.png" alt="WeChat QR" class="wc-qr" onerror="this.style.display='none';document.getElementById('qrph').style.display='flex'">
+    <div id="qrph" class="wc-qr-ph" style="display:none">&#128241; wechat-qr.png</div>
+    <div class="wc-id">Beckychyy &#127800;</div>
+    <div class="wc-divider zh-only">或</div><div class="wc-divider en-only">or</div>
+    <div class="wc-email zh-only">发送邮件至 <a href="mailto:becky@aipsychlab.com">becky@aipsychlab.com</a></div>
+    <div class="wc-email en-only">Email us at <a href="mailto:becky@aipsychlab.com">becky@aipsychlab.com</a></div>
+  </div>
+</div>
+<script>
+function toggleMob(){var m=document.getElementById('mob');m.style.display=(m.style.display==='none'||!m.style.display)?'block':'none'}
+function closeMob(){document.getElementById('mob').style.display='none'}
+function openWechat(){document.getElementById('wechat-modal').classList.add('on')}
+function closeWechat(){document.getElementById('wechat-modal').classList.remove('on')}
+document.addEventListener('keydown',function(e){if(e.key==='Escape')closeWechat()});
+var isEN=false;
+function toggleLang(){isEN=!isEN;document.body.classList.toggle('lang-en',isEN);document.querySelector('.lang-btn').textContent=isEN?'中':'EN';document.documentElement.lang=isEN?'en':'zh'}
+var obs=new IntersectionObserver(function(e){e.forEach(function(x){if(x.isIntersecting)x.target.classList.add('vis')})},{threshold:.08});
+document.querySelectorAll('.fi').forEach(function(el){obs.observe(el)});
+</script>
+</body>
+</html>

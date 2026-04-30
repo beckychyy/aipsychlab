@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>公益计划 | AI Psych Lab</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+
+:root{--cr:#6B1C23;--crd:#4d1219;--gold:#C9A961;--cream:#F5F1E8;--creamd:#EDE8DC;--dark:#2C2C2C;--gray:#7a7a7a;--lg:#E8E4DC}
+*{margin:0;padding:0;box-sizing:border-box}html{scroll-behavior:smooth}
+body{font-family:'DM Sans',sans-serif;background:var(--cream);color:var(--dark);overflow-x:hidden}
+.en-only{display:none}span.zh-only{display:inline}span.en-only{display:none}
+body.lang-en .zh-only{display:none!important}body.lang-en span.en-only{display:inline!important}
+body.lang-en .en-only{display:block}body.lang-en li.en-only{display:list-item}
+nav{position:fixed;top:0;left:0;right:0;z-index:999;display:flex;align-items:center;justify-content:space-between;padding:0 60px;height:64px;background:rgba(245,241,232,.97);backdrop-filter:blur(8px);border-bottom:1px solid var(--lg)}
+.logo{font-family:'Playfair Display',serif;font-size:18px;color:var(--cr);font-weight:700;text-decoration:none;white-space:nowrap}
+.nav-links{display:flex;gap:0;list-style:none;align-items:center;height:64px}
+.nav-links li a{display:flex;align-items:center;height:64px;padding:0 16px;text-decoration:none;font-size:11px;letter-spacing:1.5px;color:var(--dark);text-transform:uppercase;transition:color .2s;border-bottom:2px solid transparent;position:relative;top:1px}
+.nav-links li a:hover{color:var(--cr)}.nav-links li a.active{color:var(--cr);border-bottom-color:var(--cr)}
+.nav-cta-wrap{display:flex;align-items:center;gap:10px}
+.nav-cta{background:var(--cr);color:#fff!important;padding:9px 20px;font-size:11px;letter-spacing:1.5px;text-transform:uppercase;text-decoration:none;border:none;cursor:pointer;font-family:'DM Sans',sans-serif;white-space:nowrap;transition:background .2s}
+.nav-cta:hover{background:var(--crd)!important;color:#fff!important}
+.lang-btn{background:transparent;border:1px solid var(--gold);color:var(--gold);padding:6px 14px;font-size:11px;letter-spacing:2px;cursor:pointer;font-family:'DM Sans',sans-serif;transition:all .2s}
+.lang-btn:hover{background:var(--gold);color:#fff}
+.hbg{display:none;flex-direction:column;gap:5px;cursor:pointer;background:none;border:none;padding:4px}
+.hbg span{width:22px;height:1.5px;background:var(--cr);display:block}
+section{padding:80px 60px}.sec-eye{font-size:10px;letter-spacing:4px;text-transform:uppercase;color:var(--gold);margin-bottom:8px;display:block}
+.sec-h{font-family:'Playfair Display',serif;font-size:36px;color:var(--cr);font-weight:700;line-height:1.2}
+.sec-bar{width:44px;height:1px;background:var(--gold);margin:12px auto 0}.sec-head{text-align:center;margin-bottom:52px}
+footer{background:#1a0a0c;padding:44px 60px}
+.footer-inner{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:18px}
+.fb{font-family:'Playfair Display',serif;font-size:17px;color:var(--cream);font-weight:600}
+.fs{font-size:10px;color:rgba(255,255,255,.35);margin-top:4px;letter-spacing:1px}
+.fl{display:flex;gap:22px;flex-wrap:wrap}
+.fl a{text-decoration:none;font-size:10px;letter-spacing:2px;text-transform:uppercase;color:rgba(255,255,255,.35);transition:color .2s}
+.fl a:hover{color:var(--gold)}
+.fc{padding-top:20px;border-top:1px solid rgba(255,255,255,.06);font-size:10px;color:rgba(255,255,255,.2);letter-spacing:1px;margin-top:20px}
+.mov{display:none;position:fixed;inset:0;background:rgba(0,0,0,.55);z-index:2000;align-items:center;justify-content:center}
+.mov.on{display:flex}
+.wc-modal{background:#fff;border-radius:12px;padding:36px 32px;max-width:380px;width:92%;position:relative;animation:pop .2s ease;text-align:center}
+@keyframes pop{from{opacity:0;transform:scale(.95) translateY(-12px)}to{opacity:1;transform:scale(1) translateY(0)}}
+.mclose{position:absolute;top:12px;right:16px;font-size:22px;cursor:pointer;color:#aaa;border:none;background:none}
+.wc-title{font-family:'Playfair Display',serif;font-size:22px;color:var(--cr);margin-bottom:6px;font-weight:600}
+.wc-sub{font-size:13px;color:var(--gray);line-height:1.7;margin-bottom:18px}
+.wc-qr{width:200px;height:200px;margin:0 auto 14px;display:block;object-fit:contain;border:1px solid var(--lg);padding:8px;border-radius:4px}
+.wc-qr-ph{width:200px;height:200px;margin:0 auto 14px;background:var(--creamd);display:flex;align-items:center;justify-content:center;font-size:11px;color:var(--gray);border:1px dashed var(--lg);border-radius:4px}
+.wc-id{font-size:15px;font-weight:600;color:var(--dark);letter-spacing:1px;margin-bottom:12px;padding:10px 16px;background:var(--creamd);border-radius:4px;display:inline-block}
+.wc-email{font-size:12px;color:var(--gray);margin-top:14px}.wc-email a{color:var(--cr);text-decoration:none}
+.wc-divider{display:flex;align-items:center;gap:10px;margin:14px 0;color:var(--gray);font-size:11px}
+.wc-divider::before,.wc-divider::after{content:'';flex:1;height:1px;background:var(--lg)}
+.fi{opacity:0;transform:translateY(22px);transition:opacity .65s ease,transform .65s ease}.fi.vis{opacity:1;transform:translateY(0)}
+@media(max-width:900px){nav{padding:0 20px}.nav-links{display:none}.hbg{display:flex}section{padding:60px 24px}footer{padding:28px 20px}}
+
+
+.page-hero{padding:140px 60px 80px;background:linear-gradient(135deg,#1a0a0c,#4d1219);text-align:center}
+.page-hero-eye{font-size:10px;letter-spacing:5px;text-transform:uppercase;color:var(--gold);margin-bottom:14px;display:block}
+.page-hero h1{font-family:'Playfair Display',serif;font-size:52px;color:#fff;font-weight:700;margin-bottom:16px}
+.page-hero p{font-size:15px;color:rgba(255,255,255,.75);max-width:600px;margin:0 auto;line-height:1.8}
+.impact-belief{background:#fff;padding:80px 60px;text-align:center}
+.belief-text{font-family:'Playfair Display',serif;font-size:26px;color:var(--cr);line-height:1.65;max-width:780px;margin:0 auto 18px;font-style:italic}
+.belief-sub{font-size:14px;color:var(--gray);line-height:1.8;max-width:620px;margin:0 auto}
+.projects-section{background:var(--creamd);padding:80px 60px}
+.projects-grid{display:grid;grid-template-columns:1fr 1fr;gap:24px;max-width:1060px;margin:0 auto}
+.project-card{background:#fff;overflow:hidden;border:1px solid var(--lg);transition:all .3s}
+.project-card:hover{transform:translateY(-4px);box-shadow:0 16px 48px rgba(107,28,35,.1)}
+.pc-top{padding:40px 36px;border-bottom:1px solid var(--lg)}
+.pc-status{display:inline-flex;align-items:center;gap:7px;font-size:9px;letter-spacing:2px;text-transform:uppercase;color:var(--gold);margin-bottom:16px}
+.pc-status-dot{width:6px;height:6px;border-radius:50%;background:var(--gold);animation:pulse 2s infinite}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:.3}}
+.pc-icon{font-size:42px;display:block;margin-bottom:18px}
+.pc-title{font-family:'Playfair Display',serif;font-size:24px;color:var(--cr);font-weight:700;margin-bottom:6px}
+.pc-en{font-size:11px;letter-spacing:2px;text-transform:uppercase;color:var(--gold);margin-bottom:18px;display:block}
+.pc-desc{font-size:14px;line-height:1.85;color:var(--gray)}
+.pc-desc p{margin-bottom:12px}.pc-desc p:last-child{margin-bottom:0}
+.pc-bottom{padding:28px 36px;background:var(--creamd)}
+.pc-bottom-label{font-size:9px;letter-spacing:3px;text-transform:uppercase;color:var(--gold);margin-bottom:12px}
+.pc-tags{display:flex;flex-wrap:wrap;gap:6px}
+.pc-tag{background:#fff;border:1px solid var(--lg);color:var(--gray);font-size:10px;padding:4px 12px;border-radius:20px}
+.pc-note{font-size:12px;color:var(--gray);font-style:italic;margin-top:14px;line-height:1.7}
+.commitment-section{background:var(--cr);padding:80px 60px;text-align:center}
+.commitment-section .sec-h{color:var(--cream)}
+.commitment-section .sec-eye{color:var(--gold)}
+.commitment-section .sec-bar{background:rgba(201,169,97,.4)}
+.commit-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:2px;background:rgba(255,255,255,.08);margin-top:52px;max-width:900px;margin-left:auto;margin-right:auto}
+.commit-item{background:var(--cr);padding:36px 28px;text-align:center;transition:background .25s}
+.commit-item:hover{background:var(--crd)}
+.commit-icon{font-size:36px;display:block;margin-bottom:14px}
+.commit-title{font-family:'Playfair Display',serif;font-size:17px;color:var(--cream);margin-bottom:8px;font-weight:600}
+.commit-body{font-size:13px;line-height:1.7;color:rgba(245,241,232,.7)}
+.join-section{background:var(--creamd);padding:80px 60px;text-align:center}
+.join-h{font-family:'Playfair Display',serif;font-size:36px;color:var(--cr);font-weight:700;margin-bottom:14px}
+.join-p{font-size:15px;color:var(--gray);line-height:1.8;max-width:580px;margin:0 auto 32px}
+.btn-p{background:var(--cr);color:#fff;padding:14px 32px;font-size:11px;letter-spacing:2px;text-transform:uppercase;border:none;cursor:pointer;font-family:'DM Sans',sans-serif;transition:all .25s;display:inline-block;text-decoration:none}
+.btn-p:hover{background:var(--crd);transform:translateY(-2px)}
+@media(max-width:900px){.page-hero{padding:110px 24px 60px}.page-hero h1{font-size:36px}.impact-belief{padding:60px 24px}.belief-text{font-size:20px}.projects-section{padding:60px 24px}.projects-grid{grid-template-columns:1fr}.commitment-section{padding:60px 24px}.commit-grid{grid-template-columns:1fr}.join-section{padding:60px 24px}}
+
+</style>
+</head>
+<body>
+<nav>
+  <a href="index.html" class="logo">AI Psych Lab</a>
+  <ul class="nav-links"><li><a href="index.html"><span class="zh-only">首页</span><span class="en-only">Home</span></a></li><li><a href="about.html"><span class="zh-only">关于我</span><span class="en-only">About</span></a></li><li><a href="research.html"><span class="zh-only">研究方向</span><span class="en-only">Research</span></a></li><li><a href="services.html"><span class="zh-only">产品</span><span class="en-only">Products</span></a></li><li><a href="impact.html" class="active"><span class="zh-only">公益</span><span class="en-only">Impact</span></a></li><li><a href="contact.html"><span class="zh-only">联系我们</span><span class="en-only">Contact</span></a></li></ul>
+  <div class="nav-cta-wrap">
+    <button class="lang-btn" onclick="toggleLang()">EN</button>
+    <a href="#" onclick="openWechat();return false;" class="nav-cta"><span class="zh-only">预约咨询</span><span class="en-only">Book Now</span></a>
+    <button class="hbg" onclick="toggleMob()"><span></span><span></span><span></span></button>
+  </div>
+</nav>
+<div id="mob" style="display:none;position:fixed;top:64px;left:0;right:0;background:var(--cream);padding:20px;border-bottom:1px solid var(--lg);z-index:998">
+  <div style="display:flex;flex-direction:column;gap:0">
+    <a href="index.html" style="text-decoration:none;font-size:13px;letter-spacing:1px;color:var(--dark);text-transform:uppercase;padding:12px 0;border-bottom:1px solid var(--lg)" onclick="closeMob()"><span class="zh-only">首页</span><span class="en-only">Home</span></a><a href="about.html" style="text-decoration:none;font-size:13px;letter-spacing:1px;color:var(--dark);text-transform:uppercase;padding:12px 0;border-bottom:1px solid var(--lg)" onclick="closeMob()"><span class="zh-only">关于我</span><span class="en-only">About</span></a><a href="research.html" style="text-decoration:none;font-size:13px;letter-spacing:1px;color:var(--dark);text-transform:uppercase;padding:12px 0;border-bottom:1px solid var(--lg)" onclick="closeMob()"><span class="zh-only">研究方向</span><span class="en-only">Research</span></a><a href="services.html" style="text-decoration:none;font-size:13px;letter-spacing:1px;color:var(--dark);text-transform:uppercase;padding:12px 0;border-bottom:1px solid var(--lg)" onclick="closeMob()"><span class="zh-only">产品</span><span class="en-only">Products</span></a><a href="impact.html" style="text-decoration:none;font-size:13px;letter-spacing:1px;color:var(--dark);text-transform:uppercase;padding:12px 0;border-bottom:1px solid var(--lg)" onclick="closeMob()"><span class="zh-only">公益</span><span class="en-only">Impact</span></a><a href="contact.html" style="text-decoration:none;font-size:13px;letter-spacing:1px;color:var(--dark);text-transform:uppercase;padding:12px 0;border-bottom:1px solid var(--lg)" onclick="closeMob()"><span class="zh-only">联系我们</span><span class="en-only">Contact</span></a>
+    <a href="#" onclick="closeMob();openWechat();return false;" style="text-decoration:none;font-size:13px;letter-spacing:1px;color:var(--cr);text-transform:uppercase;font-weight:600;padding:12px 0;margin-top:4px"><span class="zh-only">预约咨询</span><span class="en-only">Book Now</span></a>
+  </div>
+</div>
+
+<div class="page-hero">
+  <span class="page-hero-eye">Impact · 公益计划</span>
+  <h1 class="zh-only">AI Psych Lab 公益计划</h1>
+  <h1 class="en-only">AI Psych Lab Impact Initiative</h1>
+  <p class="zh-only">我们相信教育资源的公平与教育质量的提升，应该同步发生。<br>每一次商业合作，都是一次改变的开始。</p>
+  <p class="en-only">We believe that equity in educational resources and improvement in educational quality should advance together.<br>Every commercial partnership is the beginning of a change.</p>
+</div>
+
+<div class="impact-belief fi">
+  <p class="belief-text zh-only">"从一把黄椅子出发，我们始终相信——<br>心理健康不是特权，是每个孩子应得的底色。"</p>
+  <p class="belief-text en-only">"Starting from a yellow chair, we have always believed —<br>mental health is not a privilege, it is every child's birthright."</p>
+  <p class="belief-sub zh-only">AI Psych Lab 将商业实践与公益行动系统性绑定。这不是附加的CSR，而是我们从第一天起就写进基因里的承诺：用我们能做到的方式，让更多孩子被看见、被支持。</p>
+  <p class="belief-sub en-only">AI Psych Lab systematically binds commercial practice with social impact. This is not add-on CSR — it's a commitment written into our DNA from day one: using what we can do to help more children be seen and supported.</p>
+</div>
+
+<div class="projects-section fi">
+  <div class="sec-head">
+    <span class="sec-eye">Our Initiatives</span>
+    <h2 class="sec-h"><span class="zh-only">两大公益项目</span><span class="en-only">Two Impact Projects</span></h2>
+    <div class="sec-bar"></div>
+  </div>
+  <div class="projects-grid">
+
+    <!-- Project 1: 研究桥梁 -->
+    <div class="project-card fi">
+      <div class="pc-top">
+        <div class="pc-status">
+          <span class="pc-status-dot"></span>
+          <span class="zh-only">进行中</span><span class="en-only">Active</span>
+        </div>
+        <span class="pc-icon">&#127760;</span>
+        <div class="pc-title zh-only">研究桥梁计划</div>
+        <div class="pc-title en-only">Research Bridge Initiative</div>
+        <span class="pc-en">Harvard Education Research · China Bridge</span>
+        <div class="pc-desc zh-only">
+          <p>作为哈佛教育学院的全球校友与在读研究员，Becky 持续在<strong>国际顶尖教育研究</strong>与<strong>中国本土教育现场</strong>之间搭建桥梁。</p>
+          <p>目前，已有多位哈佛教育学院的研究团队联系 Becky，希望借助她的网络与资源，在中国真实的教育场景中收集研究数据——让国际研究不再停留于理论，真正扎根中国教育语境。</p>
+          <p>这个项目的意义在于双向流动：让中国孩子的真实成长数据被国际研究看见，也让国际最前沿的教育心理研究成果反哺中国家庭。</p>
+        </div>
+        <div class="pc-desc en-only">
+          <p>As a Harvard HGSE global alumna and current researcher, Becky continuously bridges <strong>international education research</strong> and <strong>China's real educational landscape</strong>.</p>
+          <p>Multiple Harvard HGSE research teams have reached out to Becky to leverage her network and resources for collecting research data within authentic Chinese educational contexts — allowing international research to move beyond theory and genuinely take root in China.</p>
+          <p>This project moves in both directions: making the real developmental data of Chinese children visible to international research, while channeling cutting-edge educational psychology findings back to Chinese families.</p>
+        </div>
+      </div>
+      <div class="pc-bottom">
+        <div class="pc-bottom-label zh-only">项目标签</div>
+        <div class="pc-bottom-label en-only">Project Tags</div>
+        <div class="pc-tags">
+          <span class="pc-tag zh-only">哈佛教育研究网络</span>
+          <span class="pc-tag zh-only">中国数据收集</span>
+          <span class="pc-tag zh-only">跨境研究合作</span>
+          <span class="pc-tag zh-only">双向知识流动</span>
+          <span class="pc-tag en-only">Harvard Research Network</span>
+          <span class="pc-tag en-only">China Data Collection</span>
+          <span class="pc-tag en-only">Cross-Border Research</span>
+          <span class="pc-tag en-only">Bidirectional Knowledge Flow</span>
+        </div>
+        <div class="pc-note zh-only">* 出于研究保密要求，合作团队信息暂不公开展示。如有学术合作意向，欢迎通过邮件联系。</div>
+        <div class="pc-note en-only">* Research team details are not disclosed due to confidentiality requirements. For academic collaboration inquiries, please reach out via email.</div>
+      </div>
+    </div>
+
+    <!-- Project 2: 一校一善 -->
+    <div class="project-card fi">
+      <div class="pc-top">
+        <div class="pc-status">
+          <span class="pc-status-dot"></span>
+          <span class="zh-only">持续推进中</span><span class="en-only">Ongoing</span>
+        </div>
+        <span class="pc-icon">&#129657;</span>
+        <div class="pc-title zh-only">一校一善</div>
+        <div class="pc-title en-only">One School, One Good</div>
+        <span class="pc-en">Yunnan Rural Education Initiative</span>
+        <div class="pc-desc zh-only">
+          <p>AI Psych Lab 做出一个承诺：<strong>每完成一个学校合作项目，将把该项目收入的一部分，专项捐助至云南山区小学的教育建设。</strong></p>
+          <p>捐助内容涵盖：学习材料与文具采购、心理健康启蒙课程开发与落地、基础教育资源扩充，以及教师能力建设支持。每一笔捐助都会持续追踪使用情况，并在官网公示。</p>
+          <p>我们相信，当我们帮助城市里有资源的家庭更好地支持孩子时，也有责任让更远处的孩子被看见——让心理健康的启蒙，不只属于少数人。</p>
+        </div>
+        <div class="pc-desc en-only">
+          <p>AI Psych Lab makes a commitment: <strong>for every school partnership completed, a portion of the project revenue will be dedicated to educational development at rural primary schools in Yunnan's mountain regions.</strong></p>
+          <p>Donations cover: learning materials and stationery procurement, development and delivery of mental health literacy curriculum, expansion of basic educational resources, and teacher capacity-building support. Every donation is tracked and publicly disclosed on this website.</p>
+          <p>We believe that when we help resourced urban families better support their children, we also have a responsibility to make more distant children visible — so that mental health education is not the privilege of the few.</p>
+        </div>
+      </div>
+      <div class="pc-bottom">
+        <div class="pc-bottom-label zh-only">项目标签</div>
+        <div class="pc-bottom-label en-only">Project Tags</div>
+        <div class="pc-tags">
+          <span class="pc-tag zh-only">云南山区小学</span>
+          <span class="pc-tag zh-only">心理健康启蒙</span>
+          <span class="pc-tag zh-only">收入联动捐助</span>
+          <span class="pc-tag zh-only">教育公平</span>
+          <span class="pc-tag en-only">Yunnan Rural Schools</span>
+          <span class="pc-tag en-only">Mental Health Literacy</span>
+          <span class="pc-tag en-only">Revenue-Linked Giving</span>
+          <span class="pc-tag en-only">Education Equity</span>
+        </div>
+        <div class="pc-note zh-only">* 正在寻找第一所合作学校，欢迎联系参与共建。捐助记录将在网站持续公示。</div>
+        <div class="pc-note en-only">* Currently seeking the first partner school. Donation records will be continuously disclosed on this website. Reach out to get involved.</div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<div class="commitment-section fi">
+  <div class="sec-head">
+    <span class="sec-eye">Our Commitment</span>
+    <h2 class="sec-h" style="color:var(--cream)"><span class="zh-only">我们的承诺</span><span class="en-only">What We Stand For</span></h2>
+    <div class="sec-bar"></div>
+  </div>
+  <div class="commit-grid">
+    <div class="commit-item">
+      <span class="commit-icon">&#128269;</span>
+      <div class="commit-title zh-only">透明公示</div><div class="commit-title en-only">Full Transparency</div>
+      <div class="commit-body zh-only">每一笔公益捐助的去向，都会在官网持续公开，接受社会监督</div>
+      <div class="commit-body en-only">Every donation's use is continuously disclosed on this website, open to public accountability</div>
+    </div>
+    <div class="commit-item">
+      <span class="commit-icon">&#128204;</span>
+      <div class="commit-title zh-only">系统绑定</div><div class="commit-title en-only">Structurally Linked</div>
+      <div class="commit-body zh-only">公益不是附加动作，而是与商业合作系统性绑定——每一个合作都触发捐助</div>
+      <div class="commit-body en-only">Impact is not an add-on — it's structurally linked to every partnership, so every collaboration triggers a donation</div>
+    </div>
+    <div class="commit-item">
+      <span class="commit-icon">&#127331;</span>
+      <div class="commit-title zh-only">持续推进</div><div class="commit-title en-only">Long-Term Commitment</div>
+      <div class="commit-body zh-only">不是一次性活动，而是随着 AI Psych Lab 的成长持续扩大公益影响</div>
+      <div class="commit-body en-only">Not a one-time event — impact grows as AI Psych Lab grows, continuously expanding reach</div>
+    </div>
+  </div>
+</div>
+
+<div class="join-section fi">
+  <div class="join-h zh-only">一起参与这件事</div>
+  <div class="join-h en-only">Join Us in This</div>
+  <p class="join-p zh-only">如果你相信教育应该更公平，如果你的学校或机构希望参与云南山区教育建设，或者你有意向在研究层面与我们合作——欢迎联系我们。</p>
+  <p class="join-p en-only">If you believe education should be more equitable, if your school or organization wants to participate in rural Yunnan education development, or if you're interested in research collaboration — we'd love to hear from you.</p>
+  <button onclick="openWechat()" class="btn-p"><span class="zh-only">联系我们 →</span><span class="en-only">Get in Touch →</span></button>
+</div>
+
+<footer>
+  <div class="footer-inner">
+    <div><div class="fb">AI Psych Lab</div><div class="fs">AIPSYCHLAB.COM · BECKY@AIPSYCHLAB.COM</div></div>
+    <div class="fl">
+      <a href="index.html"><span class="zh-only">首页</span><span class="en-only">Home</span></a>
+      <a href="about.html"><span class="zh-only">关于我</span><span class="en-only">About</span></a>
+      <a href="research.html"><span class="zh-only">研究</span><span class="en-only">Research</span></a>
+      <a href="services.html"><span class="zh-only">产品</span><span class="en-only">Products</span></a>
+      <a href="impact.html"><span class="zh-only">公益</span><span class="en-only">Impact</span></a>
+      <a href="contact.html"><span class="zh-only">联系</span><span class="en-only">Contact</span></a>
+    </div>
+  </div>
+  <div class="fc">&#169; 2025 AI Psych Lab · Becky Chen · Harvard Innovation Labs Incubated · MTSS Framework · All rights reserved</div>
+</footer>
+<div class="mov" id="wechat-modal" onclick="if(event.target===this)closeWechat()">
+  <div class="wc-modal">
+    <button class="mclose" onclick="closeWechat()">&#215;</button>
+    <div class="wc-title zh-only">微信预约</div><div class="wc-title en-only">Book via WeChat</div>
+    <div class="wc-sub zh-only">扫描二维码，添加微信后即可预约</div><div class="wc-sub en-only">Scan the QR code to connect on WeChat</div>
+    <img src="wechat-qr.png" alt="WeChat QR" class="wc-qr" onerror="this.style.display='none';document.getElementById('qrph').style.display='flex'">
+    <div id="qrph" class="wc-qr-ph" style="display:none">&#128241; wechat-qr.png</div>
+    <div class="wc-id">Beckychyy &#127800;</div>
+    <div class="wc-divider zh-only">或</div><div class="wc-divider en-only">or</div>
+    <div class="wc-email zh-only">发送邮件至 <a href="mailto:becky@aipsychlab.com">becky@aipsychlab.com</a></div>
+    <div class="wc-email en-only">Email us at <a href="mailto:becky@aipsychlab.com">becky@aipsychlab.com</a></div>
+  </div>
+</div>
+<script>
+function toggleMob(){var m=document.getElementById('mob');m.style.display=(m.style.display==='none'||!m.style.display)?'block':'none'}
+function closeMob(){document.getElementById('mob').style.display='none'}
+function openWechat(){document.getElementById('wechat-modal').classList.add('on')}
+function closeWechat(){document.getElementById('wechat-modal').classList.remove('on')}
+document.addEventListener('keydown',function(e){if(e.key==='Escape')closeWechat()});
+var isEN=false;
+function toggleLang(){isEN=!isEN;document.body.classList.toggle('lang-en',isEN);document.querySelector('.lang-btn').textContent=isEN?'中':'EN';document.documentElement.lang=isEN?'en':'zh'}
+var obs=new IntersectionObserver(function(e){e.forEach(function(x){if(x.isIntersecting)x.target.classList.add('vis')})},{threshold:.08});
+document.querySelectorAll('.fi').forEach(function(el){obs.observe(el)});
+</script>
+</body>
+</html>
