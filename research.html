@@ -57,47 +57,43 @@ footer{background:#1a0a0c;padding:44px 60px}
 .page-hero h1{font-family:'Playfair Display',serif;font-size:52px;color:#fff;font-weight:700;margin-bottom:16px}
 .page-hero p{font-size:15px;color:rgba(255,255,255,.75);max-width:580px;margin:0 auto;line-height:1.75}
 .research-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:20px;max-width:1060px;margin:0 auto}
-.rc{background:#fff;padding:36px;border:1px solid var(--lg);border-left:4px solid var(--gold);cursor:pointer;transition:all .25s}
+.rc{background:#fff;padding:36px;border:1px solid var(--lg);border-left:4px solid var(--gold);transition:all .25s;cursor:pointer}
 .rc.foundation{border-left-color:var(--cr)}
 .rc:hover{box-shadow:0 8px 32px rgba(107,28,35,.08);transform:translateY(-3px)}
 .rc-pillar{font-size:9px;letter-spacing:2px;text-transform:uppercase;color:var(--gold);margin-bottom:10px;display:block}
 .rc.foundation .rc-pillar{color:var(--cr)}
 .rc-head{display:flex;align-items:flex-start;justify-content:space-between;gap:12px}
 .rc-title{font-family:'Playfair Display',serif;font-size:20px;color:var(--cr);font-weight:600;margin-bottom:10px;flex:1}
-.rc-plus{font-size:20px;color:var(--gold);transition:transform .3s;flex-shrink:0}
+.rc-plus{font-size:22px;color:var(--gold);transition:transform .35s;flex-shrink:0;line-height:1}
 .rc.open .rc-plus{transform:rotate(45deg)}
 .rc-preview{font-size:13px;line-height:1.75;color:var(--gray)}
-.rc-detail{max-height:0;overflow:hidden;transition:max-height .45s ease}
-.rc.open .rc-detail{max-height:500px}
+.rc-detail{max-height:0;overflow:hidden;transition:max-height .5s ease}
+.rc.open .rc-detail{max-height:600px}
 .rc-detail-inner{padding-top:16px;border-top:1px solid var(--lg);margin-top:16px;font-size:13px;line-height:1.85;color:var(--gray)}
-.rc-detail-inner strong{color:var(--dark)}
-/* MTSS */
+.rc-detail-inner strong{color:var(--dark);display:block;margin-top:12px;margin-bottom:6px}
+.rc-detail-inner ul{list-style:none;display:flex;flex-direction:column;gap:6px}
+.rc-detail-inner ul li{padding-left:16px;position:relative}
+.rc-detail-inner ul li::before{content:'·';position:absolute;left:0;color:var(--gold);font-size:16px;top:-2px}
 .mtss-wrap{background:var(--crd);padding:80px 60px}
 .mtss-wrap .sec-h{color:var(--cream)}.mtss-wrap .sec-eye{color:var(--gold)}.mtss-wrap .sec-bar{background:rgba(201,169,97,.4)}
 .method-intro{text-align:center;font-size:15px;color:rgba(245,241,232,.7);line-height:1.8;max-width:680px;margin:16px auto 52px}
 .mtss-layout{display:grid;grid-template-columns:1fr 1fr;gap:56px;max-width:1060px;margin:0 auto;align-items:center}
 .pyramid-hint{font-size:10px;letter-spacing:2px;text-transform:uppercase;color:var(--gold);margin-bottom:14px;opacity:.7;text-align:center}
-.mtss-pyramid-svg{width:100%;max-width:360px;display:block;margin:0 auto}
-.pyramid-tier .poly{fill:rgba(255,255,255,.06);stroke:rgba(201,169,97,.2);stroke-width:1;transition:all .25s}
-.pyramid-tier{cursor:pointer}
-.pyramid-tier:hover .poly,.pyramid-tier.active .poly{fill:rgba(201,169,97,.2);stroke:var(--gold);stroke-width:1.5}
-.pt-num{font-size:24px;font-weight:700;fill:var(--gold);font-family:'Playfair Display',serif;pointer-events:none}
-.pt-lbl{font-size:9px;letter-spacing:1.5px;fill:rgba(245,241,232,.85);text-transform:uppercase;font-family:'DM Sans',sans-serif;pointer-events:none}
-.pt-sub{font-size:8px;fill:rgba(201,169,97,.7);letter-spacing:.5px;font-family:'DM Sans',sans-serif;pointer-events:none}
-.pyramid-tier.active .pt-num{fill:#fff}.pyramid-tier.active .pt-lbl{fill:#fff}.pyramid-tier.active .pt-sub{fill:var(--gold)}
+.mtss-pyramid-svg{width:100%;max-width:320px;display:block;margin:0 auto}
+.ct{cursor:pointer;transition:opacity .2s}.ct:hover{opacity:.75}
 .pyramid-axis{display:flex;gap:20px;justify-content:center;margin-top:16px}
-.axis-item{display:flex;align-items:center;gap:8px;font-size:10px;letter-spacing:.5px;color:rgba(245,241,232,.4)}
-.axis-dot{width:8px;height:8px;border-radius:50%;background:var(--gold);opacity:.5;flex-shrink:0}
+.axis-item{display:flex;align-items:center;gap:8px;font-size:10px;color:rgba(245,241,232,.4)}
+.axis-dot{width:8px;height:8px;border-radius:50%;background:var(--gold);flex-shrink:0}
 .detail-panel{padding:36px;background:rgba(255,255,255,.04);border:1px solid rgba(201,169,97,.15)}
 .dp-badge{display:inline-block;font-size:9px;letter-spacing:3px;text-transform:uppercase;background:var(--gold);color:var(--crd);padding:5px 14px;font-weight:700;margin-bottom:18px}
-.dp-title{font-family:'Playfair Display',serif;font-size:26px;color:var(--cream);font-weight:700;margin-bottom:6px}
+.dp-title{font-family:'Playfair Display',serif;font-size:26px;color:var(--cream);font-weight:700;margin-bottom:6px;line-height:1.2}
 .dp-tag{font-size:10px;letter-spacing:1.5px;text-transform:uppercase;color:var(--gold);margin-bottom:22px;display:block}
 .dp-div{height:1px;background:rgba(255,255,255,.08);margin:18px 0}
 .dp-label{font-size:9px;letter-spacing:3px;text-transform:uppercase;color:rgba(201,169,97,.65);margin-bottom:8px}
-.dp-text{font-size:13px;color:rgba(245,241,232,.8);line-height:1.8;margin-bottom:0}
-.dp-research{display:flex;flex-wrap:wrap;gap:6px;margin-top:8px}
-.dr-chip{font-size:10px;padding:5px 12px;border:1px solid rgba(255,255,255,.1);color:rgba(245,241,232,.3);border-radius:20px;transition:all .3s}
-.dr-chip.on{border-color:var(--gold);color:var(--gold);background:rgba(201,169,97,.08)}
+.dp-text{font-size:13px;color:rgba(245,241,232,.8);line-height:1.8}
+.dp-chips{display:flex;flex-wrap:wrap;gap:6px;margin-top:8px}
+.dp-chip{font-size:10px;padding:5px 12px;border:1px solid rgba(255,255,255,.1);color:rgba(245,241,232,.3);border-radius:20px}
+.dp-chip.on{border-color:var(--gold);color:var(--gold);background:rgba(201,169,97,.08)}
 .dp-cta{margin-top:22px;display:inline-block;background:var(--gold);color:var(--crd);border:none;padding:12px 26px;font-size:11px;letter-spacing:2px;text-transform:uppercase;cursor:pointer;font-family:'DM Sans',sans-serif;font-weight:700;transition:all .25s}
 .dp-cta:hover{background:#dfc285;transform:translateY(-2px)}
 @media(max-width:900px){.page-hero{padding:110px 24px 60px}.page-hero h1{font-size:36px}.research-grid{grid-template-columns:1fr}.mtss-wrap{padding:60px 24px}.mtss-layout{grid-template-columns:1fr}}
@@ -124,8 +120,8 @@ footer{background:#1a0a0c;padding:44px 60px}
 <div class="page-hero">
   <span class="page-hero-eye">Research Foundation</span>
   <h1 class="zh-only">实验室研究方向</h1><h1 class="en-only">Lab Research Areas</h1>
-  <p class="zh-only">四大研究方向直接对应产品三大支柱——每一个产品设计决策，都有实验室研究支撑</p>
-  <p class="en-only">Four research areas map directly to the three product pillars — every product design decision is backed by lab research</p>
+  <p class="zh-only">四大研究方向直接对应产品三大支柱——点击每个方向展开详细内容</p>
+  <p class="en-only">Four research areas map directly to the three product pillars — click each card to expand</p>
 </div>
 
 <section style="background:var(--creamd)" class="fi">
@@ -135,7 +131,8 @@ footer{background:#1a0a0c;padding:44px 60px}
     <div class="sec-bar"></div>
   </div>
   <div class="research-grid">
-    <div class="rc fi" onclick="toggleRC(this)">
+
+    <div class="rc" onclick="var w=this.classList.contains('open');document.querySelectorAll('.rc').forEach(function(r){r.classList.remove('open');});if(!w)this.classList.add('open');">
       <span class="rc-pillar zh-only">&#8594; 支柱一：内驱力</span><span class="rc-pillar en-only">&#8594; Pillar 1: Intrinsic Drive</span>
       <div class="rc-head">
         <div class="rc-title"><span class="zh-only">内驱力神经科学</span><span class="en-only">Motivational Neuroscience</span></div>
@@ -143,42 +140,54 @@ footer{background:#1a0a0c;padding:44px 60px}
       </div>
       <div class="rc-preview zh-only">如何科学识别与激活孩子真正的内在动力内核与执行功能</div>
       <div class="rc-preview en-only">Scientifically identifying and activating each child's true intrinsic motivation core</div>
-      <div class="rc-detail"><div class="rc-detail-inner zh-only">基于约翰斯·霍普金斯大学神经教育研究，探索动机、奖励回路与认知投入之间的神经机制。<br><br><strong>核心研究方向：</strong><br>· 执行功能与自我调节的神经发育路径<br>· 内在动机 vs. 外在奖励的脑区激活差异<br>· 兴趣驱动型学习的神经可塑性机制<br>· 目标设定与前额叶皮层功能的关系<br><br>研究成果直接应用于《动力地图报告》的评估框架设计与家庭未来力实验室的核心评估工具。</div>
-      <div class="rc-detail-inner en-only">Drawing on JHU neuroeducation research, exploring neural mechanisms between motivation, reward circuitry, and cognitive engagement.<br><br><strong>Core Research Areas:</strong><br>· Neural developmental pathways of executive function and self-regulation<br>· Brain activation differences between intrinsic vs. extrinsic motivation<br>· Neuroplasticity mechanisms in interest-driven learning<br>· Goal-setting and prefrontal cortex function<br><br>Findings directly inform the Motivation Mapping Report assessment framework and the Family Future Readiness Lab's core evaluation tools.</div></div>
+      <div class="rc-detail">
+        <div class="rc-detail-inner zh-only">基于约翰斯·霍普金斯大学神经教育研究，探索动机、奖励回路与认知投入之间的神经机制。<strong>核心研究方向：</strong><ul><li>执行功能与自我调节的神经发育路径</li><li>内在动机 vs. 外在奖励的脑区激活差异</li><li>兴趣驱动型学习的神经可塑性机制</li><li>目标设定与前额叶皮层功能的关系</li></ul><strong>产品落地：</strong>《动力地图报告》评估框架 · 家庭未来力实验室核心评估工具</div>
+        <div class="rc-detail-inner en-only">Drawing on JHU neuroeducation research, exploring neural mechanisms between motivation, reward circuitry, and cognitive engagement.<strong>Core Research Areas:</strong><ul><li>Neural developmental pathways of executive function and self-regulation</li><li>Brain activation differences: intrinsic vs. extrinsic motivation</li><li>Neuroplasticity mechanisms in interest-driven learning</li><li>Goal-setting and prefrontal cortex function</li></ul><strong>Product Application:</strong>Motivation Mapping Report · Family Future Readiness Lab core assessment tools</div>
+      </div>
     </div>
-    <div class="rc fi" onclick="toggleRC(this)">
+
+    <div class="rc" onclick="var w=this.classList.contains('open');document.querySelectorAll('.rc').forEach(function(r){r.classList.remove('open');});if(!w)this.classList.add('open');">
       <span class="rc-pillar zh-only">&#8594; 支柱二：情绪管理</span><span class="rc-pillar en-only">&#8594; Pillar 2: Emotional Regulation</span>
       <div class="rc-head">
         <div class="rc-title"><span class="zh-only">情绪神经科学与韧性发展</span><span class="en-only">Emotional Neuroscience & Resilience</span></div>
         <span class="rc-plus">+</span>
       </div>
-      <div class="rc-preview zh-only">脑科学视角下的情绪调节机制，与AI时代高压环境下的心理韧性培养</div>
-      <div class="rc-preview en-only">Neuroscience-based emotional regulation mechanisms and resilience-building in the high-pressure AI era</div>
-      <div class="rc-detail"><div class="rc-detail-inner zh-only">聚焦青少年情绪调节的神经发育机制，研究如何在AI时代高压环境中建立可持续的韧性系统，积累1000+小时一线临床数据。<br><br><strong>核心研究方向：</strong><br>· 前额叶皮层与情绪调节系统的协同发育<br>· 神经多样性青少年的情绪模式识别（ADHD、自闭症谱系）<br>· 压力神经生物学与创伤知情干预方案<br>· AI时代数字焦虑与情绪边界建立<br><br>研究成果直接指导家庭未来力实验室的情绪韧性评估模块与PsychLab.AI Bot的情绪支持算法。</div>
-      <div class="rc-detail-inner en-only">Focusing on neurodevelopmental mechanisms of adolescent emotional regulation and sustainable resilience systems in high-pressure AI-era environments. Backed by 1,000+ hours of clinical data.<br><br><strong>Core Research Areas:</strong><br>· Co-development of prefrontal cortex and emotional regulation systems<br>· Emotional pattern recognition in neurodiverse youth (ADHD, ASD)<br>· Stress neurobiology and trauma-informed intervention<br>· Digital anxiety and emotional boundary-setting in the AI era<br><br>Findings directly guide the emotional resilience assessment module and PsychLab.AI Bot's emotional support algorithms.</div></div>
+      <div class="rc-preview zh-only">脑科学视角下的情绪调节机制与AI时代心理韧性培养</div>
+      <div class="rc-preview en-only">Neuroscience-based emotional regulation and resilience-building in the AI era</div>
+      <div class="rc-detail">
+        <div class="rc-detail-inner zh-only">聚焦青少年情绪调节的神经发育机制，积累1000+小时一线临床数据。<strong>核心研究方向：</strong><ul><li>前额叶皮层与情绪调节系统的协同发育</li><li>神经多样性青少年的情绪模式（ADHD、自闭症谱系）</li><li>压力神经生物学与创伤知情干预方案</li><li>AI时代数字焦虑与情绪边界建立</li></ul><strong>产品落地：</strong>家庭未来力实验室情绪韧性模块 · PsychLab.AI Bot情绪支持算法</div>
+        <div class="rc-detail-inner en-only">Focusing on neurodevelopmental mechanisms of adolescent emotional regulation. Backed by 1,000+ clinical hours.<strong>Core Research Areas:</strong><ul><li>Co-development of prefrontal cortex and emotional regulation systems</li><li>Emotional patterns in neurodiverse youth (ADHD, ASD)</li><li>Stress neurobiology and trauma-informed intervention</li><li>Digital anxiety and emotional boundary-setting in the AI era</li></ul><strong>Product Application:</strong>Emotional resilience module · PsychLab.AI Bot emotional support algorithms</div>
+      </div>
     </div>
-    <div class="rc fi" onclick="toggleRC(this)">
+
+    <div class="rc" onclick="var w=this.classList.contains('open');document.querySelectorAll('.rc').forEach(function(r){r.classList.remove('open');});if(!w)this.classList.add('open');">
       <span class="rc-pillar zh-only">&#8594; 支柱三：AI竞争力</span><span class="rc-pillar en-only">&#8594; Pillar 3: AI Competitiveness</span>
       <div class="rc-head">
         <div class="rc-title"><span class="zh-only">AI辅助个性化教育技术</span><span class="en-only">AI-Assisted Personalized Education</span></div>
         <span class="rc-plus">+</span>
       </div>
-      <div class="rc-preview zh-only">用AI技术实现真正个性化的教育心理评估与成长路径设计</div>
-      <div class="rc-preview en-only">Using AI to deliver truly personalized educational psychology assessment and growth pathway design</div>
-      <div class="rc-detail"><div class="rc-detail-inner zh-only">探索心理学测评与AI技术结合，为每个孩子生成专属的成长数据画像，这也是PsychLab.AI Bot的核心研究基础。<br><br><strong>核心研究方向：</strong><br>· AI辅助认知模式与学习风格评估系统<br>· 自然语言处理在心理支持对话中的伦理边界<br>· 人机协作思维模式与批判性思维培养<br>· 数字心理健康：屏幕时间与前额叶发育的关系<br>· AI时代的创造力保护与人类独特性培养<br><br>研究直接支撑PsychLab.AI Bot的对话逻辑设计与未来心智计划的课程框架。</div>
-      <div class="rc-detail-inner en-only">Exploring how psychological assessment and AI combine to generate individualized growth data profiles — forming the core research foundation for PsychLab.AI Bot.<br><br><strong>Core Research Areas:</strong><br>· AI-assisted cognitive pattern and learning style assessment systems<br>· Ethical boundaries of NLP in psychological support dialogue<br>· Human-AI collaborative thinking and critical thinking cultivation<br>· Digital mental health: screen time and prefrontal cortex development<br>· Protecting creativity and human uniqueness in the AI era<br><br>Research directly supports PsychLab.AI Bot's dialogue logic and the Future Mind Program's curriculum framework.</div></div>
+      <div class="rc-preview zh-only">用AI实现真正个性化的教育心理评估与成长路径设计</div>
+      <div class="rc-preview en-only">Using AI for truly personalized educational psychology assessment and growth design</div>
+      <div class="rc-detail">
+        <div class="rc-detail-inner zh-only">探索心理学测评与AI技术结合，为每个孩子生成专属成长数据画像。<strong>核心研究方向：</strong><ul><li>AI辅助认知模式与学习风格评估系统</li><li>自然语言处理在心理支持对话中的伦理边界</li><li>人机协作思维模式与批判性思维培养</li><li>数字心理健康：屏幕时间与前额叶发育</li><li>AI时代的创造力保护与人类独特性</li></ul><strong>产品落地：</strong>PsychLab.AI Bot对话逻辑 · 未来心智计划课程框架</div>
+        <div class="rc-detail-inner en-only">Exploring how psychological assessment and AI combine to generate individualized growth profiles.<strong>Core Research Areas:</strong><ul><li>AI-assisted cognitive pattern and learning style assessment</li><li>Ethical boundaries of NLP in psychological support dialogue</li><li>Human-AI collaborative thinking and critical thinking</li><li>Digital mental health: screen time and prefrontal development</li><li>Protecting creativity and human uniqueness in the AI era</li></ul><strong>Product Application:</strong>PsychLab.AI Bot dialogue logic · Future Mind Program curriculum framework</div>
+      </div>
     </div>
-    <div class="rc foundation fi" onclick="toggleRC(this)">
+
+    <div class="rc foundation" onclick="var w=this.classList.contains('open');document.querySelectorAll('.rc').forEach(function(r){r.classList.remove('open');});if(!w)this.classList.add('open');">
       <span class="rc-pillar zh-only">&#10022; 三大支柱的底层基础</span><span class="rc-pillar en-only">&#10022; Foundation for All Three Pillars</span>
       <div class="rc-head">
         <div class="rc-title"><span class="zh-only">家庭系统与养育环境</span><span class="en-only">Family Systems & Parenting Environment</span></div>
         <span class="rc-plus">+</span>
       </div>
       <div class="rc-preview zh-only">依附理论与家庭系统治疗：孩子成长生态系统的底层逻辑</div>
-      <div class="rc-preview en-only">Attachment theory and family systems therapy: the foundational logic of the child development ecosystem</div>
-      <div class="rc-detail"><div class="rc-detail-inner zh-only">基于Bowlby依附理论与Bowen家庭系统治疗理论，研究家庭生态如何影响孩子的内驱力、情绪调节与AI时代适应能力。这是贯穿所有产品的底层理论基础。<br><br><strong>核心研究方向：</strong><br>· 安全型依附关系对执行功能的长期神经影响<br>· 父母焦虑传递机制与代际创伤干预<br>· 高净值家庭特有的教育压力模式与应对<br>· 跨文化家庭养育差异（中美教育价值观比较）<br>· 单亲、留守、异国他乡家庭的特殊支持需求<br><br>所有产品设计均将家庭系统纳入核心评估维度，家长coaching是每个服务层级的必要组成。</div>
-      <div class="rc-detail-inner en-only">Drawing on Bowlby's attachment theory and Bowen family systems therapy, researching how family ecosystems shape children's intrinsic drive, emotional regulation, and AI-era adaptability — the underlying theoretical foundation across all products.<br><br><strong>Core Research Areas:</strong><br>· Long-term neural impact of secure attachment on executive function<br>· Parental anxiety transmission and intergenerational trauma intervention<br>· Unique educational pressure patterns in high-net-worth families<br>· Cross-cultural parenting differences (China-US educational value comparison)<br>· Special support needs for single-parent, left-behind, and overseas families<br><br>All products incorporate family systems as a core assessment dimension; parent coaching is integral at every service tier.</div></div>
+      <div class="rc-preview en-only">Attachment theory and family systems therapy: the foundational logic of child development</div>
+      <div class="rc-detail">
+        <div class="rc-detail-inner zh-only">基于Bowlby依附理论与Bowen家庭系统治疗理论，贯穿所有产品的底层理论基础。<strong>核心研究方向：</strong><ul><li>安全型依附关系对执行功能的长期神经影响</li><li>父母焦虑传递机制与代际创伤干预</li><li>高净值家庭特有的教育压力模式与应对</li><li>跨文化家庭养育差异（中美教育价值观比较）</li><li>单亲、留守、异国他乡家庭的特殊支持需求</li></ul><strong>产品落地：</strong>所有产品均含家庭系统评估维度 · 家长coaching是每个层级的必要组成</div>
+        <div class="rc-detail-inner en-only">Drawing on Bowlby's attachment theory and Bowen family systems therapy — underlying foundation across all products.<strong>Core Research Areas:</strong><ul><li>Long-term neural impact of secure attachment on executive function</li><li>Parental anxiety transmission and intergenerational trauma intervention</li><li>Educational pressure patterns in high-net-worth families</li><li>Cross-cultural parenting differences (China-US comparison)</li><li>Special support needs for single-parent and overseas families</li></ul><strong>Product Application:</strong>Family systems assessment across all products · Parent coaching integral at every tier</div>
+      </div>
     </div>
+
   </div>
 </section>
 
@@ -188,130 +197,55 @@ footer{background:#1a0a0c;padding:44px 60px}
     <h2 class="sec-h" style="color:var(--cream)"><span class="zh-only">MTSS 方法论框架</span><span class="en-only">MTSS Methodological Framework</span></h2>
     <div class="sec-bar"></div>
   </div>
-  <p class="method-intro zh-only">所有产品均基于 <strong style="color:var(--gold)">MTSS 多层次支持体系（Multi-Tiered System of Supports）</strong>——国际循证心理教育领域最权威的干预框架，由哈佛与约翰霍普金斯大学研究团队持续验证。<br>点击下方三角形每一层，了解对应产品与研究支撑。</p>
-  <p class="method-intro en-only">All products are designed around the <strong style="color:var(--gold)">MTSS (Multi-Tiered System of Supports)</strong> — the most authoritative evidence-based intervention framework in international educational psychology, continuously validated by research teams at Harvard and Johns Hopkins University.<br>Click each tier of the pyramid to explore the corresponding product and research backing.</p>
+  <p class="method-intro zh-only">所有产品均基于 <strong style="color:var(--gold)">MTSS 多层次支持体系（Multi-Tiered System of Supports）</strong>——国际循证心理教育领域最权威的干预框架，由哈佛与约翰霍普金斯大学研究团队持续验证。<br><br>点击三角形的每一层，了解对应产品与研究支撑。</p>
+  <p class="method-intro en-only">All products are designed around the <strong style="color:var(--gold)">MTSS (Multi-Tiered System of Supports)</strong> — the most authoritative evidence-based framework in international educational psychology, validated by Harvard and JHU.<br><br>Click each tier of the pyramid to explore the corresponding product and research.</p>
 
   <div class="mtss-layout">
     <div>
-      <div class="pyramid-hint zh-only">点击每一层 · 查看详情</div>
-      <div class="pyramid-hint en-only">Click each tier · View details</div>
-      <svg class="mtss-pyramid-svg" viewBox="0 0 340 295" xmlns="http://www.w3.org/2000/svg">
-        <g class="pyramid-tier active" id="pt3" onclick="pickTier(3)">
-          <polygon class="poly" points="170,12 268,92 72,92"/>
-          <text class="pt-num" x="170" y="50" text-anchor="middle">3</text>
-          <text class="pt-lbl" x="170" y="67" text-anchor="middle"><tspan class="zh-only">密集个体支持</tspan><tspan class="en-only">Intensive Support</tspan></text>
-          <text class="pt-sub" x="170" y="82" text-anchor="middle"><tspan class="zh-only">家庭未来力实验室</tspan><tspan class="en-only">Future Readiness Lab</tspan></text>
-        </g>
-        <line x1="72" y1="95" x2="268" y2="95" stroke="rgba(201,169,97,.2)" stroke-width="1"/>
-        <g class="pyramid-tier" id="pt2" onclick="pickTier(2)">
-          <polygon class="poly" points="72,98 268,98 308,182 32,182"/>
-          <text class="pt-num" x="170" y="134" text-anchor="middle">2</text>
-          <text class="pt-lbl" x="170" y="153" text-anchor="middle"><tspan class="zh-only">定向日常支持</tspan><tspan class="en-only">Targeted Support</tspan></text>
-          <text class="pt-sub" x="170" y="169" text-anchor="middle">PsychLab.AI Bot</text>
-        </g>
-        <line x1="32" y1="185" x2="308" y2="185" stroke="rgba(201,169,97,.2)" stroke-width="1"/>
-        <g class="pyramid-tier" id="pt1" onclick="pickTier(1)">
-          <polygon class="poly" points="32,188 308,188 338,273 2,273"/>
-          <text class="pt-num" x="170" y="222" text-anchor="middle">1</text>
-          <text class="pt-lbl" x="170" y="243" text-anchor="middle"><tspan class="zh-only">全体预防支持</tspan><tspan class="en-only">Universal Support</tspan></text>
-          <text class="pt-sub" x="170" y="259" text-anchor="middle"><tspan class="zh-only">未来心智计划</tspan><tspan class="en-only">Future Mind Program</tspan></text>
-        </g>
+      <div class="pyramid-hint zh-only">&#8595; 点击三角形每一层</div>
+      <div class="pyramid-hint en-only">&#8595; Click each tier</div>
+      <svg class="mtss-pyramid-svg" viewBox="0 0 260 330" xmlns="http://www.w3.org/2000/svg">
+        <polygon class="ct" points="130,8 78,125 182,125" fill="#6B1C23"
+          onclick="document.getElementById('dp-badge').textContent='Tier 3';document.getElementById('dp-title').textContent='家庭未来力实验室';document.getElementById('dp-tag').textContent='密集个体支持 · 高度个性化 · 长期深度陪伴';document.getElementById('dp-who').textContent='有复杂需求、希望获得密集专属支持的家庭。每季度限接3个新家庭，申请制，全程签署保密协议。';document.getElementById('dp-desc').textContent='Tier 3是MTSS中强度最高的层级——最小覆盖、最大深度。家庭未来力实验室用研究级评估工具与长期陪伴方案，确保每个孩子的支持都真正量身定制。';document.getElementById('dp-chips').innerHTML='<span class=&quot;dp-chip on&quot;>内驱力神经科学</span><span class=&quot;dp-chip on&quot;>情绪神经科学与韧性</span><span class=&quot;dp-chip on&quot;>AI个性化教育</span><span class=&quot;dp-chip on&quot;>家庭系统理论</span>';document.getElementById('dp-cta').textContent='申请入营 →';"/>
+        <polygon class="ct" points="78,125 40,222 220,222 182,125" fill="#9B4D5E"
+          onclick="document.getElementById('dp-badge').textContent='Tier 2';document.getElementById('dp-title').textContent='PsychLab.AI Bot';document.getElementById('dp-tag').textContent='定向日常支持 · AI驱动 · 24/7随时可用';document.getElementById('dp-who').textContent='希望将专业心理支持融入日常生活的家庭。随时开启AI对话，低门槛，无需预约。';document.getElementById('dp-desc').textContent='Tier 2介于全体支持与密集个体之间。PsychLab.AI Bot将实验室评估逻辑转化为24/7可用的AI工具，把循证支持带入日常。';document.getElementById('dp-chips').innerHTML='<span class=&quot;dp-chip&quot;>内驱力神经科学</span><span class=&quot;dp-chip on&quot;>情绪神经科学与韧性</span><span class=&quot;dp-chip on&quot;>AI个性化教育</span><span class=&quot;dp-chip on&quot;>家庭系统理论</span>';document.getElementById('dp-cta').textContent='加入候补名单 →';"/>
+        <polygon class="ct" points="40,222 6,320 254,320 220,222" fill="rgba(201,169,97,.15)" stroke="#C9A961" stroke-width="1.5"
+          onclick="document.getElementById('dp-badge').textContent='Tier 1';document.getElementById('dp-title').textContent='未来心智计划';document.getElementById('dp-tag').textContent='全体预防支持 · 学校课程体系 · 系统性覆盖';document.getElementById('dp-who').textContent='希望系统性建立AI时代心理教育能力的国际学校与双语学校，覆盖学生、教师与家长全体生态。';document.getElementById('dp-desc').textContent='Tier 1是MTSS中覆盖最广的预防性层级。未来心智计划将实验室研究转化为可落地的学校课程，让整个学校生态系统具备应对AI时代的能力。';document.getElementById('dp-chips').innerHTML='<span class=&quot;dp-chip on&quot;>内驱力神经科学</span><span class=&quot;dp-chip on&quot;>情绪神经科学与韧性</span><span class=&quot;dp-chip on&quot;>AI个性化教育</span><span class=&quot;dp-chip on&quot;>家庭系统理论</span>';document.getElementById('dp-cta').textContent='了解学校合作 →';"/>
+        <text x="130" y="75" text-anchor="middle" style="font-size:13px;fill:#fff;font-family:'Playfair Display',serif;pointer-events:none;font-weight:700">3</text>
+        <text x="130" y="92" text-anchor="middle" style="font-size:7.5px;fill:rgba(255,255,255,.7);font-family:'DM Sans',sans-serif;pointer-events:none;letter-spacing:1.5px">密集支持</text>
+        <text x="130" y="178" text-anchor="middle" style="font-size:13px;fill:#fff;font-family:'Playfair Display',serif;pointer-events:none;font-weight:700">2</text>
+        <text x="130" y="195" text-anchor="middle" style="font-size:7.5px;fill:rgba(255,255,255,.7);font-family:'DM Sans',sans-serif;pointer-events:none;letter-spacing:1.5px">定向支持</text>
+        <text x="130" y="278" text-anchor="middle" style="font-size:13px;fill:#C9A961;font-family:'Playfair Display',serif;pointer-events:none;font-weight:700">1</text>
+        <text x="130" y="295" text-anchor="middle" style="font-size:7.5px;fill:rgba(201,169,97,.8);font-family:'DM Sans',sans-serif;pointer-events:none;letter-spacing:1.5px">全体支持</text>
       </svg>
       <div class="pyramid-axis">
-        <div class="axis-item"><div class="axis-dot"></div><span class="zh-only">上层：强度高，覆盖少</span><span class="en-only">Top: High intensity, fewer</span></div>
-        <div class="axis-item"><div class="axis-dot" style="opacity:.2"></div><span class="zh-only">下层：预防性，覆盖广</span><span class="en-only">Base: Preventive, broader</span></div>
+        <div class="axis-item"><div class="axis-dot"></div><span class="zh-only">上层强度高覆盖少</span><span class="en-only">Top: High intensity</span></div>
+        <div class="axis-item"><div class="axis-dot" style="opacity:.2"></div><span class="zh-only">下层预防广覆盖</span><span class="en-only">Base: Broad prevention</span></div>
       </div>
     </div>
 
-    <div class="detail-panel" id="detail-panel">
+    <div class="detail-panel">
       <div class="dp-badge" id="dp-badge">Tier 3</div>
-      <div class="dp-title zh-only" id="dp-title-zh">家庭未来力实验室</div>
-      <div class="dp-title en-only" id="dp-title-en">Family Future Readiness Lab</div>
-      <div class="dp-tag zh-only" id="dp-tag-zh">密集个体支持 · 高度个性化 · 长期深度陪伴</div>
-      <div class="dp-tag en-only" id="dp-tag-en">Intensive · Highly Personalized · Long-Term</div>
+      <div class="dp-title" id="dp-title">家庭未来力实验室</div>
+      <div class="dp-tag" id="dp-tag">密集个体支持 · 高度个性化 · 长期深度陪伴</div>
       <div class="dp-div"></div>
       <div class="dp-label zh-only">适合人群</div><div class="dp-label en-only">Who It's For</div>
-      <div class="dp-text zh-only" id="dp-who-zh">有复杂需求、希望获得密集专属支持的家庭。每季度限接3个新家庭，申请制，全程签署保密协议。</div>
-      <div class="dp-text en-only" id="dp-who-en">Families with complex needs seeking intensive, individualized support. Limited to 3 new families per quarter, application-based, full confidentiality agreement.</div>
+      <div class="dp-text" id="dp-who">有复杂需求、希望获得密集专属支持的家庭。每季度限接3个新家庭，申请制，全程签署保密协议。</div>
       <div class="dp-div"></div>
-      <div class="dp-label zh-only">MTSS 在这里的含义</div><div class="dp-label en-only">What MTSS Means Here</div>
-      <div class="dp-text zh-only" id="dp-desc-zh">Tier 3 是 MTSS 框架中强度最高的层级——最小覆盖、最大深度。家庭未来力实验室用研究级评估工具与长期陪伴方案，确保每个孩子的支持都真正量身定制，而非通用方案。</div>
-      <div class="dp-text en-only" id="dp-desc-en">Tier 3 is the highest-intensity level — smallest reach, greatest depth. The Family Future Readiness Lab uses research-grade assessment and long-term growth plans, ensuring every child's support is genuinely bespoke, never generic.</div>
+      <div class="dp-label zh-only">MTSS含义</div><div class="dp-label en-only">What MTSS Means Here</div>
+      <div class="dp-text" id="dp-desc">Tier 3是MTSS中强度最高的层级——最小覆盖、最大深度。家庭未来力实验室用研究级评估工具与长期陪伴方案，确保每个孩子的支持都真正量身定制。</div>
       <div class="dp-div"></div>
       <div class="dp-label zh-only">支撑研究方向</div><div class="dp-label en-only">Research Backing</div>
-      <div class="dp-research" id="dp-research">
-        <span class="dr-chip on">内驱力神经科学</span>
-        <span class="dr-chip on">情绪神经科学与韧性</span>
-        <span class="dr-chip on">AI个性化教育</span>
-        <span class="dr-chip on">家庭系统理论</span>
+      <div class="dp-chips" id="dp-chips">
+        <span class="dp-chip on">内驱力神经科学</span>
+        <span class="dp-chip on">情绪神经科学与韧性</span>
+        <span class="dp-chip on">AI个性化教育</span>
+        <span class="dp-chip on">家庭系统理论</span>
       </div>
-      <button class="dp-cta" onclick="openWechat()" id="dp-cta-zh">申请入营 →</button>
-      <button class="dp-cta" onclick="openWechat()" id="dp-cta-en" style="display:none">Apply Now →</button>
+      <button class="dp-cta" id="dp-cta" onclick="openWechat()">申请入营 →</button>
     </div>
   </div>
 </div>
-
-<script>
-function toggleRC(el){
-  var open=el.classList.contains('open');
-  document.querySelectorAll('.rc').forEach(function(r){r.classList.remove('open')});
-  if(!open)el.classList.add('open');
-}
-
-var tiers={
-  3:{badge:'Tier 3',
-    tzh:'家庭未来力实验室',ten:'Family Future Readiness Lab',
-    tgzh:'密集个体支持 · 高度个性化 · 长期深度陪伴',tgen:'Intensive · Highly Personalized · Long-Term',
-    wzh:'有复杂需求、希望获得密集专属支持的家庭。每季度限接3个新家庭，申请制，全程签署保密协议。',
-    wen:'Families with complex needs seeking intensive, individualized support. Limited to 3 new families per quarter, application-based, full confidentiality.',
-    dzh:'Tier 3 是 MTSS 框架中强度最高的层级——最小覆盖、最大深度。家庭未来力实验室用研究级评估工具与长期陪伴方案，确保每个孩子的支持都真正量身定制，而非通用方案。',
-    den:'Tier 3 is the highest-intensity level — smallest reach, greatest depth. The Family Future Readiness Lab uses research-grade assessment and long-term growth plans, ensuring every child's support is genuinely bespoke.',
-    chips:[1,1,1,1],ctazh:'申请入营 →',ctaen:'Apply Now →'},
-  2:{badge:'Tier 2',
-    tzh:'PsychLab.AI Bot',ten:'PsychLab.AI Bot',
-    tgzh:'定向日常支持 · AI驱动 · 24/7 随时可用',tgen:'Targeted · AI-Driven · Available 24/7',
-    wzh:'希望将专业心理支持融入日常生活的家庭，或无法进行密集个体支持的家庭。随时可用，低门槛。',
-    wen:'Families who want to integrate professional psychological support into daily life, or those unable to access intensive individual support. Accessible anytime, low barrier.',
-    dzh:'Tier 2 介于全体支持与密集个体之间，面向有特定需求的群体。PsychLab.AI Bot 将实验室评估逻辑转化为24/7可用的AI工具，真正把循证支持带入千家万户。',
-    den:'Tier 2 sits between universal support and intensive individual care. PsychLab.AI Bot translates lab assessment logic into a 24/7 AI tool, genuinely bringing evidence-based support to every family.',
-    chips:[0,1,1,1],ctazh:'加入候补名单 →',ctaen:'Join Waitlist →'},
-  1:{badge:'Tier 1',
-    tzh:'未来心智计划',ten:'Future Mind Program',
-    tgzh:'全体预防支持 · 学校课程体系 · 系统性全员覆盖',tgen:'Universal · School Curriculum · Systemic',
-    wzh:'希望系统性建立AI时代心理教育能力的国际学校与双语学校，覆盖全体学生、教师与家长生态。',
-    wen:'International and bilingual schools seeking to systematically build AI-era psychological education capacity for all students, teachers, and parents.',
-    dzh:'Tier 1 是 MTSS 中覆盖最广的预防性层级。未来心智计划将实验室研究成果转化为可落地的学校课程，让整个学校生态系统具备应对AI时代的心理教育能力。',
-    den:'Tier 1 is the broadest preventive level of MTSS. The Future Mind Program translates lab research into implementable school curriculum, equipping the entire school ecosystem with AI-era psychological education capacity.',
-    chips:[1,1,1,1],ctazh:'了解学校合作 →',ctaen:'Learn About Partnership →'}
-};
-var rLabelsZh=['内驱力神经科学','情绪神经科学与韧性','AI个性化教育','家庭系统理论'];
-var rLabelsEn=['Motivational Neuroscience','Emotional Neuroscience','AI-Assisted Education','Family Systems'];
-
-function pickTier(n){
-  document.querySelectorAll('.pyramid-tier').forEach(function(t){t.classList.remove('active')});
-  document.getElementById('pt'+n).classList.add('active');
-  var d=tiers[n];
-  document.getElementById('dp-badge').textContent=d.badge;
-  document.getElementById('dp-title-zh').textContent=d.tzh;
-  document.getElementById('dp-title-en').textContent=d.ten;
-  document.getElementById('dp-tag-zh').textContent=d.tgzh;
-  document.getElementById('dp-tag-en').textContent=d.tgen;
-  document.getElementById('dp-who-zh').textContent=d.wzh;
-  document.getElementById('dp-who-en').textContent=d.wen;
-  document.getElementById('dp-desc-zh').textContent=d.dzh;
-  document.getElementById('dp-desc-en').textContent=d.den;
-  var isEn=document.body.classList.contains('lang-en');
-  var labels=isEn?rLabelsEn:rLabelsZh;
-  document.getElementById('dp-research').innerHTML=d.chips.map(function(on,i){
-    return '<span class="dr-chip'+(on?' on':'')+'">'+labels[i]+'</span>';
-  }).join('');
-  var isEnNow=document.body.classList.contains('lang-en');
-  document.getElementById('dp-cta-zh').textContent=d.ctazh;
-  document.getElementById('dp-cta-en').textContent=d.ctaen;
-  document.getElementById('dp-cta-zh').style.display=isEnNow?'none':'inline-block';
-  document.getElementById('dp-cta-en').style.display=isEnNow?'inline-block':'none';
-}
-</script>
 
 <footer>
   <div class="footer-inner">

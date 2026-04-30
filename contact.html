@@ -166,7 +166,7 @@ footer{background:#1a0a0c;padding:44px 60px}
         <div class="form-title en-only">Send Your Inquiry</div>
         <div class="form-sub zh-only">填写后24小时内回复 · 保密协议保障</div>
         <div class="form-sub en-only">Response within 24 hours · Confidentiality guaranteed</div>
-        <form onsubmit="submitForm(event)">
+        <form action="https://formspree.io/f/beckychyy@gmail.com" method="POST">
           <div class="frow">
             <div class="fg"><label><span class="zh-only">姓名 *</span><span class="en-only">Name *</span></label><input type="text" required placeholder="Your name"></div>
             <div class="fg"><label><span class="zh-only">联系方式 *</span><span class="en-only">Contact *</span></label><input type="text" required placeholder="Phone or email"></div>
@@ -196,20 +196,16 @@ footer{background:#1a0a0c;padding:44px 60px}
           <div class="fg"><label><span class="zh-only">希望的联系时间</span><span class="en-only">Preferred Contact Time</span></label><input type="text" placeholder="e.g. weekday afternoons / weekend mornings"></div>
           <div class="fg"><label><span class="zh-only">简要说明（选填）</span><span class="en-only">Brief Description (optional)</span></label><textarea placeholder="Please briefly share what brings you here..."></textarea></div>
           <button type="submit" class="sbtn"><span class="zh-only">提交申请</span><span class="en-only">Submit Inquiry</span></button>
-          <div class="ok" id="ok">&#10003; <span class="zh-only">已收到，24小时内与您联系。</span><span class="en-only">Received. We'll be in touch within 24 hours.</span></div>
+          <p style="font-size:11px;color:rgba(245,241,232,.35);margin-top:10px;line-height:1.6">
+            <span class="zh-only">提交后将直接发送至 becky@aipsychlab.com，24小时内回复</span>
+            <span class="en-only">Your message will be sent directly to becky@aipsychlab.com, response within 24 hours</span>
+          </p>
         </form>
       </div>
     </div>
   </div>
 </section>
-<script>
-function submitForm(e){
-  e.preventDefault();
-  document.getElementById('ok').style.display='block';
-  e.target.reset();
-  setTimeout(function(){document.getElementById('ok').style.display='none'},6000);
-}
-</script>
+
 
 <footer>
   <div class="footer-inner">
