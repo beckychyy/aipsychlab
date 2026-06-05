@@ -32,7 +32,7 @@
     <div class="wrap reveal in">
       <span class="kicker"><span class="zh">AIPsychLab 初步评估</span><span class="en">AIPsychLab Intake Evaluation</span></span>
       <h1 class="display"><span class="zh">让 Becky 先看见孩子的<span class="chrome">真实状态</span></span><span class="en">Help Becky see the student's real state.</span></h1>
-      <p class="lead"><span class="zh">大约 3–5 分钟。填写后会生成一份可以直接发给 Becky 的 evaluation summary。家长复制结果、添加微信 Beckychyy，就可以进入一对一初评沟通。</span><span class="en">About 3-5 minutes. After completion, the page generates an evaluation summary parents can send directly to Becky, then add WeChat Beckychyy for a one-on-one assessment.</span></p>
+      <p class="lead"><span class="zh">大约 5–7 分钟。最好由孩子自己填写；如果孩子暂时不愿意，也可以由家长根据观察填写。提交后会生成一份精美 PDF 报告，家长可以直接发给 Becky 做一对一初评。</span><span class="en">About 5-7 minutes. Ideally the student completes it; parents may also answer based on observation. The page generates a polished PDF report for Becky.</span></p>
     </div>
   </header>
 
@@ -51,6 +51,8 @@
             <label><span class="zh">联系方式：微信 / 邮箱 / 电话</span><span class="en">Contact: WeChat / email / phone</span><input name="parent_contact" required placeholder="请至少留一种"></label>
             <label><span class="zh">孩子年级 / 年龄</span><span class="en">Student grade / age</span><input name="student_grade" required placeholder="例如：G8 / 13岁"></label>
             <label><span class="zh">学校类型</span><span class="en">School type</span><select name="school_type"><option>国际学校 / 双语学校</option><option>公立学校</option><option>美高 / 海外学校</option><option>大学本科</option><option>其他</option></select></label>
+            <label><span class="zh">这份评估由谁填写？</span><span class="en">Who is completing this?</span><select name="filled_by"><option>孩子自己填写</option><option>家长根据观察填写</option><option>亲子一起填写</option></select></label>
+            <label><span class="zh">孩子更像哪种状态？</span><span class="en">Current student state</span><select name="current_state"><option>想做点什么，但不知道从哪开始</option><option>抗拒安排，只愿意做自己选的事</option><option>想法很多，但很难坚持做完</option><option>很优秀，但没有特别想要的方向</option><option>最近状态低，不太愿意沟通</option></select></label>
           </div>
         </section>
 
@@ -70,24 +72,46 @@
         </section>
 
         <section class="eval-step">
-          <div class="term-head"><span><span class="zh">03 状态刻度</span><span class="en">03 State scale</span></span><span>1-5</span></div>
+          <div class="term-head"><span><span class="zh">03 孩子反应方式</span><span class="en">03 Student patterns</span></span><span>select</span></div>
+          <p class="form-note"><span class="zh">这些选项会帮助报告判断孩子属于哪一种启动画像。</span><span class="en">These help identify the student's activation profile.</span></p>
+          <div class="eval-check-grid trait-grid">
+            <label><input type="checkbox" name="traits" value="被安排太多"><span>被安排太多</span></label>
+            <label><input type="checkbox" name="traits" value="害怕失败 / 完美主义"><span>害怕失败 / 完美主义</span></label>
+            <label><input type="checkbox" name="traits" value="只愿意做自己感兴趣的事"><span>只愿意做自己感兴趣的事</span></label>
+            <label><input type="checkbox" name="traits" value="想法很多但不落地"><span>想法很多但不落地</span></label>
+            <label><input type="checkbox" name="traits" value="喜欢系统 / 规则 / 逻辑"><span>喜欢系统 / 规则 / 逻辑</span></label>
+            <label><input type="checkbox" name="traits" value="共情强 / 想帮助别人"><span>共情强 / 想帮助别人</span></label>
+            <label><input type="checkbox" name="traits" value="表达欲强 / 喜欢内容创作"><span>表达欲强 / 喜欢内容创作</span></label>
+            <label><input type="checkbox" name="traits" value="社交压力大"><span>社交压力大</span></label>
+          </div>
+        </section>
+
+        <section class="eval-step">
+          <div class="term-head"><span><span class="zh">04 能力刻度</span><span class="en">04 Capability scale</span></span><span>1-5</span></div>
           <div class="slider-list">
             <label><span><span class="zh">内驱力：1 很低，5 很强</span><span class="en">Drive: 1 low, 5 strong</span></span><input type="range" name="drive" min="1" max="5" value="3" data-range><b data-range-value>3</b></label>
             <label><span><span class="zh">亲子沟通：1 很关闭，5 很开放</span><span class="en">Communication: 1 closed, 5 open</span></span><input type="range" name="communication" min="1" max="5" value="3" data-range><b data-range-value>3</b></label>
             <label><span><span class="zh">情绪稳定：1 波动大，5 较稳定</span><span class="en">Emotional stability: 1 unstable, 5 stable</span></span><input type="range" name="emotion" min="1" max="5" value="3" data-range><b data-range-value>3</b></label>
             <label><span><span class="zh">AI / 编程基础：1 没接触，5 已能独立做</span><span class="en">AI / coding base: 1 none, 5 independent</span></span><input type="range" name="ai_base" min="1" max="5" value="2" data-range><b data-range-value>2</b></label>
+            <label><span><span class="zh">自主感：1 总被安排，5 很能自己做主</span><span class="en">Autonomy: 1 arranged, 5 self-directed</span></span><input type="range" name="autonomy" min="1" max="5" value="3" data-range><b data-range-value>3</b></label>
+            <label><span><span class="zh">好奇心：1 很少探索，5 经常主动问</span><span class="en">Curiosity: 1 rarely explores, 5 often asks</span></span><input type="range" name="curiosity" min="1" max="5" value="3" data-range><b data-range-value>3</b></label>
+            <label><span><span class="zh">落地执行：1 很难完成，5 能持续推进</span><span class="en">Execution: 1 hard to finish, 5 follows through</span></span><input type="range" name="execution" min="1" max="5" value="3" data-range><b data-range-value>3</b></label>
+            <label><span><span class="zh">创造表达：1 很少表达，5 点子很多</span><span class="en">Creative expression: 1 quiet, 5 idea-rich</span></span><input type="range" name="creativity" min="1" max="5" value="3" data-range><b data-range-value>3</b></label>
+            <label><span><span class="zh">抗挫力：1 容易放弃，5 能反复尝试</span><span class="en">Resilience: 1 gives up, 5 keeps trying</span></span><input type="range" name="resilience" min="1" max="5" value="3" data-range><b data-range-value>3</b></label>
           </div>
         </section>
 
         <section class="eval-step">
-          <div class="term-head"><span><span class="zh">04 兴趣与目标</span><span class="en">04 Interest and goals</span></span><span>context</span></div>
+          <div class="term-head"><span><span class="zh">05 兴趣与目标</span><span class="en">05 Interest and goals</span></span><span>context</span></div>
           <label><span class="zh">孩子最近还愿意聊什么？哪怕很小</span><span class="en">What does the student still talk about, even slightly?</span><textarea name="interest" required placeholder="例如：游戏、心理、音乐、塔罗、视频、公益、运动、某个 App..."></textarea></label>
+          <label><span class="zh">如果让孩子自己设计一个东西，他会想解决什么问题？</span><span class="en">If the student could build something, what problem might they solve?</span><textarea name="dream_project" placeholder="例如：帮助同学缓解焦虑、做一个学习提醒工具、做游戏角色设定、给老人做陪伴产品..."></textarea></label>
           <label><span class="zh">你最希望 3–12 个月后看到什么变化？</span><span class="en">What change would you hope to see in 3-12 months?</span><textarea name="goal" required placeholder="例如：愿意开始做事、能做出作品、亲子沟通缓和、申请故事更清楚..."></textarea></label>
+          <label><span class="zh">孩子最不喜欢别人怎么帮助他？</span><span class="en">What kind of help does the student dislike most?</span><textarea name="support_dislike" placeholder="例如：被讲道理、被催、被比较、被安排太满、别人直接替他做决定..."></textarea></label>
           <label><span class="zh">还有什么 Becky 需要提前知道？</span><span class="en">Anything Becky should know before the first call?</span><textarea name="notes" placeholder="可以写诊断史、近期压力事件、孩子抗拒点、家长担心等。"></textarea></label>
         </section>
 
         <section class="eval-step">
-          <div class="term-head"><span><span class="zh">05 预约意向</span><span class="en">05 Booking intent</span></span><span>next</span></div>
+          <div class="term-head"><span><span class="zh">06 预约意向</span><span class="en">06 Booking intent</span></span><span>next</span></div>
           <div class="form-grid">
             <label><span class="zh">希望沟通时间</span><span class="en">Preferred time</span><select name="preferred_time"><option>工作日白天</option><option>工作日晚间</option><option>周末</option><option>都可以</option></select></label>
             <label><span class="zh">紧急程度</span><span class="en">Urgency</span><select name="urgency"><option>想先了解，不着急</option><option>希望 1–2 周内沟通</option><option>孩子状态比较急，需要尽快沟通</option></select></label>
@@ -107,7 +131,7 @@
         <span class="kicker"><span class="zh">Evaluation 预览</span><span class="en">Evaluation Preview</span></span>
         <h2><span class="zh">填完后，这里会生成可以直接交给 Becky 的初评摘要</span><span class="en">After completion, this becomes a readable intake summary for Becky.</span></h2>
         <div class="eval-output" data-eval-output>
-          <p><span class="zh">结果会包含：孩子主要困惑、状态风险、AI 进入点、建议陪跑强度、第一次沟通重点。生成后请复制给 Becky，并添加微信 Beckychyy 做一对一初评。</span><span class="en">The result includes concerns, state signals, AI entry point, suggested intensity and first-call focus. Copy it to Becky and add WeChat Beckychyy for a one-on-one assessment.</span></p>
+          <p><span class="zh">结果会包含：AI 驱动力评分、孩子画像类型、是否建议 AI 介入、适合的项目入口、第一次沟通重点。生成后请下载 PDF，添加微信 Beckychyy 发给 Becky。</span><span class="en">The result includes AI-drive score, student profile, AI intervention recommendation, project entry and first-call focus. Download the PDF and send it to Becky on WeChat.</span></p>
         </div>
         <div class="eval-result-actions">
           <button class="btn primary" type="button" data-copy-eval><span class="zh">复制文字版给 Becky</span><span class="en">Copy text version</span></button>
@@ -120,7 +144,7 @@
   <iframe name="eval-submit-frame" title="evaluation submit frame" hidden></iframe>
 
   <footer><div class="wrap row"><div>© 2026 AIPsychLab</div><div><span class="zh">复制 Evaluation · 添加微信 Beckychyy · 预约 1v1 初评</span><span class="en">Copy evaluation · Add WeChat Beckychyy · Book 1-on-1 assessment</span></div></div></footer>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js" integrity="sha512-YcsIPGdhPK4P/uRW6/sruonlYj+vF8qycQJ8p4q0uV05tEL2B6eC+GkYpZ6kyJ6Vbzc2YJYn9YEDj1W5oYgL6A==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-  <script src="site.js?v=20260605-pdf"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+  <script src="site.js?v=20260605-profile"></script>
 </body>
 </html>

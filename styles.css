@@ -958,6 +958,11 @@ body{font-size:var(--type-body)}
 .ai-decision-card{border:1px solid rgba(255,184,108,.38);border-radius:14px;background:linear-gradient(135deg,rgba(255,184,108,.16),rgba(var(--accent-rgb),.08));padding:18px;margin:16px 0}
 .ai-decision-card b{display:block;font-size:clamp(24px,2.4vw,36px);line-height:1.1;color:var(--warm);margin-bottom:8px}
 .ai-decision-card p{margin:0;color:var(--chrome);line-height:1.7}
+.profile-card{border:1px solid rgba(255,45,154,.38);border-radius:14px;background:linear-gradient(135deg,rgba(255,45,154,.16),rgba(var(--accent-rgb),.08));padding:18px;margin:16px 0}
+.profile-card span{display:block;font-family:var(--mono);font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--accent);margin-bottom:8px}
+.profile-card b{display:block;font-size:clamp(25px,2.5vw,38px);line-height:1.08;color:var(--chrome)}
+.profile-card small{display:inline-flex;border:1px solid rgba(255,255,255,.14);border-radius:999px;background:rgba(8,7,12,.55);padding:7px 10px;color:var(--warm);font-family:var(--mono);font-size:12px;margin:10px 0}
+.profile-card p{margin:0;color:var(--text2);line-height:1.72}
 .eval-insight b,.becky-questions b{display:block;color:var(--chrome);font-size:18px;margin-bottom:8px}
 .eval-insight p{margin:0;color:var(--text2);line-height:1.7}
 .becky-questions{display:grid;gap:10px;border:1px solid var(--soft);border-radius:12px;background:rgba(8,7,12,.5);padding:16px;margin-top:14px}

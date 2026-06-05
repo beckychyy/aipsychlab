@@ -267,6 +267,9 @@ async function startCamera() {
   setStatus("正在请求摄像头权限...");
 
   try {
+    if (window.self !== window.top) {
+      throw new Error("摄像头手势建议在独立页面打开。请点击作品入口后新页面使用，或复制当前链接到浏览器地址栏。");
+    }
     if (!window.Hands || !window.Camera) {
       throw new Error("手势模型还没有加载完成，请稍后重试。");
     }
@@ -295,7 +298,7 @@ async function startCamera() {
     showScreen("screenQuestion");
   } catch (error) {
     cameraGuideButton.textContent = "摄像头暂不可用";
-    setStatus(`摄像头或手势模型不可用：${error.message} 可以点 ✦ 手动抽三张牌。`);
+    setStatus(`摄像头或手势模型不可用：${error.message} 也可以点“抽三张牌”手动体验。`);
     showScreen("screenQuestion");
   }
 }
@@ -523,9 +526,12 @@ async function renderFinalReading(cards) {
     renderCardResults(cards, markdownToHtml(payload.reading), `AI reading · ${payload.provider || "deepseek"} · ${payload.model || "deepseek-chat"}`);
   } catch (error) {
     const message = error instanceof Error ? error.message : String(error);
+    const apiHint = /DEEPSEEK_API_KEY|environment variable/i.test(message)
+      ? "线上 DeepSeek API 还没有连接环境变量。牌已经正常抽出，下面先显示本地备用解读；配置好 DeepSeek 后会自动恢复 AI 深度解读。"
+      : message;
     renderCardResults(cards, `
       <h2>本地备用解读</h2>
-      <p><b>AI 接口暂时没有返回：</b>${escapeHtml(message)}</p>
+      <p><b>AI 接口暂时没有返回：</b>${escapeHtml(apiHint)}</p>
       ${buildDeepReading(cards, getQuestion())}
     `, "Local fallback · DeepSeek unavailable");
   }
