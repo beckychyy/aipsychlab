@@ -155,6 +155,8 @@ let fistStartedAt = 0;
 let activeGesture = "idle";
 let deckRendered = false;
 let drawTimer = null;
+let gestureLoop = 0;
+let sendingFrame = false;
 
 function showScreen(id) {
   screens.forEach((screen) => {
@@ -274,7 +276,7 @@ async function startCamera() {
   setStatus("正在请求摄像头权限...");
 
   try {
-    if (!window.Hands || !window.Camera) {
+    if (!window.Hands) {
       throw new Error("手势模型还没有加载完成，请稍后重试。");
     }
 
@@ -289,16 +291,44 @@ async function startCamera() {
     });
     hands.onResults(onHandResults);
 
-    camera = new Camera(video, {
-      onFrame: async () => {
-        if (!hasDrawn) await hands.send({ image: video });
+    const stream = await navigator.mediaDevices.getUserMedia({
+      video: {
+        width: { ideal: 960 },
+        height: { ideal: 720 },
+        facingMode: "user",
       },
-      width: 960,
-      height: 720,
+      audio: false,
     });
-    await camera.start();
+    camera = stream;
+    video.srcObject = stream;
+    video.muted = true;
+    video.playsInline = true;
+    await video.play();
+    resizeCanvas();
+
+    window.cancelAnimationFrame(gestureLoop);
+    const tick = async () => {
+      if (!hands || hasDrawn) {
+        gestureLoop = window.requestAnimationFrame(tick);
+        return;
+      }
+      if (!sendingFrame && video.readyState >= 2) {
+        sendingFrame = true;
+        try {
+          await hands.send({ image: video });
+        } catch (error) {
+          const message = error instanceof Error ? error.message : String(error);
+          setStatus(`手势模型正在连接中：${message}`);
+        } finally {
+          sendingFrame = false;
+        }
+      }
+      gestureLoop = window.requestAnimationFrame(tick);
+    };
+    gestureLoop = window.requestAnimationFrame(tick);
+
     cameraGuideButton.textContent = "摄像头已开启";
-    setStatus("张手加速旋转，握拳 1 秒抽出三张牌。");
+    setStatus("摄像头已开启。请把整只手放进画面中央，先张开手掌。");
     showScreen("screenQuestion");
   } catch (error) {
     cameraGuideButton.textContent = "摄像头暂不可用";
