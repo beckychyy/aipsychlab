@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1.0">
+  <title>孩子状态评估 · AIPsychLab</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@400;500;700&family=JetBrains+Mono:wght@300;400;500;600&family=Noto+Sans+SC:wght@300;400;500;700&family=Orbitron:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css?v=20260605-eval">
+</head>
+<body class="theme-contact">
+  <div class="orb one"></div><div class="orb two"></div><div class="orb three"></div><div class="bg-grid"></div><div class="particles"></div><div class="progress"></div><div class="scanlines"></div><div class="grain"></div>
+
+  <nav class="nav">
+    <a class="brand" href="index.html">AI<b>Psych</b>Lab</a>
+    <div class="nav-links">
+      <a href="index.html"><span class="zh">首页</span><span class="en">Home</span></a>
+      <a href="families.html"><span class="zh">家庭 1v1</span><span class="en">Families · 1v1</span></a>
+      <a href="about.html">Becky</a>
+      <a href="works.html"><span class="zh">作品</span><span class="en">Works</span></a>
+      <a class="secondary-link" href="schools.html"><span class="zh">机构合作</span><span class="en">For Schools</span></a>
+    </div>
+    <div class="nav-right">
+      <div class="lang"><button class="active" data-lang="zh">中</button><button data-lang="en">EN</button></div>
+      <button class="menu-btn"><span class="zh">菜单</span><span class="en">MENU</span></button>
+      <a class="nav-cta active" href="contact.html"><span class="zh">预约评估</span><span class="en">Book Assessment</span></a>
+    </div>
+  </nav>
+
+  <header class="hero center eval-hero">
+    <div class="wrap reveal in">
+      <span class="kicker"><span class="zh">AIPsychLab 初步评估</span><span class="en">AIPsychLab Intake Evaluation</span></span>
+      <h1 class="display"><span class="zh">让 Becky 先看见孩子的<span class="chrome">真实状态</span></span><span class="en">Help Becky see the student's real state.</span></h1>
+      <p class="lead"><span class="zh">大约 3–5 分钟。填写后会生成一份可以直接发给 Becky 的 evaluation summary。家长复制结果、添加微信 Beckychyy，就可以进入一对一初评沟通。</span><span class="en">About 3-5 minutes. After completion, the page generates an evaluation summary parents can send directly to Becky, then add WeChat Beckychyy for a one-on-one assessment.</span></p>
+    </div>
+  </header>
+
+  <main class="section eval-section">
+    <div class="wrap eval-layout">
+      <form class="eval-form panel-card reveal in" data-eval-form action="https://formsubmit.co/beckychyy@163.com" method="POST" target="eval-submit-frame">
+        <input type="hidden" name="_subject" value="AIPsychLab 新评估提交">
+        <input type="hidden" name="_template" value="table">
+        <input type="hidden" name="_captcha" value="false">
+        <input type="hidden" name="evaluation_summary" data-eval-hidden>
+
+        <section class="eval-step">
+          <div class="term-head"><span><span class="zh">01 基本信息</span><span class="en">01 Basics</span></span><span class="live"><span class="zh">必填</span><span class="en">Required</span></span></div>
+          <div class="form-grid">
+            <label><span class="zh">家长姓名</span><span class="en">Parent name</span><input name="parent_name" required placeholder="例如：王女士"></label>
+            <label><span class="zh">联系方式：微信 / 邮箱 / 电话</span><span class="en">Contact: WeChat / email / phone</span><input name="parent_contact" required placeholder="请至少留一种"></label>
+            <label><span class="zh">孩子年级 / 年龄</span><span class="en">Student grade / age</span><input name="student_grade" required placeholder="例如：G8 / 13岁"></label>
+            <label><span class="zh">学校类型</span><span class="en">School type</span><select name="school_type"><option>国际学校 / 双语学校</option><option>公立学校</option><option>美高 / 海外学校</option><option>大学本科</option><option>其他</option></select></label>
+          </div>
+        </section>
+
+        <section class="eval-step">
+          <div class="term-head"><span><span class="zh">02 当前困惑</span><span class="en">02 Current concerns</span></span><span>select</span></div>
+          <p class="form-note"><span class="zh">可以多选。请选择最像你家孩子此刻状态的信号。</span><span class="en">Select all that feel relevant.</span></p>
+          <div class="eval-check-grid">
+            <label><input type="checkbox" name="concerns" value="AI 焦虑"><span>AI 焦虑</span></label>
+            <label><input type="checkbox" name="concerns" value="沉迷屏幕"><span>沉迷屏幕</span></label>
+            <label><input type="checkbox" name="concerns" value="没有内驱力"><span>没有内驱力</span></label>
+            <label><input type="checkbox" name="concerns" value="没有爱好"><span>没有爱好</span></label>
+            <label><input type="checkbox" name="concerns" value="AI 创造力不足"><span>AI 创造力</span></label>
+            <label><input type="checkbox" name="concerns" value="不沟通"><span>不沟通</span></label>
+            <label><input type="checkbox" name="concerns" value="ADHD / 神经多样性"><span>ADHD / 神经多样性</span></label>
+            <label><input type="checkbox" name="concerns" value="作品集 / 申请路径"><span>作品集 / 申请路径</span></label>
+          </div>
+        </section>
+
+        <section class="eval-step">
+          <div class="term-head"><span><span class="zh">03 状态刻度</span><span class="en">03 State scale</span></span><span>1-5</span></div>
+          <div class="slider-list">
+            <label><span><span class="zh">内驱力：1 很低，5 很强</span><span class="en">Drive: 1 low, 5 strong</span></span><input type="range" name="drive" min="1" max="5" value="3" data-range><b data-range-value>3</b></label>
+            <label><span><span class="zh">亲子沟通：1 很关闭，5 很开放</span><span class="en">Communication: 1 closed, 5 open</span></span><input type="range" name="communication" min="1" max="5" value="3" data-range><b data-range-value>3</b></label>
+            <label><span><span class="zh">情绪稳定：1 波动大，5 较稳定</span><span class="en">Emotional stability: 1 unstable, 5 stable</span></span><input type="range" name="emotion" min="1" max="5" value="3" data-range><b data-range-value>3</b></label>
+            <label><span><span class="zh">AI / 编程基础：1 没接触，5 已能独立做</span><span class="en">AI / coding base: 1 none, 5 independent</span></span><input type="range" name="ai_base" min="1" max="5" value="2" data-range><b data-range-value>2</b></label>
+          </div>
+        </section>
+
+        <section class="eval-step">
+          <div class="term-head"><span><span class="zh">04 兴趣与目标</span><span class="en">04 Interest and goals</span></span><span>context</span></div>
+          <label><span class="zh">孩子最近还愿意聊什么？哪怕很小</span><span class="en">What does the student still talk about, even slightly?</span><textarea name="interest" required placeholder="例如：游戏、心理、音乐、塔罗、视频、公益、运动、某个 App..."></textarea></label>
+          <label><span class="zh">你最希望 3–12 个月后看到什么变化？</span><span class="en">What change would you hope to see in 3-12 months?</span><textarea name="goal" required placeholder="例如：愿意开始做事、能做出作品、亲子沟通缓和、申请故事更清楚..."></textarea></label>
+          <label><span class="zh">还有什么 Becky 需要提前知道？</span><span class="en">Anything Becky should know before the first call?</span><textarea name="notes" placeholder="可以写诊断史、近期压力事件、孩子抗拒点、家长担心等。"></textarea></label>
+        </section>
+
+        <section class="eval-step">
+          <div class="term-head"><span><span class="zh">05 预约意向</span><span class="en">05 Booking intent</span></span><span>next</span></div>
+          <div class="form-grid">
+            <label><span class="zh">希望沟通时间</span><span class="en">Preferred time</span><select name="preferred_time"><option>工作日白天</option><option>工作日晚间</option><option>周末</option><option>都可以</option></select></label>
+            <label><span class="zh">紧急程度</span><span class="en">Urgency</span><select name="urgency"><option>想先了解，不着急</option><option>希望 1–2 周内沟通</option><option>孩子状态比较急，需要尽快沟通</option></select></label>
+          </div>
+          <label class="eval-consent"><input type="checkbox" required><span class="zh">我理解此评估仅用于预约前沟通，不是医学诊断。</span><span class="en">I understand this evaluation is for pre-consultation only, not medical diagnosis.</span></label>
+        </section>
+
+        <div class="eval-submit-row">
+          <button class="btn primary" type="submit"><span class="zh">生成 Evaluation 并进入微信预约</span><span class="en">Generate evaluation and book on WeChat</span> →</button>
+          <a class="btn" href="contact.html"><span class="zh">返回预约页</span><span class="en">Back</span></a>
+        </div>
+        <p class="form-note" data-eval-status><span class="zh">提交后请等待页面生成评估结果。</span><span class="en">After submitting, wait for the summary.</span></p>
+      </form>
+
+      <aside class="eval-result panel-card reveal d1" data-eval-result>
+        <div class="scan"></div>
+        <span class="kicker"><span class="zh">Evaluation 预览</span><span class="en">Evaluation Preview</span></span>
+        <h2><span class="zh">填完后，这里会生成可以直接交给 Becky 的初评摘要</span><span class="en">After completion, this becomes a readable intake summary for Becky.</span></h2>
+        <div class="eval-output" data-eval-output>
+          <p><span class="zh">结果会包含：孩子主要困惑、状态风险、AI 进入点、建议陪跑强度、第一次沟通重点。生成后请复制给 Becky，并添加微信 Beckychyy 做一对一初评。</span><span class="en">The result includes concerns, state signals, AI entry point, suggested intensity and first-call focus. Copy it to Becky and add WeChat Beckychyy for a one-on-one assessment.</span></p>
+        </div>
+        <div class="eval-result-actions">
+          <button class="btn primary" type="button" data-copy-eval><span class="zh">复制 Evaluation 发给 Becky</span><span class="en">Copy evaluation for Becky</span></button>
+          <a class="btn" data-mail-eval href="mailto:beckychyy@163.com"><span class="zh">备用：邮件发送</span><span class="en">Backup: email it</span></a>
+        </div>
+      </aside>
+    </div>
+  </main>
+
+  <iframe name="eval-submit-frame" title="evaluation submit frame" hidden></iframe>
+
+  <footer><div class="wrap row"><div>© 2026 AIPsychLab</div><div><span class="zh">复制 Evaluation · 添加微信 Beckychyy · 预约 1v1 初评</span><span class="en">Copy evaluation · Add WeChat Beckychyy · Book 1-on-1 assessment</span></div></div></footer>
+  <script src="site.js?v=20260605-eval"></script>
+</body>
+</html>

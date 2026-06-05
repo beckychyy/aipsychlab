@@ -900,3 +900,43 @@ body{font-size:var(--type-body)}
   .preview-copy b{font-size:42px}
   .idea-statement{font-size:clamp(36px,11vw,52px)}
 }
+
+/* ===== Evaluation intake and WeChat booking flow ===== */
+.eval-entry-hero .lead,.eval-hero .lead{max-width:62ch}
+.eval-actions{display:flex;flex-wrap:wrap;gap:12px;margin-top:28px}
+.qr-panel{padding:28px;align-self:center}
+.qr-panel .kicker{display:block;margin-bottom:18px}
+.eval-qr{width:min(280px,76vw);aspect-ratio:1;margin:0 auto 18px;border:1px solid var(--line);border-radius:12px;background:#fff;padding:14px;box-shadow:0 0 44px rgba(var(--accent-rgb),.18)}
+.eval-qr img{display:block;width:100%;height:100%;object-fit:contain}
+.qr-panel p{color:var(--text2);line-height:1.72;margin:0 0 18px}
+.eval-section{padding-top:28px}
+.eval-layout{display:grid;grid-template-columns:minmax(0,1.08fr) minmax(340px,.92fr);gap:24px;align-items:start}
+.eval-form,.eval-result{padding:28px}
+.eval-step{border-bottom:1px solid var(--soft);padding:0 0 26px;margin-bottom:26px}
+.eval-step:last-of-type{border-bottom:0;margin-bottom:0}
+.form-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}
+.eval-form label{display:grid;gap:8px;color:var(--chrome);font-size:13px;line-height:1.45}
+.eval-form input,.eval-form textarea,.eval-form select{width:100%;border:1px solid var(--soft);border-radius:8px;background:rgba(8,7,12,.72);color:var(--chrome);padding:13px 14px;font:inherit;outline:none}
+.eval-form textarea{min-height:112px;resize:vertical}
+.eval-form input:focus,.eval-form textarea:focus,.eval-form select:focus{border-color:var(--line);box-shadow:0 0 0 3px rgba(var(--accent-rgb),.12)}
+.eval-check-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;margin-top:14px}
+.eval-check-grid label{display:flex;align-items:center;gap:10px;min-height:50px;border:1px solid var(--soft);border-radius:10px;background:rgba(24,18,31,.62);padding:12px 14px;cursor:pointer;transition:.25s}
+.eval-check-grid label:hover{border-color:var(--line);transform:translateY(-2px)}
+.eval-check-grid input,.eval-consent input{width:auto;accent-color:var(--accent)}
+.slider-list{display:grid;gap:16px}
+.slider-list label{grid-template-columns:1fr minmax(120px,180px) 34px;align-items:center;border:1px solid var(--soft);border-radius:10px;background:rgba(24,18,31,.5);padding:14px}
+.slider-list input{padding:0}
+.slider-list b{font-family:var(--mono);color:var(--accent);text-align:right}
+.eval-consent{display:flex!important;grid-template-columns:none!important;align-items:center;gap:10px;margin-top:18px}
+.eval-submit-row,.eval-result-actions{display:flex;flex-wrap:wrap;gap:12px;margin-top:22px}
+.eval-result{position:sticky;top:92px;overflow:hidden}
+.eval-result h2{font-size:clamp(26px,2.6vw,38px);line-height:1.14;margin:18px 0}
+.eval-output{border:1px solid var(--soft);border-radius:12px;background:rgba(8,7,12,.72);padding:18px;min-height:260px;color:var(--text2);line-height:1.72}
+.eval-output pre{white-space:pre-wrap;font-family:var(--body);font-size:15px;line-height:1.72;color:var(--chrome);margin:0}
+.eval-result.ready{border-color:var(--line);box-shadow:0 24px 72px rgba(var(--accent-rgb),.14)}
+.wechat-next{margin-top:18px;border:1px solid rgba(255,184,108,.35);border-radius:12px;background:linear-gradient(135deg,rgba(255,184,108,.14),rgba(var(--accent-rgb),.08));padding:18px}
+.wechat-next b{display:block;font-size:clamp(22px,2vw,30px);line-height:1.18;color:var(--chrome);margin-bottom:8px}
+.wechat-next span{display:inline-flex;border:1px solid rgba(255,255,255,.16);border-radius:999px;background:rgba(8,7,12,.62);padding:8px 12px;color:var(--warm);font-family:var(--mono);font-size:13px;margin-bottom:12px}
+.wechat-next p{margin:0 0 16px;color:var(--text2);line-height:1.7}
+@media(max-width:940px){.eval-layout{grid-template-columns:1fr}.eval-result{position:relative;top:auto}.form-grid,.eval-check-grid{grid-template-columns:1fr}}
+@media(max-width:640px){.eval-form,.eval-result,.qr-panel{padding:22px}.slider-list label{grid-template-columns:1fr;gap:10px}.eval-submit-row .btn,.eval-result-actions .btn,.eval-actions .btn{width:100%;justify-content:center}.eval-qr{width:min(240px,72vw)}}
