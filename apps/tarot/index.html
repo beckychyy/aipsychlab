@@ -24,7 +24,7 @@
         <div class="guide-copy">
           <p class="eyebrow">AIPsychLab Example</p>
           <h1>Camera Tarot Reading</h1>
-          <p>这是一个跟随式塔罗体验。你会先进入仪式场，再开启摄像头，用张手加速洗牌，用攥拳抽出三张牌，最后得到围绕你问题展开的深度解读。</p>
+          <p>这是一个跟随式塔罗体验。你会先进入仪式场，再开启摄像头，用张手加速洗牌，用握拳抽出三张牌，最后得到围绕你问题展开的深度解读。</p>
           <button class="primary-button" type="button" data-next="screenCamera">进入仪式</button>
         </div>
       </section>
@@ -40,13 +40,13 @@
           </div>
           <div class="gesture-grid">
             <div><b>张手</b><span>牌阵加速旋转</span></div>
-            <div><b>攥拳</b><span>锁定并抽三张</span></div>
+            <div><b>握拳</b><span>锁定并抽三张</span></div>
           </div>
         </div>
         <div class="guide-copy">
           <p class="eyebrow">Step 01 · Camera Gesture</p>
           <h2>开启摄像头，让手势成为抽牌方式</h2>
-          <p>浏览器会询问摄像头权限。开启后，把手放在画面里：张开手掌，牌会加速；攥拳保持约 1 秒，系统会抽出三张牌。</p>
+          <p>浏览器会询问摄像头权限。开启后，把手放在画面里：张开手掌，牌会加速；握拳保持约 1 秒，系统会抽出三张牌。</p>
           <div class="guide-actions">
             <button class="secondary-button" type="button" data-prev="screenIntro">返回</button>
             <button class="primary-button" id="cameraGuideButton" type="button">开启摄像头</button>
@@ -88,7 +88,8 @@
               <video id="camera" playsinline muted></video>
               <canvas id="overlay" aria-hidden="true"></canvas>
               <div class="camera-panel__veil"></div>
-              <div class="camera-panel__status" id="cameraStatus">张手加速，攥拳抽出三张牌</div>
+              <div class="gesture-badge" id="gestureBadge"><span>当前手势</span><b>等待手掌</b></div>
+              <div class="camera-panel__status" id="cameraStatus">张手加速，握拳抽出三张牌</div>
             </div>
             <div class="deck-orbit is-shuffling" id="deckOrbit" aria-hidden="true">
               <div class="aura-ring"></div>

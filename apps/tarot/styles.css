@@ -527,6 +527,50 @@ button {
   pointer-events: none;
 }
 
+.gesture-badge {
+  position: absolute;
+  top: 18px;
+  left: 18px;
+  z-index: 9;
+  display: grid;
+  gap: 4px;
+  min-width: 170px;
+  border: 1px solid rgba(216, 185, 106, 0.44);
+  border-radius: 12px;
+  padding: 12px 14px;
+  background: rgba(15, 17, 21, 0.82);
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.32), 0 0 32px rgba(216, 185, 106, 0.12);
+  backdrop-filter: blur(14px);
+}
+
+.gesture-badge span {
+  font-size: 10px;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+.gesture-badge b {
+  font-size: clamp(18px, 2vw, 26px);
+  line-height: 1.12;
+  color: var(--paper);
+}
+
+.gesture-badge.is-open {
+  border-color: rgba(126, 204, 166, 0.62);
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.32), 0 0 38px rgba(126, 204, 166, 0.26);
+}
+
+.gesture-badge.is-fist {
+  border-color: rgba(216, 185, 106, 0.78);
+  background: rgba(62, 38, 23, 0.86);
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.34), 0 0 48px rgba(216, 185, 106, 0.38);
+}
+
+.gesture-badge.is-fist b {
+  color: var(--gold);
+}
+
 .camera-panel__status {
   position: absolute;
   left: 18px;

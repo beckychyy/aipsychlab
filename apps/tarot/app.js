@@ -2,6 +2,7 @@ const video = document.querySelector("#camera");
 const canvas = document.querySelector("#overlay");
 const ctx = canvas.getContext("2d");
 const statusEl = document.querySelector("#cameraStatus");
+const gestureBadge = document.querySelector("#gestureBadge");
 const cameraGuideButton = document.querySelector("#cameraGuideButton");
 const drawButton = document.querySelector("#drawButton");
 const resetButton = document.querySelector("#resetButton");
@@ -197,15 +198,15 @@ function resizeCanvas() {
 function isFingerFolded(tip, pip, wrist) {
   const tipToWrist = Math.hypot(tip.x - wrist.x, tip.y - wrist.y);
   const pipToWrist = Math.hypot(pip.x - wrist.x, pip.y - wrist.y);
-  return tipToWrist < pipToWrist * 1.06;
+  return tipToWrist < pipToWrist * 1.12;
 }
 
 function isFist(landmarks) {
   const wrist = landmarks[0];
   const fingers = [[8, 6], [12, 10], [16, 14], [20, 18]];
   const folded = fingers.filter(([tip, pip]) => isFingerFolded(landmarks[tip], landmarks[pip], wrist)).length;
-  const thumbNearPalm = Math.hypot(landmarks[4].x - landmarks[9].x, landmarks[4].y - landmarks[9].y) < 0.18;
-  return folded >= 3 && thumbNearPalm;
+  const thumbNearPalm = Math.hypot(landmarks[4].x - landmarks[9].x, landmarks[4].y - landmarks[9].y) < 0.24;
+  return folded >= 4 || (folded >= 3 && thumbNearPalm);
 }
 
 function isOpenHand(landmarks) {
@@ -224,6 +225,11 @@ function setGestureState(state) {
   activeGesture = state;
   deckOrbit.classList.toggle("hand-open", state === "open");
   deckOrbit.classList.toggle("hand-fist", state === "fist");
+  if (gestureBadge) {
+    gestureBadge.classList.toggle("is-open", state === "open");
+    gestureBadge.classList.toggle("is-fist", state === "fist");
+    gestureBadge.querySelector("b").textContent = state === "open" ? "张手：洗牌加速" : state === "fist" ? "握拳：正在锁定" : "等待手掌";
+  }
 }
 
 function onHandResults(results) {
@@ -233,6 +239,7 @@ function onHandResults(results) {
   if (!results.multiHandLandmarks?.length || hasDrawn) {
     fistStartedAt = 0;
     setGestureState("idle");
+    if (!hasDrawn) setStatus("摄像头已开启，但还没有识别到手。请把整只手放进画面中央，先张开手掌。");
     return;
   }
 
@@ -246,7 +253,7 @@ function onHandResults(results) {
     setGestureState("fist");
     fistStartedAt ||= performance.now();
     const held = performance.now() - fistStartedAt;
-    setStatus(`检测到攥拳，牌阵正在锁定：${(Math.max(0, 1000 - held) / 1000).toFixed(1)} 秒`);
+    setStatus(`检测到握拳，牌阵正在锁定：${(Math.max(0, 1000 - held) / 1000).toFixed(1)} 秒`);
     if (held >= 1000) drawCards("fist");
     return;
   }
@@ -254,10 +261,10 @@ function onHandResults(results) {
   fistStartedAt = 0;
   if (isOpenHand(landmarks)) {
     setGestureState("open");
-    setStatus("检测到张手，全部塔罗牌加速旋转。攥拳即可抽出三张。");
+    setStatus("检测到张手，全部塔罗牌加速旋转。握拳即可抽出三张。");
   } else {
     setGestureState("idle");
-    setStatus("张手加速旋转，攥拳 1 秒抽出三张牌。");
+    setStatus("张手加速旋转，握拳 1 秒抽出三张牌。");
   }
 }
 
@@ -267,9 +274,6 @@ async function startCamera() {
   setStatus("正在请求摄像头权限...");
 
   try {
-    if (window.self !== window.top) {
-      throw new Error("摄像头手势建议在独立页面打开。请点击作品入口后新页面使用，或复制当前链接到浏览器地址栏。");
-    }
     if (!window.Hands || !window.Camera) {
       throw new Error("手势模型还没有加载完成，请稍后重试。");
     }
@@ -280,8 +284,8 @@ async function startCamera() {
     hands.setOptions({
       maxNumHands: 1,
       modelComplexity: 1,
-      minDetectionConfidence: 0.68,
-      minTrackingConfidence: 0.62,
+      minDetectionConfidence: 0.48,
+      minTrackingConfidence: 0.48,
     });
     hands.onResults(onHandResults);
 
@@ -294,7 +298,7 @@ async function startCamera() {
     });
     await camera.start();
     cameraGuideButton.textContent = "摄像头已开启";
-    setStatus("张手加速旋转，攥拳 1 秒抽出三张牌。");
+    setStatus("张手加速旋转，握拳 1 秒抽出三张牌。");
     showScreen("screenQuestion");
   } catch (error) {
     cameraGuideButton.textContent = "摄像头暂不可用";
@@ -544,14 +548,14 @@ function drawCards(source = "manual") {
   setGestureState("idle");
   deckOrbit.classList.remove("is-shuffling", "hand-open", "hand-fist");
   deckOrbit.classList.add("locked");
-  setStatus(source === "fist" ? "攥拳锁定，三张牌正在翻开。" : "三张牌正在从牌堆中翻开。");
+  setStatus(source === "fist" ? "握拳锁定，三张牌正在翻开。" : "三张牌正在从牌堆中翻开。");
 
   const cards = pickCards();
   readingEl.innerHTML = renderSelectionRitual(cards);
   readingEl.scrollIntoView({ behavior: "smooth", block: "start" });
   window.clearTimeout(drawTimer);
   drawTimer = window.setTimeout(() => {
-    setStatus(source === "fist" ? "攥拳锁定，三张牌已抽出。" : "已手动停止，三张牌已抽出。");
+    setStatus(source === "fist" ? "握拳锁定，三张牌已抽出。" : "已手动停止，三张牌已抽出。");
     renderFinalReading(cards);
   }, 3100);
 }
@@ -564,7 +568,7 @@ function resetReading() {
   ctx.clearRect(0, 0, canvas.width, canvas.height);
   deckOrbit.classList.add("is-shuffling");
   deckOrbit.classList.remove("locked", "hand-open", "hand-fist");
-  setStatus(camera ? "重新洗牌中。张手加速，攥拳 1 秒抽出三张牌。" : "准备打开摄像头");
+  setStatus(camera ? "重新洗牌中。张手加速，握拳 1 秒抽出三张牌。" : "准备打开摄像头");
   readingEl.innerHTML = `
     <div class="reading__empty">
       <span></span>
