@@ -6,6 +6,7 @@ const gestureBadge = document.querySelector("#gestureBadge");
 const cameraGuideButton = document.querySelector("#cameraGuideButton");
 const drawButton = document.querySelector("#drawButton");
 const resetButton = document.querySelector("#resetButton");
+const closeCameraButton = document.querySelector("#closeCameraButton");
 const questionInput = document.querySelector("#question");
 const readingQuestionInput = document.querySelector("#readingQuestion");
 const questionPreview = document.querySelector("#questionPreview");
@@ -157,6 +158,7 @@ let deckRendered = false;
 let drawTimer = null;
 let gestureLoop = 0;
 let sendingFrame = false;
+let lastReading = null;
 
 function showScreen(id) {
   screens.forEach((screen) => {
@@ -175,6 +177,21 @@ function showScreen(id) {
 
 function setStatus(message) {
   statusEl.textContent = message;
+}
+
+function stopCamera() {
+  window.cancelAnimationFrame(gestureLoop);
+  gestureLoop = 0;
+  sendingFrame = false;
+  if (camera?.getTracks) camera.getTracks().forEach((track) => track.stop());
+  camera = null;
+  video.srcObject = null;
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
+  fistStartedAt = 0;
+  setGestureState("idle");
+  cameraGuideButton.textContent = "开启摄像头";
+  readingCameraButton.textContent = "开启摄像头";
+  setStatus("摄像头已关闭。也可以直接点击“抽三张牌”。");
 }
 
 function getQuestion() {
@@ -328,6 +345,7 @@ async function startCamera() {
     gestureLoop = window.requestAnimationFrame(tick);
 
     cameraGuideButton.textContent = "摄像头已开启";
+    readingCameraButton.textContent = "摄像头已开启";
     setStatus("摄像头已开启。请把整只手放进画面中央，先张开手掌。");
     showScreen("screenQuestion");
   } catch (error) {
@@ -472,6 +490,12 @@ function markdownToHtml(markdown) {
     .join("");
 }
 
+function stripHtml(html) {
+  const div = document.createElement("div");
+  div.innerHTML = html;
+  return div.textContent.replace(/\s+\n/g, "\n").replace(/\n{3,}/g, "\n\n").trim();
+}
+
 function cardsForApi(cards) {
   return cards.map((card) => ({
     name: card.name,
@@ -524,7 +548,7 @@ function renderSelectionRitual(cards) {
   `;
 }
 
-function renderCardResults(cards, readingHtml, meta = "") {
+function renderCardResults(cards, readingHtml, meta = "", readingText = "") {
   const cardHtml = cards.map((card, index) => `
     <article class="tarot-card ${card.reversed ? "is-reversed" : ""}" style="--gold:${card.gold};--accent:${card.accent}">
       ${cardFace(card, "large")}
@@ -541,8 +565,22 @@ function renderCardResults(cards, readingHtml, meta = "") {
     <div class="interpretation deep-reading ai-reading">
       ${meta ? `<div class="ai-meta">${meta}</div>` : ""}
       ${readingHtml}
+      <div class="takeaway-actions">
+        <button class="primary-button" type="button" data-download-tarot-pdf>下载 PDF 解读</button>
+        <button class="secondary-button" type="button" data-download-tarot-card>下载带走卡片</button>
+      </div>
     </div>
   `;
+  lastReading = {
+    cards,
+    question: getQuestion() || "整体能量解读",
+    html: readingHtml,
+    text: readingText || stripHtml(readingHtml),
+    meta,
+    createdAt: new Date(),
+  };
+  readingEl.querySelector("[data-download-tarot-pdf]")?.addEventListener("click", downloadTarotPdf);
+  readingEl.querySelector("[data-download-tarot-card]")?.addEventListener("click", downloadTakeawayCard);
 }
 
 function renderAIReadingLoading(cards) {
@@ -557,18 +595,156 @@ async function renderFinalReading(cards) {
   renderAIReadingLoading(cards);
   try {
     const payload = await fetchAIReading(cards);
-    renderCardResults(cards, markdownToHtml(payload.reading), `AI reading · ${payload.provider || "deepseek"} · ${payload.model || "deepseek-chat"}`);
+    renderCardResults(cards, markdownToHtml(payload.reading), `AI reading · ${payload.provider || "deepseek"} · ${payload.model || "deepseek-chat"}`, payload.reading);
   } catch (error) {
     const message = error instanceof Error ? error.message : String(error);
     const apiHint = /DEEPSEEK_API_KEY|environment variable/i.test(message)
       ? "线上 DeepSeek API 还没有连接环境变量。牌已经正常抽出，下面先显示本地备用解读；配置好 DeepSeek 后会自动恢复 AI 深度解读。"
       : message;
+    const fallbackHtml = buildDeepReading(cards, getQuestion());
     renderCardResults(cards, `
       <h2>本地备用解读</h2>
       <p><b>AI 接口暂时没有返回：</b>${escapeHtml(apiHint)}</p>
-      ${buildDeepReading(cards, getQuestion())}
-    `, "Local fallback · DeepSeek unavailable");
+      ${fallbackHtml}
+    `, "Local fallback · DeepSeek unavailable", `AI 接口暂时没有返回：${apiHint}\n\n${stripHtml(fallbackHtml)}`);
   }
+}
+
+function reportHtml() {
+  if (!lastReading) return "";
+  const qr = `https://api.qrserver.com/v1/create-qr-code/?size=220x220&margin=12&data=${encodeURIComponent("https://www.aipsychlab.com/apps/tarot/index.html")}`;
+  const cardRows = lastReading.cards.map((card, index) => `
+    <article>
+      <small>${positions[index]} · ${card.reversed ? "逆位" : "正位"}</small>
+      <h3>${escapeHtml(card.name)}</h3>
+      <p>${escapeHtml(card.keywords)}。${escapeHtml(card.reversed ? card.shadow : card.message)}</p>
+    </article>
+  `).join("");
+  return `<!doctype html><html lang="zh-CN"><head><meta charset="utf-8"><style>
+    *{box-sizing:border-box}body{margin:0;background:#151217;color:#f8f0df;font-family:-apple-system,BlinkMacSystemFont,"PingFang SC","Noto Sans SC",Arial,sans-serif;line-height:1.7}.report{width:920px;margin:0 auto;padding:42px;background:radial-gradient(circle at 20% 0%,rgba(216,185,106,.2),transparent 30%),#151217}.hero{border:1px solid rgba(216,185,106,.5);border-radius:22px;padding:30px;background:rgba(255,255,255,.04)}.eyebrow{letter-spacing:.18em;color:#d8b96a;font-size:12px;text-transform:uppercase}h1{font-size:42px;line-height:1.08;margin:10px 0 14px}.question{font-size:22px;color:#fff4df}.cards{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin:22px 0}.cards article,.reading,.qr{border:1px solid rgba(248,240,223,.14);border-radius:18px;background:rgba(255,255,255,.04);padding:18px}.cards small{color:#d8b96a}.cards h3{font-size:25px;margin:6px 0}.cards p,.reading pre{color:#d8d0c3}.reading h2{font-size:28px}.reading pre{white-space:pre-wrap;font-family:inherit;margin:0}.footer{display:grid;grid-template-columns:1fr 170px;gap:20px;align-items:center;margin-top:22px}.qr img{width:140px;height:140px;display:block;margin:auto;background:#fff;border-radius:12px;padding:8px}.qr p{text-align:center;margin:10px 0 0;color:#d8b96a;font-size:13px}
+  </style></head><body><main class="report"><section class="hero"><div class="eyebrow">AIPsychLab Tarot Takeaway</div><h1>三张牌解读报告</h1><p class="question">你问的问题：${escapeHtml(lastReading.question)}</p><p>${escapeHtml(lastReading.meta || "Tarot reading")}</p></section><section class="cards">${cardRows}</section><section class="reading"><h2>你的解读</h2><pre>${escapeHtml(lastReading.text)}</pre></section><section class="footer"><div><div class="eyebrow">带走提醒</div><p>塔罗只作为反思工具，不替代专业心理、医疗、法律或财务建议。欢迎扫码回到 AIPsychLab 继续体验。</p></div><div class="qr"><img src="${qr}" alt="AIPsychLab QR"><p>扫码回到官网</p></div></section></main></body></html>`;
+}
+
+async function downloadTarotPdf() {
+  if (!lastReading) return;
+  const box = document.createElement("div");
+  box.className = "pdf-stage";
+  box.innerHTML = reportHtml();
+  document.body.appendChild(box);
+  const report = box.querySelector(".report");
+  const filename = `AIPsychLab-Tarot-${Date.now()}.pdf`;
+  if (window.html2pdf) {
+    await window.html2pdf().set({
+      margin: 0,
+      filename,
+      image: { type: "jpeg", quality: 0.98 },
+      html2canvas: { scale: 2, useCORS: true, backgroundColor: "#151217" },
+      jsPDF: { unit: "px", format: [920, 1300], orientation: "portrait" },
+    }).from(report).save();
+  } else {
+    const w = window.open("", "_blank");
+    if (w) {
+      w.document.write(reportHtml());
+      w.document.close();
+      setTimeout(() => w.print(), 500);
+    }
+  }
+  box.remove();
+}
+
+function wrapCanvasText(ctx, text, x, y, maxWidth, lineHeight, maxLines = 8) {
+  const words = String(text || "").replace(/\s+/g, " ").split("");
+  let line = "";
+  let lines = 0;
+  for (const char of words) {
+    const test = line + char;
+    if (ctx.measureText(test).width > maxWidth && line) {
+      ctx.fillText(line, x, y);
+      y += lineHeight;
+      line = char;
+      lines += 1;
+      if (lines >= maxLines - 1) break;
+    } else {
+      line = test;
+    }
+  }
+  if (line && lines < maxLines) ctx.fillText(line, x, y);
+  return y + lineHeight;
+}
+
+function loadImage(src) {
+  return new Promise((resolve, reject) => {
+    const img = new Image();
+    img.crossOrigin = "anonymous";
+    img.onload = () => resolve(img);
+    img.onerror = reject;
+    img.src = src;
+  });
+}
+
+async function downloadTakeawayCard() {
+  if (!lastReading) return;
+  const canvas = document.createElement("canvas");
+  canvas.width = 1080;
+  canvas.height = 1600;
+  const c = canvas.getContext("2d");
+  const gradient = c.createLinearGradient(0, 0, 1080, 1600);
+  gradient.addColorStop(0, "#19151f");
+  gradient.addColorStop(0.5, "#241a24");
+  gradient.addColorStop(1, "#101014");
+  c.fillStyle = gradient;
+  c.fillRect(0, 0, 1080, 1600);
+  c.strokeStyle = "rgba(216,185,106,.72)";
+  c.lineWidth = 3;
+  c.strokeRect(54, 54, 972, 1492);
+  c.fillStyle = "#d8b96a";
+  c.font = "28px Arial";
+  c.fillText("AIPsychLab Tarot Takeaway", 86, 120);
+  c.fillStyle = "#f8f0df";
+  c.font = "bold 58px Arial";
+  c.fillText("三张牌解读卡", 86, 205);
+  c.font = "30px Arial";
+  let y = wrapCanvasText(c, `问题：${lastReading.question}`, 86, 285, 890, 48, 4);
+  y += 30;
+  lastReading.cards.forEach((card, index) => {
+    c.fillStyle = "rgba(248,240,223,.06)";
+    c.fillRect(86, y, 890, 138);
+    c.strokeStyle = "rgba(216,185,106,.32)";
+    c.strokeRect(86, y, 890, 138);
+    c.fillStyle = "#d8b96a";
+    c.font = "24px Arial";
+    c.fillText(`${positions[index]} · ${card.reversed ? "逆位" : "正位"}`, 114, y + 42);
+    c.fillStyle = "#fff8eb";
+    c.font = "bold 40px Arial";
+    c.fillText(card.name, 114, y + 90);
+    y += 164;
+  });
+  c.fillStyle = "#f8f0df";
+  c.font = "bold 34px Arial";
+  c.fillText("给你的提醒", 86, y + 20);
+  c.fillStyle = "#d8d0c3";
+  c.font = "28px Arial";
+  wrapCanvasText(c, lastReading.text.slice(0, 220), 86, y + 70, 890, 44, 7);
+  c.fillStyle = "#d8b96a";
+  c.font = "24px Arial";
+  c.fillText("www.aipsychlab.com", 86, 1480);
+  try {
+    const qr = await loadImage(`https://api.qrserver.com/v1/create-qr-code/?size=240x240&margin=12&data=${encodeURIComponent("https://www.aipsychlab.com/apps/tarot/index.html")}`);
+    c.fillStyle = "#ffffff";
+    c.fillRect(804, 1358, 148, 148);
+    c.drawImage(qr, 814, 1368, 128, 128);
+    c.fillStyle = "#d8b96a";
+    c.font = "20px Arial";
+    c.fillText("扫码回到官网", 790, 1520);
+  } catch {
+    c.fillStyle = "#d8b96a";
+    c.font = "20px Arial";
+    c.fillText("AIPsychLab.com", 780, 1480);
+  }
+  const link = document.createElement("a");
+  link.download = `AIPsychLab-Tarot-Card-${Date.now()}.png`;
+  link.href = canvas.toDataURL("image/png");
+  link.click();
 }
 
 function drawCards(source = "manual") {
@@ -618,6 +794,7 @@ document.querySelectorAll("[data-prev]").forEach((button) => {
 
 cameraGuideButton.addEventListener("click", startCamera);
 readingCameraButton.addEventListener("click", startCamera);
+closeCameraButton.addEventListener("click", stopCamera);
 drawButton.addEventListener("click", () => drawCards("manual"));
 resetButton.addEventListener("click", resetReading);
 readingQuestionInput.addEventListener("input", () => {

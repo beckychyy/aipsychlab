@@ -8,6 +8,7 @@
     <script src="https://cdn.jsdelivr.net/npm/@mediapipe/camera_utils/camera_utils.js" defer></script>
     <script src="https://cdn.jsdelivr.net/npm/@mediapipe/drawing_utils/drawing_utils.js" defer></script>
     <script src="https://cdn.jsdelivr.net/npm/@mediapipe/hands/hands.js" defer></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js" crossorigin="anonymous" referrerpolicy="no-referrer" defer></script>
     <script src="./app.js" defer></script>
   </head>
   <body>
@@ -119,6 +120,7 @@
             </label>
             <div class="actions">
               <button class="secondary-button camera-button" id="readingCameraButton" type="button">开启摄像头</button>
+              <button class="secondary-button camera-button" id="closeCameraButton" type="button">关闭摄像头</button>
               <button class="primary-button" id="drawButton" type="button">抽三张牌</button>
               <button class="icon-button" id="resetButton" type="button" title="重新开始" aria-label="重新开始">↻</button>
             </div>

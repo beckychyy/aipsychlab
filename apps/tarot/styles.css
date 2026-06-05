@@ -878,7 +878,7 @@ textarea:focus {
 
 .actions {
   display: grid;
-  grid-template-columns: 1fr 1fr 52px;
+  grid-template-columns: 1fr 1fr 1fr 52px;
   gap: 10px;
 }
 
@@ -1528,6 +1528,29 @@ textarea:focus {
   font-size: 0.74rem;
   letter-spacing: 0.08em;
   text-transform: uppercase;
+}
+
+.takeaway-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 18px;
+  padding-top: 18px;
+  border-top: 1px solid rgba(248, 240, 223, 0.12);
+}
+
+.takeaway-actions button {
+  min-width: 180px;
+}
+
+.pdf-stage {
+  position: fixed;
+  left: -12000px;
+  top: 0;
+  width: 920px;
+  pointer-events: none;
+  opacity: 0;
+  z-index: -1;
 }
 
 .ai-loader {
