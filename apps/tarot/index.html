@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>AIPsychLab | Camera Tarot Example</title>
+    <title>月光塔罗 AI | Camera Tarot</title>
     <link rel="stylesheet" href="./styles.css" />
     <script src="https://cdn.jsdelivr.net/npm/@mediapipe/camera_utils/camera_utils.js" defer></script>
     <script src="https://cdn.jsdelivr.net/npm/@mediapipe/drawing_utils/drawing_utils.js" defer></script>
@@ -23,9 +23,9 @@
           </div>
         </div>
         <div class="guide-copy">
-          <p class="eyebrow">AIPsychLab Example</p>
-          <h1>Camera Tarot Reading</h1>
-          <p>这是一个跟随式塔罗体验。你会先进入仪式场，再开启摄像头，用张手加速洗牌，用握拳抽出三张牌，最后得到围绕你问题展开的深度解读。</p>
+          <p class="eyebrow">Moonlit AI Tarot</p>
+          <h1>月光塔罗 AI</h1>
+          <p>这是一个 AI 塔罗体验。你可以开启摄像头，用张手加速洗牌、握拳抽出三张牌，也可以直接点击抽牌。每次解读都会围绕你的问题生成。</p>
           <button class="primary-button" type="button" data-next="screenCamera">进入仪式</button>
         </div>
       </section>
@@ -123,6 +123,18 @@
               <button class="secondary-button camera-button" id="closeCameraButton" type="button">关闭摄像头</button>
               <button class="primary-button" id="drawButton" type="button">抽三张牌</button>
               <button class="icon-button" id="resetButton" type="button" title="重新开始" aria-label="重新开始">↻</button>
+            </div>
+            <div class="access-panel" id="accessPanel">
+              <div>
+                <span>占卜次数</span>
+                <strong id="accessStatus">免费体验 1 次</strong>
+              </div>
+              <label>
+                <span>兑换码</span>
+                <input id="redeemCode" autocomplete="off" placeholder="输入购买后收到的兑换码" />
+              </label>
+              <button class="secondary-button" id="redeemButton" type="button">解锁 100 次</button>
+              <p id="redeemStatus">9.9 元解锁 100 次 AI 解读，用完可重新购买。</p>
             </div>
             <p class="hint" id="gestureHint">如果摄像头不可用，可以直接点击抽牌。塔罗只作为反思工具，不替代专业心理、医疗或财务建议。</p>
           </aside>

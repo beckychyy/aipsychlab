@@ -14,7 +14,14 @@ const readingCameraButton = document.querySelector("#readingCameraButton");
 const readingEl = document.querySelector("#reading");
 const deckOrbit = document.querySelector("#deckOrbit");
 const deckTrack = document.querySelector("#deckTrack");
+const redeemCodeInput = document.querySelector("#redeemCode");
+const redeemButton = document.querySelector("#redeemButton");
+const redeemStatus = document.querySelector("#redeemStatus");
+const accessStatus = document.querySelector("#accessStatus");
 const screens = [...document.querySelectorAll(".guide-screen, .reader-screen")];
+const ACCESS_TOKEN_KEY = "moonlit_tarot_access_token";
+const ACCESS_REMAINING_KEY = "moonlit_tarot_remaining";
+const FREE_USED_KEY = "moonlit_tarot_free_used";
 
 const majorArcana = [
   ["愚者", "The Fool", "0", "自由、冒险、信任直觉", "新的旅程已经打开，先行动再理解。", "轻率、逃避承诺", "sunrise", "✦", "#e7c76f", "#4f83a8"],
@@ -177,6 +184,52 @@ function showScreen(id) {
 
 function setStatus(message) {
   statusEl.textContent = message;
+}
+
+function accessToken() {
+  return localStorage.getItem(ACCESS_TOKEN_KEY) || "";
+}
+
+function setAccess(token, remaining) {
+  if (token) localStorage.setItem(ACCESS_TOKEN_KEY, token);
+  if (Number.isFinite(Number(remaining))) localStorage.setItem(ACCESS_REMAINING_KEY, String(remaining));
+  renderAccess();
+}
+
+function renderAccess(message = "") {
+  const token = accessToken();
+  const remaining = Number(localStorage.getItem(ACCESS_REMAINING_KEY) || 0);
+  const freeUsed = localStorage.getItem(FREE_USED_KEY) === "1";
+  if (accessStatus) {
+    accessStatus.textContent = token ? `已解锁，剩余 ${Math.max(0, remaining)} 次` : freeUsed ? "免费体验已用完" : "免费体验剩余 1 次";
+  }
+  if (redeemStatus && message) redeemStatus.textContent = message;
+}
+
+async function redeemCode() {
+  const code = redeemCodeInput.value.trim();
+  if (!code) {
+    renderAccess("请输入购买后收到的兑换码。");
+    return;
+  }
+  redeemButton.disabled = true;
+  redeemStatus.textContent = "正在验证兑换码...";
+  try {
+    const response = await fetch("/api/redeem-tarot-code", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ code }),
+    });
+    const payload = await response.json();
+    if (!response.ok) throw new Error(payload?.error || "兑换失败");
+    setAccess(payload.accessToken, payload.credits);
+    redeemCodeInput.value = "";
+    renderAccess(`兑换成功，已解锁 ${payload.credits} 次 AI 解读。`);
+  } catch (error) {
+    renderAccess(error instanceof Error ? error.message : String(error));
+  } finally {
+    redeemButton.disabled = false;
+  }
 }
 
 function stopCamera() {
@@ -506,18 +559,35 @@ function cardsForApi(cards) {
 }
 
 async function fetchAIReading(cards) {
+  const token = accessToken();
+  const freeUsed = localStorage.getItem(FREE_USED_KEY) === "1";
+  if (!token && freeUsed) {
+    const error = new Error("免费体验已用完。请输入兑换码解锁 100 次 AI 解读。");
+    error.paymentRequired = true;
+    throw error;
+  }
   const response = await fetch("/api/tarot-reading", {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify({
       question: getQuestion(),
       cards: cardsForApi(cards),
+      accessToken: token,
+      freeTrial: !token && !freeUsed,
     }),
   });
 
   const payload = await response.json();
   if (!response.ok) {
-    throw new Error(payload?.detail || payload?.error || "AI 解读接口暂时不可用");
+    const error = new Error(payload?.detail || payload?.error || "AI 解读接口暂时不可用");
+    error.paymentRequired = payload?.paymentRequired;
+    error.remaining = payload?.remaining;
+    throw error;
+  }
+  if (payload.accessToken) setAccess(payload.accessToken, payload.remaining);
+  if (payload.freeTrialUsed) {
+    localStorage.setItem(FREE_USED_KEY, "1");
+    renderAccess("免费体验已使用。输入兑换码可解锁 100 次 AI 解读。");
   }
   return payload;
 }
@@ -598,6 +668,15 @@ async function renderFinalReading(cards) {
     renderCardResults(cards, markdownToHtml(payload.reading), `AI reading · ${payload.provider || "deepseek"} · ${payload.model || "deepseek-chat"}`, payload.reading);
   } catch (error) {
     const message = error instanceof Error ? error.message : String(error);
+    if (error?.paymentRequired) {
+      renderCardResults(cards, `
+        <h2>需要兑换码继续 AI 解读</h2>
+        <p>${escapeHtml(message)}</p>
+        <p>购买后输入兑换码，即可解锁 100 次 AI 塔罗深度解读。已经抽出的三张牌会保留，你也可以输入兑换码后重新抽牌。</p>
+      `, "Access required", message);
+      renderAccess(message);
+      return;
+    }
     const apiHint = /DEEPSEEK_API_KEY|environment variable/i.test(message)
       ? "线上 DeepSeek API 还没有连接环境变量。牌已经正常抽出，下面先显示本地备用解读；配置好 DeepSeek 后会自动恢复 AI 深度解读。"
       : message;
@@ -612,7 +691,8 @@ async function renderFinalReading(cards) {
 
 function reportHtml() {
   if (!lastReading) return "";
-  const qr = `https://api.qrserver.com/v1/create-qr-code/?size=220x220&margin=12&data=${encodeURIComponent("https://www.aipsychlab.com/apps/tarot/index.html")}`;
+  const productUrl = "https://www.aipsychlab.com/apps/tarot/index.html";
+  const qr = `https://api.qrserver.com/v1/create-qr-code/?size=220x220&margin=12&data=${encodeURIComponent(productUrl)}`;
   const cardRows = lastReading.cards.map((card, index) => `
     <article>
       <small>${positions[index]} · ${card.reversed ? "逆位" : "正位"}</small>
@@ -622,7 +702,7 @@ function reportHtml() {
   `).join("");
   return `<!doctype html><html lang="zh-CN"><head><meta charset="utf-8"><style>
     *{box-sizing:border-box}body{margin:0;background:#151217;color:#f8f0df;font-family:-apple-system,BlinkMacSystemFont,"PingFang SC","Noto Sans SC",Arial,sans-serif;line-height:1.7}.report{width:920px;margin:0 auto;padding:42px;background:radial-gradient(circle at 20% 0%,rgba(216,185,106,.2),transparent 30%),#151217}.hero{border:1px solid rgba(216,185,106,.5);border-radius:22px;padding:30px;background:rgba(255,255,255,.04)}.eyebrow{letter-spacing:.18em;color:#d8b96a;font-size:12px;text-transform:uppercase}h1{font-size:42px;line-height:1.08;margin:10px 0 14px}.question{font-size:22px;color:#fff4df}.cards{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin:22px 0}.cards article,.reading,.qr{border:1px solid rgba(248,240,223,.14);border-radius:18px;background:rgba(255,255,255,.04);padding:18px}.cards small{color:#d8b96a}.cards h3{font-size:25px;margin:6px 0}.cards p,.reading pre{color:#d8d0c3}.reading h2{font-size:28px}.reading pre{white-space:pre-wrap;font-family:inherit;margin:0}.footer{display:grid;grid-template-columns:1fr 170px;gap:20px;align-items:center;margin-top:22px}.qr img{width:140px;height:140px;display:block;margin:auto;background:#fff;border-radius:12px;padding:8px}.qr p{text-align:center;margin:10px 0 0;color:#d8b96a;font-size:13px}
-  </style></head><body><main class="report"><section class="hero"><div class="eyebrow">AIPsychLab Tarot Takeaway</div><h1>三张牌解读报告</h1><p class="question">你问的问题：${escapeHtml(lastReading.question)}</p><p>${escapeHtml(lastReading.meta || "Tarot reading")}</p></section><section class="cards">${cardRows}</section><section class="reading"><h2>你的解读</h2><pre>${escapeHtml(lastReading.text)}</pre></section><section class="footer"><div><div class="eyebrow">带走提醒</div><p>塔罗只作为反思工具，不替代专业心理、医疗、法律或财务建议。欢迎扫码回到 AIPsychLab 继续体验。</p></div><div class="qr"><img src="${qr}" alt="AIPsychLab QR"><p>扫码回到官网</p></div></section></main></body></html>`;
+  </style></head><body><main class="report"><section class="hero"><div class="eyebrow">Moonlit AI Tarot</div><h1>三张牌解读报告</h1><p class="question">你问的问题：${escapeHtml(lastReading.question)}</p><p>${escapeHtml(lastReading.meta || "Tarot reading")}</p></section><section class="cards">${cardRows}</section><section class="reading"><h2>你的解读</h2><pre>${escapeHtml(lastReading.text)}</pre></section><section class="footer"><div><div class="eyebrow">带走提醒</div><p>塔罗只作为娱乐与自我反思工具，不替代专业心理、医疗、法律或财务建议。欢迎扫码回到月光塔罗 AI 继续体验。</p></div><div class="qr"><img src="${qr}" alt="Moonlit AI Tarot QR"><p>扫码回到塔罗站</p></div></section></main></body></html>`;
 }
 
 async function downloadTarotPdf() {
@@ -632,7 +712,7 @@ async function downloadTarotPdf() {
   box.innerHTML = reportHtml();
   document.body.appendChild(box);
   const report = box.querySelector(".report");
-  const filename = `AIPsychLab-Tarot-${Date.now()}.pdf`;
+  const filename = `Moonlit-AI-Tarot-${Date.now()}.pdf`;
   if (window.html2pdf) {
     await window.html2pdf().set({
       margin: 0,
@@ -699,7 +779,7 @@ async function downloadTakeawayCard() {
   c.strokeRect(54, 54, 972, 1492);
   c.fillStyle = "#d8b96a";
   c.font = "28px Arial";
-  c.fillText("AIPsychLab Tarot Takeaway", 86, 120);
+  c.fillText("Moonlit AI Tarot Takeaway", 86, 120);
   c.fillStyle = "#f8f0df";
   c.font = "bold 58px Arial";
   c.fillText("三张牌解读卡", 86, 205);
@@ -727,7 +807,7 @@ async function downloadTakeawayCard() {
   wrapCanvasText(c, lastReading.text.slice(0, 220), 86, y + 70, 890, 44, 7);
   c.fillStyle = "#d8b96a";
   c.font = "24px Arial";
-  c.fillText("www.aipsychlab.com", 86, 1480);
+  c.fillText("Moonlit AI Tarot", 86, 1480);
   try {
     const qr = await loadImage(`https://api.qrserver.com/v1/create-qr-code/?size=240x240&margin=12&data=${encodeURIComponent("https://www.aipsychlab.com/apps/tarot/index.html")}`);
     c.fillStyle = "#ffffff";
@@ -739,10 +819,10 @@ async function downloadTakeawayCard() {
   } catch {
     c.fillStyle = "#d8b96a";
     c.font = "20px Arial";
-    c.fillText("AIPsychLab.com", 780, 1480);
+    c.fillText("Moonlit AI Tarot", 780, 1480);
   }
   const link = document.createElement("a");
-  link.download = `AIPsychLab-Tarot-Card-${Date.now()}.png`;
+  link.download = `Moonlit-AI-Tarot-Card-${Date.now()}.png`;
   link.href = canvas.toDataURL("image/png");
   link.click();
 }
@@ -795,6 +875,13 @@ document.querySelectorAll("[data-prev]").forEach((button) => {
 cameraGuideButton.addEventListener("click", startCamera);
 readingCameraButton.addEventListener("click", startCamera);
 closeCameraButton.addEventListener("click", stopCamera);
+redeemButton.addEventListener("click", redeemCode);
+redeemCodeInput.addEventListener("keydown", (event) => {
+  if (event.key === "Enter") {
+    event.preventDefault();
+    redeemCode();
+  }
+});
 drawButton.addEventListener("click", () => drawCards("manual"));
 resetButton.addEventListener("click", resetReading);
 readingQuestionInput.addEventListener("input", () => {
@@ -805,3 +892,4 @@ questionInput.addEventListener("input", () => {
   if (readingQuestionInput) readingQuestionInput.value = questionInput.value;
 });
 window.addEventListener("resize", resizeCanvas);
+renderAccess();

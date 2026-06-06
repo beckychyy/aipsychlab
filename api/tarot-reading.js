@@ -1,15 +1,6 @@
-const DEEPSEEK_URL = "https://api.deepseek.com/chat/completions";
+import { clientIp, rateLimit, readLocalEnv, signAccess, verifyAccess } from "./lib/tarot-auth.js";
 
-async function readLocalEnv(name) {
-  try {
-    const { readFile } = await import("node:fs/promises");
-    const envText = await readFile(`${process.cwd()}/.env.local`, "utf8");
-    const line = envText.split(/\r?\n/).find((item) => item.startsWith(`${name}=`));
-    return line ? line.slice(name.length + 1).trim().replace(/^["']|["']$/g, "") : "";
-  } catch {
-    return "";
-  }
-}
+const DEEPSEEK_URL = "https://api.deepseek.com/chat/completions";
 
 function sendJson(response, status, payload) {
   response.statusCode = status;
@@ -69,9 +60,36 @@ export default async function handler(request, response) {
 
   const question = String(body?.question || "").slice(0, 800);
   const cards = Array.isArray(body?.cards) ? body.cards.slice(0, 3) : [];
+  const access = await verifyAccess(body?.accessToken);
+  const isFreeTrial = body?.freeTrial === true && !access;
+  const ip = clientIp(request);
 
   if (cards.length !== 3) {
     sendJson(response, 400, { error: "Exactly three tarot cards are required" });
+    return;
+  }
+
+  const perMinute = rateLimit(`tarot-minute:${ip}`, 5, 60 * 1000);
+  if (!perMinute.ok) {
+    sendJson(response, 429, { error: "请求太频繁，请稍等一分钟再占卜。" });
+    return;
+  }
+
+  if (!access && !isFreeTrial) {
+    sendJson(response, 402, { error: "请输入兑换码解锁 AI 解读。", paymentRequired: true });
+    return;
+  }
+
+  if (isFreeTrial) {
+    const freeLimit = rateLimit(`tarot-free:${ip}`, 6, 24 * 60 * 60 * 1000);
+    if (!freeLimit.ok) {
+      sendJson(response, 402, { error: "免费体验次数已用完，请输入兑换码继续。", paymentRequired: true });
+      return;
+    }
+  }
+
+  if (access && access.credits <= 0) {
+    sendJson(response, 402, { error: "兑换码次数已用完，请重新购买新的 100 次包。", paymentRequired: true, remaining: 0 });
     return;
   }
 
@@ -109,10 +127,24 @@ export default async function handler(request, response) {
       return;
     }
 
+    let nextAccessToken = body?.accessToken || "";
+    let remaining = isFreeTrial ? 0 : access?.credits;
+    if (access) {
+      remaining = Math.max(0, Number(access.credits || 0) - 1);
+      nextAccessToken = await signAccess({
+        ...access,
+        credits: remaining,
+        iat: Date.now(),
+      });
+    }
+
     sendJson(response, 200, {
       reading: result?.choices?.[0]?.message?.content || "",
       provider: "deepseek",
       model: result?.model || process.env.DEEPSEEK_MODEL || await readLocalEnv("DEEPSEEK_MODEL") || "deepseek-chat",
+      accessToken: nextAccessToken,
+      remaining,
+      freeTrialUsed: isFreeTrial,
     });
   } catch (error) {
     sendJson(response, 500, {
