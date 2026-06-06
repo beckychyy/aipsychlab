@@ -973,3 +973,45 @@ body{font-size:var(--type-body)}
 .pdf-render-root{position:fixed;left:-12000px;top:0;width:980px;z-index:-1;opacity:0;pointer-events:none}
 @media(max-width:940px){.eval-layout{grid-template-columns:1fr}.eval-result{position:relative;top:auto}.form-grid,.eval-check-grid{grid-template-columns:1fr}}
 @media(max-width:640px){.eval-form,.eval-result,.qr-panel{padding:22px}.slider-list label{grid-template-columns:1fr;gap:10px}.eval-submit-row .btn,.eval-result-actions .btn,.eval-actions .btn{width:100%;justify-content:center}.eval-qr{width:min(240px,72vw)}.score-console{grid-template-columns:1fr}.score-ring{margin:auto}.dimension-row{grid-template-columns:1fr 1fr}.dimension-row i,.dimension-row small{grid-column:1/-1}.dimension-row b{text-align:left}}
+
+/* Mobile homepage overflow fix */
+@media(max-width:640px){
+  html,body{width:100%;max-width:100%;overflow-x:hidden}
+  .nav{padding:18px 20px}
+  .nav.scrolled{padding:14px 20px}
+  .brand{font-size:13px;letter-spacing:.08em}
+  .nav-right{gap:8px}
+  .lang button,.menu-btn{font-size:11px;padding:7px 10px}
+  .parent-hero{width:100%;overflow:hidden;padding:116px 0 48px}
+  .parent-hero .wrap{width:100%;max-width:100%;padding:0 22px;overflow:hidden}
+  .parent-hero .kicker{display:flex;width:100%;max-width:100%;font-size:12px;line-height:1.55;letter-spacing:.06em;white-space:normal;overflow-wrap:anywhere}
+  .parent-hero .kicker:before{flex:0 0 22px}
+  .parent-hero h1,
+  .hero h1,
+  .hero.center h1{
+    width:100%;
+    max-width:100%;
+    font-size:clamp(38px,11vw,46px);
+    line-height:1.14;
+    letter-spacing:0;
+    word-break:normal;
+    overflow-wrap:anywhere;
+    white-space:normal;
+    text-transform:none;
+  }
+  .parent-hero h1 .zh,
+  .parent-hero h1 .en{display:block;max-width:100%;white-space:normal}
+  .parent-hero p.lead{width:100%;max-width:100%;font-size:16px;line-height:1.82;overflow-wrap:break-word}
+  .parent-hero .cred{width:100%;max-width:100%;font-size:12px;line-height:1.65;letter-spacing:0;overflow-wrap:break-word}
+  .parent-hero .hero-actions{display:grid;grid-template-columns:1fr 1fr;width:100%;gap:10px}
+  .parent-hero .btn{width:100%;min-width:0;padding:0 10px;min-height:50px;font-size:12px;letter-spacing:.04em;white-space:normal}
+  .parent-hero .terminal-card{width:100%;max-width:100%;margin-top:18px;overflow:hidden}
+  .decision-row b,
+  .decision-row p,
+  .console{overflow-wrap:anywhere}
+}
+
+@media(max-width:380px){
+  .parent-hero .hero-actions{grid-template-columns:1fr}
+  .parent-hero h1{font-size:clamp(34px,10.5vw,42px)}
+}
