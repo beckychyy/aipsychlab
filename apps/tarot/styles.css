@@ -1592,6 +1592,14 @@ textarea:focus {
   min-width: 180px;
 }
 
+.download-status {
+  flex-basis: 100%;
+  margin: 2px 0 0;
+  color: var(--gold);
+  font-size: 0.92rem;
+  line-height: 1.55;
+}
+
 .pdf-stage {
   position: fixed;
   left: -12000px;

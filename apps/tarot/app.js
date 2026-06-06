@@ -638,6 +638,7 @@ function renderCardResults(cards, readingHtml, meta = "", readingText = "") {
       <div class="takeaway-actions">
         <button class="primary-button" type="button" data-download-tarot-pdf>下载 PDF 解读</button>
         <button class="secondary-button" type="button" data-download-tarot-card>下载带走卡片</button>
+        <p class="download-status" data-download-status></p>
       </div>
     </div>
   `;
@@ -689,10 +690,32 @@ async function renderFinalReading(cards) {
   }
 }
 
-function reportHtml() {
+function downloadStatus(message) {
+  const el = readingEl.querySelector("[data-download-status]");
+  if (el) el.textContent = message;
+}
+
+async function imageDataUrl(src) {
+  const response = await fetch(src, { mode: "cors" });
+  const blob = await response.blob();
+  return await new Promise((resolve, reject) => {
+    const reader = new FileReader();
+    reader.onload = () => resolve(reader.result);
+    reader.onerror = reject;
+    reader.readAsDataURL(blob);
+  });
+}
+
+async function reportHtml() {
   if (!lastReading) return "";
   const productUrl = "https://www.aipsychlab.com/apps/tarot/index.html";
-  const qr = `https://api.qrserver.com/v1/create-qr-code/?size=220x220&margin=12&data=${encodeURIComponent(productUrl)}`;
+  const qrUrl = `https://api.qrserver.com/v1/create-qr-code/?size=220x220&margin=12&data=${encodeURIComponent(productUrl)}`;
+  let qr = qrUrl;
+  try {
+    qr = await imageDataUrl(qrUrl);
+  } catch {
+    qr = qrUrl;
+  }
   const cardRows = lastReading.cards.map((card, index) => `
     <article>
       <small>${positions[index]} · ${card.reversed ? "逆位" : "正位"}</small>
@@ -707,13 +730,15 @@ function reportHtml() {
 
 async function downloadTarotPdf() {
   if (!lastReading) return;
+  downloadStatus("正在生成 PDF，请稍等...");
   const box = document.createElement("div");
   box.className = "pdf-stage";
-  box.innerHTML = reportHtml();
-  document.body.appendChild(box);
-  const report = box.querySelector(".report");
   const filename = `Moonlit-AI-Tarot-${Date.now()}.pdf`;
-  if (window.html2pdf) {
+  try {
+    box.innerHTML = await reportHtml();
+    document.body.appendChild(box);
+    const report = box.querySelector(".report");
+    if (!window.html2pdf) throw new Error("PDF 生成库还没有加载完成，请稍后再点一次。");
     await window.html2pdf().set({
       margin: 0,
       filename,
@@ -721,15 +746,19 @@ async function downloadTarotPdf() {
       html2canvas: { scale: 2, useCORS: true, backgroundColor: "#151217" },
       jsPDF: { unit: "px", format: [920, 1300], orientation: "portrait" },
     }).from(report).save();
-  } else {
+    downloadStatus("PDF 已生成，请在浏览器下载栏或手机文件中查看。");
+  } catch (error) {
+    downloadStatus("PDF 自动下载失败，已打开打印页面，请选择“另存为 PDF”。");
     const w = window.open("", "_blank");
     if (w) {
-      w.document.write(reportHtml());
+      w.document.write(await reportHtml());
       w.document.close();
       setTimeout(() => w.print(), 500);
     }
+    console.error(error);
+  } finally {
+    box.remove();
   }
-  box.remove();
 }
 
 function wrapCanvasText(ctx, text, x, y, maxWidth, lineHeight, maxLines = 8) {
@@ -764,6 +793,7 @@ function loadImage(src) {
 
 async function downloadTakeawayCard() {
   if (!lastReading) return;
+  downloadStatus("正在生成带走卡片...");
   const canvas = document.createElement("canvas");
   canvas.width = 1080;
   canvas.height = 1600;
@@ -822,9 +852,20 @@ async function downloadTakeawayCard() {
     c.fillText("Moonlit AI Tarot", 780, 1480);
   }
   const link = document.createElement("a");
-  link.download = `Moonlit-AI-Tarot-Card-${Date.now()}.png`;
-  link.href = canvas.toDataURL("image/png");
-  link.click();
+  canvas.toBlob((blob) => {
+    if (!blob) {
+      downloadStatus("卡片生成失败，请再点一次。");
+      return;
+    }
+    const url = URL.createObjectURL(blob);
+    link.download = `Moonlit-AI-Tarot-Card-${Date.now()}.png`;
+    link.href = url;
+    document.body.appendChild(link);
+    link.click();
+    link.remove();
+    setTimeout(() => URL.revokeObjectURL(url), 1200);
+    downloadStatus("卡片已生成，请在浏览器下载栏或手机文件中查看。");
+  }, "image/png");
 }
 
 function drawCards(source = "manual") {
