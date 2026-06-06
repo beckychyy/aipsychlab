@@ -695,6 +695,13 @@ function downloadStatus(message) {
   if (el) el.textContent = message;
 }
 
+function setDownloadBusy(isBusy) {
+  readingEl.querySelectorAll("[data-download-tarot-pdf], [data-download-tarot-card]").forEach((button) => {
+    button.disabled = isBusy;
+    button.setAttribute("aria-busy", String(isBusy));
+  });
+}
+
 async function imageDataUrl(src) {
   const response = await fetch(src, { mode: "cors" });
   const blob = await response.blob();
@@ -728,36 +735,233 @@ async function reportHtml() {
   </style></head><body><main class="report"><section class="hero"><div class="eyebrow">Moonlit AI Tarot</div><h1>三张牌解读报告</h1><p class="question">你问的问题：${escapeHtml(lastReading.question)}</p><p>${escapeHtml(lastReading.meta || "Tarot reading")}</p></section><section class="cards">${cardRows}</section><section class="reading"><h2>你的解读</h2><pre>${escapeHtml(lastReading.text)}</pre></section><section class="footer"><div><div class="eyebrow">带走提醒</div><p>塔罗只作为娱乐与自我反思工具，不替代专业心理、医疗、法律或财务建议。欢迎扫码回到月光塔罗 AI 继续体验。</p></div><div class="qr"><img src="${qr}" alt="Moonlit AI Tarot QR"><p>扫码回到塔罗站</p></div></section></main></body></html>`;
 }
 
+function splitCanvasLines(ctx, text, maxWidth) {
+  const lines = [];
+  let line = "";
+  for (const char of String(text || "").replace(/\r/g, "")) {
+    if (char === "\n") {
+      if (line) lines.push(line);
+      line = "";
+      continue;
+    }
+    const test = line + char;
+    if (ctx.measureText(test).width > maxWidth && line) {
+      lines.push(line);
+      line = char;
+    } else {
+      line = test;
+    }
+  }
+  if (line) lines.push(line);
+  return lines;
+}
+
+function drawRoundRect(ctx, x, y, width, height, radius) {
+  ctx.beginPath();
+  ctx.moveTo(x + radius, y);
+  ctx.lineTo(x + width - radius, y);
+  ctx.quadraticCurveTo(x + width, y, x + width, y + radius);
+  ctx.lineTo(x + width, y + height - radius);
+  ctx.quadraticCurveTo(x + width, y + height, x + width - radius, y + height);
+  ctx.lineTo(x + radius, y + height);
+  ctx.quadraticCurveTo(x, y + height, x, y + height - radius);
+  ctx.lineTo(x, y + radius);
+  ctx.quadraticCurveTo(x, y, x + radius, y);
+  ctx.closePath();
+}
+
+function drawPdfBackground(ctx, width, height, pageNumber) {
+  const gradient = ctx.createLinearGradient(0, 0, width, height);
+  gradient.addColorStop(0, "#18131e");
+  gradient.addColorStop(0.48, "#241725");
+  gradient.addColorStop(1, "#0f1015");
+  ctx.fillStyle = gradient;
+  ctx.fillRect(0, 0, width, height);
+
+  ctx.strokeStyle = "rgba(216,185,106,.5)";
+  ctx.lineWidth = 3;
+  drawRoundRect(ctx, 58, 58, width - 116, height - 116, 28);
+  ctx.stroke();
+
+  ctx.strokeStyle = "rgba(248,240,223,.045)";
+  ctx.lineWidth = 1;
+  for (let x = 90; x < width; x += 78) {
+    ctx.beginPath();
+    ctx.moveTo(x, 92);
+    ctx.lineTo(x, height - 92);
+    ctx.stroke();
+  }
+  for (let y = 92; y < height; y += 78) {
+    ctx.beginPath();
+    ctx.moveTo(92, y);
+    ctx.lineTo(width - 92, y);
+    ctx.stroke();
+  }
+
+  ctx.fillStyle = "rgba(216,185,106,.82)";
+  ctx.font = "24px Arial";
+  ctx.fillText("Moonlit AI Tarot", 92, height - 88);
+  ctx.textAlign = "right";
+  ctx.fillText(`Page ${pageNumber}`, width - 92, height - 88);
+  ctx.textAlign = "left";
+}
+
+function drawPdfTextBlock(ctx, lines, x, y, maxY, lineHeight) {
+  let index = 0;
+  while (index < lines.length && y + lineHeight <= maxY) {
+    ctx.fillText(lines[index], x, y);
+    y += lineHeight;
+    index += 1;
+  }
+  return { drawn: index, y };
+}
+
+function createPdfCanvas(pageNumber) {
+  const canvas = document.createElement("canvas");
+  canvas.width = 1240;
+  canvas.height = 1754;
+  const ctx = canvas.getContext("2d");
+  drawPdfBackground(ctx, canvas.width, canvas.height, pageNumber);
+  return { canvas, ctx };
+}
+
+function addCanvasPageToPdf(pdf, canvas, isFirstPage) {
+  const image = canvas.toDataURL("image/jpeg", 0.94);
+  if (!isFirstPage) pdf.addPage();
+  pdf.addImage(image, "JPEG", 0, 0, 595.28, 841.89);
+}
+
+function withTimeout(promise, ms) {
+  return Promise.race([
+    promise,
+    new Promise((_, reject) => window.setTimeout(() => reject(new Error("timeout")), ms)),
+  ]);
+}
+
 async function downloadTarotPdf() {
   if (!lastReading) return;
-  downloadStatus("正在生成 PDF，请稍等...");
-  const box = document.createElement("div");
-  box.className = "pdf-stage";
   const filename = `Moonlit-AI-Tarot-${Date.now()}.pdf`;
+  setDownloadBusy(true);
+  downloadStatus("正在生成 PDF，请稍等...");
   try {
-    box.innerHTML = await reportHtml();
-    document.body.appendChild(box);
-    const report = box.querySelector(".report");
-    if (!window.html2pdf) throw new Error("PDF 生成库还没有加载完成，请稍后再点一次。");
-    await window.html2pdf().set({
-      margin: 0,
-      filename,
-      image: { type: "jpeg", quality: 0.98 },
-      html2canvas: { scale: 2, useCORS: true, backgroundColor: "#151217" },
-      jsPDF: { unit: "px", format: [920, 1300], orientation: "portrait" },
-    }).from(report).save();
+    const JsPdf = window.jspdf?.jsPDF;
+    if (!JsPdf) throw new Error("PDF 生成库还没有加载完成，请稍后再点一次。");
+    const pdf = new JsPdf({ orientation: "portrait", unit: "pt", format: "a4", compress: true });
+    const productUrl = "https://www.aipsychlab.com/apps/tarot/index.html";
+    const qrUrl = `https://api.qrserver.com/v1/create-qr-code/?size=260x260&margin=12&data=${encodeURIComponent(productUrl)}`;
+    let qr = null;
+    try {
+      qr = await withTimeout(loadImage(qrUrl), 2200);
+    } catch {
+      qr = null;
+    }
+
+    const font = '"PingFang SC","Microsoft YaHei","Noto Sans SC",Arial,sans-serif';
+    let pageNumber = 1;
+    const page = createPdfCanvas(pageNumber);
+    const { canvas, ctx } = page;
+
+    ctx.fillStyle = "#d8b96a";
+    ctx.font = `28px ${font}`;
+    ctx.fillText("GUIDED TAROT REPORT", 92, 150);
+    ctx.fillStyle = "#fff7eb";
+    ctx.font = `bold 72px ${font}`;
+    ctx.fillText("三张牌解读报告", 92, 245);
+    ctx.fillStyle = "#d8d0c3";
+    ctx.font = `32px ${font}`;
+    const questionLines = splitCanvasLines(ctx, `你的问题：${lastReading.question || "未输入具体问题，系统给出整体能量解读。"}`, 930);
+    let y = 318;
+    questionLines.slice(0, 4).forEach((line) => {
+      ctx.fillText(line, 92, y);
+      y += 48;
+    });
+
+    y += 24;
+    lastReading.cards.forEach((card, index) => {
+      ctx.fillStyle = "rgba(248,240,223,.06)";
+      drawRoundRect(ctx, 92, y, 1056, 172, 24);
+      ctx.fill();
+      ctx.strokeStyle = "rgba(216,185,106,.34)";
+      ctx.stroke();
+      ctx.fillStyle = "#d8b96a";
+      ctx.font = `26px ${font}`;
+      ctx.fillText(`${positions[index]} · ${card.reversed ? "逆位" : "正位"}`, 128, y + 50);
+      ctx.fillStyle = "#fff8eb";
+      ctx.font = `bold 44px ${font}`;
+      ctx.fillText(card.name, 128, y + 105);
+      ctx.fillStyle = "#d8d0c3";
+      ctx.font = `26px ${font}`;
+      splitCanvasLines(ctx, `${card.keywords}。${card.reversed ? card.shadow : card.message}`, 740).slice(0, 2).forEach((line, lineIndex) => {
+        ctx.fillText(line, 128, y + 145 + lineIndex * 35);
+      });
+      y += 204;
+    });
+
+    ctx.fillStyle = "#fff7eb";
+    ctx.font = `bold 42px ${font}`;
+    ctx.fillText("你的 AI 解读", 92, y + 30);
+    ctx.fillStyle = "#d8d0c3";
+    ctx.font = `29px ${font}`;
+    const readingLines = splitCanvasLines(ctx, lastReading.text, 1040);
+    const firstBlock = drawPdfTextBlock(ctx, readingLines, 92, y + 88, 1435, 44);
+    addCanvasPageToPdf(pdf, canvas, true);
+
+    let consumed = firstBlock.drawn;
+    while (consumed < readingLines.length) {
+      await new Promise((resolve) => window.requestAnimationFrame(resolve));
+      pageNumber += 1;
+      const next = createPdfCanvas(pageNumber);
+      next.ctx.fillStyle = "#fff7eb";
+      next.ctx.font = `bold 42px ${font}`;
+      next.ctx.fillText("解读继续", 92, 155);
+      next.ctx.fillStyle = "#d8d0c3";
+      next.ctx.font = `29px ${font}`;
+      const block = drawPdfTextBlock(next.ctx, readingLines.slice(consumed), 92, 220, 1435, 44);
+      consumed += block.drawn;
+      addCanvasPageToPdf(pdf, next.canvas, false);
+    }
+
+    await new Promise((resolve) => window.requestAnimationFrame(resolve));
+    pageNumber += 1;
+    const end = createPdfCanvas(pageNumber);
+    let endY = 170;
+    end.ctx.fillStyle = "#fff7eb";
+    end.ctx.font = `bold 48px ${font}`;
+    end.ctx.fillText("带走卡片", 92, endY);
+    endY += 86;
+    end.ctx.fillStyle = "#d8d0c3";
+    end.ctx.font = `30px ${font}`;
+    [
+      "把这份报告保存下来，之后可以回看：你问了什么、牌给了什么提醒、当时的自己正在意什么。",
+      "塔罗只作为娱乐与自我反思工具，不替代专业心理、医疗、法律或财务建议。",
+      "欢迎扫码回到月光塔罗 AI 继续体验。"
+    ].forEach((paragraph) => {
+      splitCanvasLines(end.ctx, paragraph, 960).forEach((line) => {
+        end.ctx.fillText(line, 92, endY);
+        endY += 46;
+      });
+      endY += 26;
+    });
+    if (qr) {
+      end.ctx.fillStyle = "#ffffff";
+      drawRoundRect(end.ctx, 390, 650, 460, 460, 34);
+      end.ctx.fill();
+      end.ctx.drawImage(qr, 430, 690, 380, 380);
+      end.ctx.fillStyle = "#d8b96a";
+      end.ctx.font = `28px ${font}`;
+      end.ctx.textAlign = "center";
+      end.ctx.fillText("扫码回到塔罗站", 620, 1145);
+      end.ctx.textAlign = "left";
+    }
+    addCanvasPageToPdf(pdf, end.canvas, false);
+
+    pdf.save(filename);
     downloadStatus("PDF 已生成，请在浏览器下载栏或手机文件中查看。");
   } catch (error) {
-    downloadStatus("PDF 自动下载失败，已打开打印页面，请选择“另存为 PDF”。");
-    const w = window.open("", "_blank");
-    if (w) {
-      w.document.write(await reportHtml());
-      w.document.close();
-      setTimeout(() => w.print(), 500);
-    }
+    downloadStatus("PDF 生成失败，请刷新后再试一次。");
     console.error(error);
   } finally {
-    box.remove();
+    setDownloadBusy(false);
   }
 }
 
@@ -793,70 +997,69 @@ function loadImage(src) {
 
 async function downloadTakeawayCard() {
   if (!lastReading) return;
+  setDownloadBusy(true);
   downloadStatus("正在生成带走卡片...");
-  const canvas = document.createElement("canvas");
-  canvas.width = 1080;
-  canvas.height = 1600;
-  const c = canvas.getContext("2d");
-  const gradient = c.createLinearGradient(0, 0, 1080, 1600);
-  gradient.addColorStop(0, "#19151f");
-  gradient.addColorStop(0.5, "#241a24");
-  gradient.addColorStop(1, "#101014");
-  c.fillStyle = gradient;
-  c.fillRect(0, 0, 1080, 1600);
-  c.strokeStyle = "rgba(216,185,106,.72)";
-  c.lineWidth = 3;
-  c.strokeRect(54, 54, 972, 1492);
-  c.fillStyle = "#d8b96a";
-  c.font = "28px Arial";
-  c.fillText("Moonlit AI Tarot Takeaway", 86, 120);
-  c.fillStyle = "#f8f0df";
-  c.font = "bold 58px Arial";
-  c.fillText("三张牌解读卡", 86, 205);
-  c.font = "30px Arial";
-  let y = wrapCanvasText(c, `问题：${lastReading.question}`, 86, 285, 890, 48, 4);
-  y += 30;
-  lastReading.cards.forEach((card, index) => {
-    c.fillStyle = "rgba(248,240,223,.06)";
-    c.fillRect(86, y, 890, 138);
-    c.strokeStyle = "rgba(216,185,106,.32)";
-    c.strokeRect(86, y, 890, 138);
+  try {
+    const canvas = document.createElement("canvas");
+    canvas.width = 1080;
+    canvas.height = 1600;
+    const c = canvas.getContext("2d");
+    const gradient = c.createLinearGradient(0, 0, 1080, 1600);
+    gradient.addColorStop(0, "#19151f");
+    gradient.addColorStop(0.5, "#241a24");
+    gradient.addColorStop(1, "#101014");
+    c.fillStyle = gradient;
+    c.fillRect(0, 0, 1080, 1600);
+    c.strokeStyle = "rgba(216,185,106,.72)";
+    c.lineWidth = 3;
+    c.strokeRect(54, 54, 972, 1492);
+    c.fillStyle = "#d8b96a";
+    c.font = "28px Arial";
+    c.fillText("Moonlit AI Tarot Takeaway", 86, 120);
+    c.fillStyle = "#f8f0df";
+    c.font = "bold 58px Arial";
+    c.fillText("三张牌解读卡", 86, 205);
+    c.font = "30px Arial";
+    let y = wrapCanvasText(c, `问题：${lastReading.question}`, 86, 285, 890, 48, 4);
+    y += 30;
+    lastReading.cards.forEach((card, index) => {
+      c.fillStyle = "rgba(248,240,223,.06)";
+      c.fillRect(86, y, 890, 138);
+      c.strokeStyle = "rgba(216,185,106,.32)";
+      c.strokeRect(86, y, 890, 138);
+      c.fillStyle = "#d8b96a";
+      c.font = "24px Arial";
+      c.fillText(`${positions[index]} · ${card.reversed ? "逆位" : "正位"}`, 114, y + 42);
+      c.fillStyle = "#fff8eb";
+      c.font = "bold 40px Arial";
+      c.fillText(card.name, 114, y + 90);
+      y += 164;
+    });
+    c.fillStyle = "#f8f0df";
+    c.font = "bold 34px Arial";
+    c.fillText("给你的提醒", 86, y + 20);
+    c.fillStyle = "#d8d0c3";
+    c.font = "28px Arial";
+    wrapCanvasText(c, lastReading.text.slice(0, 220), 86, y + 70, 890, 44, 7);
     c.fillStyle = "#d8b96a";
     c.font = "24px Arial";
-    c.fillText(`${positions[index]} · ${card.reversed ? "逆位" : "正位"}`, 114, y + 42);
-    c.fillStyle = "#fff8eb";
-    c.font = "bold 40px Arial";
-    c.fillText(card.name, 114, y + 90);
-    y += 164;
-  });
-  c.fillStyle = "#f8f0df";
-  c.font = "bold 34px Arial";
-  c.fillText("给你的提醒", 86, y + 20);
-  c.fillStyle = "#d8d0c3";
-  c.font = "28px Arial";
-  wrapCanvasText(c, lastReading.text.slice(0, 220), 86, y + 70, 890, 44, 7);
-  c.fillStyle = "#d8b96a";
-  c.font = "24px Arial";
-  c.fillText("Moonlit AI Tarot", 86, 1480);
-  try {
-    const qr = await loadImage(`https://api.qrserver.com/v1/create-qr-code/?size=240x240&margin=12&data=${encodeURIComponent("https://www.aipsychlab.com/apps/tarot/index.html")}`);
-    c.fillStyle = "#ffffff";
-    c.fillRect(804, 1358, 148, 148);
-    c.drawImage(qr, 814, 1368, 128, 128);
-    c.fillStyle = "#d8b96a";
-    c.font = "20px Arial";
-    c.fillText("扫码回到官网", 790, 1520);
-  } catch {
-    c.fillStyle = "#d8b96a";
-    c.font = "20px Arial";
-    c.fillText("Moonlit AI Tarot", 780, 1480);
-  }
-  const link = document.createElement("a");
-  canvas.toBlob((blob) => {
-    if (!blob) {
-      downloadStatus("卡片生成失败，请再点一次。");
-      return;
+    c.fillText("Moonlit AI Tarot", 86, 1480);
+    try {
+      const qr = await withTimeout(loadImage(`https://api.qrserver.com/v1/create-qr-code/?size=240x240&margin=12&data=${encodeURIComponent("https://www.aipsychlab.com/apps/tarot/index.html")}`), 2200);
+      c.fillStyle = "#ffffff";
+      c.fillRect(804, 1358, 148, 148);
+      c.drawImage(qr, 814, 1368, 128, 128);
+      c.fillStyle = "#d8b96a";
+      c.font = "20px Arial";
+      c.fillText("扫码回到官网", 790, 1520);
+    } catch {
+      c.fillStyle = "#d8b96a";
+      c.font = "20px Arial";
+      c.fillText("Moonlit AI Tarot", 780, 1480);
     }
+    const blob = await new Promise((resolve) => canvas.toBlob(resolve, "image/png"));
+    if (!blob) throw new Error("Card blob is empty");
+    const link = document.createElement("a");
     const url = URL.createObjectURL(blob);
     link.download = `Moonlit-AI-Tarot-Card-${Date.now()}.png`;
     link.href = url;
@@ -865,7 +1068,12 @@ async function downloadTakeawayCard() {
     link.remove();
     setTimeout(() => URL.revokeObjectURL(url), 1200);
     downloadStatus("卡片已生成，请在浏览器下载栏或手机文件中查看。");
-  }, "image/png");
+  } catch (error) {
+    downloadStatus("卡片生成失败，请刷新后再试一次。");
+    console.error(error);
+  } finally {
+    setDownloadBusy(false);
+  }
 }
 
 function drawCards(source = "manual") {

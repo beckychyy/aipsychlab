@@ -1592,6 +1592,11 @@ textarea:focus {
   min-width: 180px;
 }
 
+.takeaway-actions button:disabled {
+  cursor: wait;
+  opacity: 0.58;
+}
+
 .download-status {
   flex-basis: 100%;
   margin: 2px 0 0;
