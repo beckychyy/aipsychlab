@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>MindBridge AI · AIPsychLab</title>
+  <meta name="description" content="Academic resilience and adaptive SFBT-CBT coaching simulation by AIPsychLab.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@400;500;700;800;900&family=JetBrains+Mono:wght@400;600;700&family=Noto+Sans+SC:wght@400;500;700;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="./styles.css?v=20260723">
+  <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js" defer></script>
+  <script src="./app.js?v=20260723" defer></script>
+</head>
+<body>
+  <main class="mindbridge-shell">
+    <section class="topbar">
+      <a class="brand-link" href="../index.html" aria-label="Back to AIPsychLab">
+        <span class="brand-mark"><i data-lucide="brain"></i></span>
+        <span><b>MindBridge AI</b><small>AIPsychLab</small></span>
+      </a>
+      <div class="topbar-copy">
+        <p data-i18n="eyebrow">Psychoeducational Simulation</p>
+        <h1>MindBridge AI</h1>
+        <span data-i18n="deck">Academic Resilience & Adaptive SFBT-CBT System</span>
+      </div>
+      <button class="language-button" type="button" data-language-toggle>
+        <i data-lucide="languages"></i>
+        <span data-i18n="switch">中文</span>
+      </button>
+    </section>
+
+    <section class="summary-strip">
+      <i data-lucide="sparkles"></i>
+      <p data-i18n="summary">A psychoeducational simulation for graduate students navigating burnout, imposter distress, advisor feedback, and dissertation procrastination.</p>
+    </section>
+
+    <section class="split-screen">
+      <section class="chat-workspace" aria-label="Active Chat Workspace">
+        <div class="panel-title">
+          <i data-lucide="message-circle"></i>
+          <div>
+            <p data-i18n="chat">Active Chat Workspace</p>
+            <span>SFBT + CBT empathic coach</span>
+          </div>
+        </div>
+
+        <div class="chat-history" data-chat-history aria-live="polite"></div>
+
+        <div class="suggestion-zone">
+          <p data-i18n="quick">Quick suggestions</p>
+          <div class="suggestion-chips" data-suggestions></div>
+        </div>
+
+        <form class="chat-composer" data-chat-form>
+          <textarea data-chat-input rows="3" autocomplete="off" data-i18n-placeholder="input" placeholder="Share what is happening academically or emotionally..."></textarea>
+          <div class="composer-footer">
+            <span><b data-word-count>0</b> <span data-i18n="wordCount">words</span></span>
+            <button type="submit" data-send-button aria-label="Send">
+              <i data-lucide="arrow-up"></i>
+            </button>
+          </div>
+        </form>
+      </section>
+
+      <aside class="meta-dashboard" aria-label="Metacognitive and Safety Dashboard">
+        <div class="panel-title dashboard-title">
+          <i data-lucide="heart-pulse"></i>
+          <div>
+            <p data-i18n="dashboard">Metacognitive & Safety Dashboard</p>
+            <span>Asynchronous evaluator model</span>
+          </div>
+        </div>
+
+        <section class="metric-card">
+          <div class="metric-heading">
+            <i data-lucide="target"></i>
+            <p data-i18n="stage">Therapeutic Stage Indicator</p>
+          </div>
+          <div class="phase-list" data-phase-list></div>
+        </section>
+
+        <section class="metric-grid">
+          <div class="metric-card compact">
+            <div class="metric-heading">
+              <i data-lucide="sparkles"></i>
+              <p data-i18n="affect">Detected Emotional Affect</p>
+            </div>
+            <span class="affect-badge" data-affect>Imposter Distress</span>
+          </div>
+
+          <div class="metric-card compact">
+            <div class="metric-heading">
+              <i data-lucide="check-circle-2"></i>
+              <p data-i18n="agency">Student Agency Gauge</p>
+            </div>
+            <div class="agency-row">
+              <strong data-agency>Emerging</strong>
+              <div class="agency-track"><span data-agency-bar></span></div>
+            </div>
+          </div>
+        </section>
+
+        <section class="metric-card risk-card" data-risk-card>
+          <div class="metric-heading">
+            <i data-lucide="shield-alert"></i>
+            <p data-i18n="risk">Real-Time Risk Meter</p>
+          </div>
+          <div class="risk-value">
+            <strong data-risk-value>0.18</strong>
+            <span>/ 1.00</span>
+          </div>
+          <div class="risk-track"><span data-risk-bar></span></div>
+        </section>
+
+        <section class="metric-card protocol-card">
+          <div class="metric-heading">
+            <i data-lucide="braces"></i>
+            <p data-i18n="protocol">Structured JSON Output</p>
+          </div>
+          <div class="source-pill">
+            <span data-i18n="sourceLabel">Evaluator</span>
+            <strong data-source>Demo baseline</strong>
+          </div>
+          <p class="schema-note" data-i18n="schemaCopy">Production instructions force the model to return only valid JSON matching this protocol. Without an API key, the demo uses deterministic structured mock responses.</p>
+          <pre data-protocol-json></pre>
+        </section>
+      </aside>
+    </section>
+  </main>
+
+  <div class="modal-scrim" data-safety-modal hidden>
+    <section class="safety-modal" role="alertdialog" aria-modal="true" aria-labelledby="safety-title">
+      <div class="modal-icon"><i data-lucide="alert-triangle"></i></div>
+      <p class="eyebrow danger" data-i18n="safety">Emergency Safety Protocol</p>
+      <h2 id="safety-title" data-i18n="modalTitle">Immediate Support Recommended</h2>
+      <p data-i18n="modalBody">MindBridge detected language that may indicate elevated risk. This simulation is paused so the student can connect with real support now.</p>
+      <div class="safety-actions">
+        <a href="tel:+14105169355"><i data-lucide="phone-call"></i><span data-i18n="jhu">JHU BHCST 410-516-9355</span></a>
+        <a href="tel:988"><i data-lucide="life-buoy"></i><span data-i18n="lifeline">988 Suicide & Crisis Lifeline</span></a>
+        <a href="https://wellbeing.jhu.edu/bhcst/" target="_blank" rel="noreferrer"><i data-lucide="heart-pulse"></i><span data-i18n="counselor">Connect with On-Call Counselor</span></a>
+      </div>
+      <small data-i18n="jhuSub">Behavioral Health Crisis Support Team, available 24/7/365 for Johns Hopkins affiliates.</small>
+      <small data-i18n="disabled">Input is disabled because the safety threshold was crossed. In a real deployment, this state should require human review or authenticated support handoff.</small>
+    </section>
+  </div>
+</body>
+</html>
