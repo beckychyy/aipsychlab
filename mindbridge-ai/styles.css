@@ -420,6 +420,10 @@ svg { width: 18px; height: 18px; }
   padding: 20px;
 }
 
+.modal-scrim[hidden] {
+  display: none;
+}
+
 .safety-modal {
   width: min(560px, 100%);
   border: 1px solid rgba(180, 35, 24, 0.34);
