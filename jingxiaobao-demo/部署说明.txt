@@ -1,0 +1,22 @@
+京小宝 · 手机模拟 App（Demo 75）：一个入口，家长端 + 老师端
+
+这个文件夹就是一个纯静态网站，不需要服务器、不需要构建：
+  index.html            入口：选择「我是家长」或「我是老师」
+  parent.html           家长端（约 5.8MB，所有代码和图片都在里面）
+  teacher.html          老师端（王老师 · 中二班）
+  manifest.webmanifest  「添加到主屏幕」配置：名字「京小宝」，打开是入口页
+  icon-180/192/512.png  主屏幕图标（小宝头像）
+
+部署：把整个文件夹原样上传到任意静态托管即可（网站根目录就是这个文件夹）：
+  - Vercel：vercel deploy（或网页上拖入文件夹）
+  - Netlify：app.netlify.com/drop 拖入文件夹
+  - GitHub Pages：建仓库，把这些文件放在根目录，Settings → Pages 选 main 分支
+注意：所有文件要在同一层目录，不要改文件名。必须用 https 地址访问。
+
+部署后只有一个地址：https://你的域名/
+  打开 → 选家长端或老师端 → 进入；右上角「⇄ 切换身份」回到入口。
+  也可以直接打开 https://你的域名/parent.html 或 https://你的域名/teacher.html
+
+手机上使用：用 Safari（iPhone）或 Chrome（安卓）打开网址 → 分享 → 添加到主屏幕，
+主屏幕上会有一个「京小宝」图标，点开先选身份。
+数据只存在各自手机的浏览器里（localStorage），没有后台；家长端和老师端的打卡等数据不互通。

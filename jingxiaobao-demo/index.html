@@ -1,0 +1,41 @@
+<!doctype html><html lang="zh-CN"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>京小宝</title>
+<meta name="apple-mobile-web-app-capable" content="yes"><meta name="mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-title" content="京小宝"><meta name="theme-color" content="#fdf1f4">
+<link rel="manifest" href="manifest.webmanifest"><link rel="apple-touch-icon" href="icon-180.png"><link rel="icon" href="icon-192.png">
+<style>
+:root{--bg:#fdf1f4;--card:#ffffff;--ink:#33252f;--muted:#8a7a86;--pink:#e0607e;--peach:#f2a57a;--mint:#3fae8c;--line:#f3dce5}
+*{box-sizing:border-box}html,body{height:100%}
+body{margin:0;background:radial-gradient(120% 60% at 50% 0%,#ffe4ec 0%,var(--bg) 60%);color:var(--ink);font:15px/1.6 -apple-system,BlinkMacSystemFont,"PingFang SC","Microsoft YaHei",sans-serif;
+ padding:calc(28px + env(safe-area-inset-top,0px)) max(20px,env(safe-area-inset-right,0px)) calc(24px + env(safe-area-inset-bottom,0px)) max(20px,env(safe-area-inset-left,0px));display:flex;flex-direction:column;align-items:center}
+.wrap{width:100%;max-width:420px;display:flex;flex-direction:column;gap:14px;flex:1}
+.hd{text-align:center;margin-bottom:8px}
+.hd img{width:96px;height:96px;border-radius:28px;box-shadow:0 10px 26px #e0607e33}
+.hd h1{margin:12px 0 2px;font-size:28px;letter-spacing:4px}
+.hd p{margin:0;color:var(--muted);font-size:13.5px}
+.q{font-size:13px;font-weight:700;color:var(--pink);margin:6px 2px 0;letter-spacing:1px}
+a.role{display:flex;gap:14px;align-items:center;text-decoration:none;color:inherit;background:var(--card);border:1.5px solid var(--line);border-radius:22px;padding:16px;box-shadow:0 8px 22px #e8889c1f;transition:transform .15s}
+a.role:active{transform:scale(.98)}
+a.role.last{border-color:var(--pink)}
+.ic{width:56px;height:56px;border-radius:18px;display:grid;place-items:center;font-size:28px;flex:none}
+.p .ic{background:#ffe7ee}.t .ic{background:#e6f6ee}
+.role b{display:block;font-size:18px}
+.role small{display:block;color:var(--muted);font-size:12.5px;line-height:1.5}
+.role em{font-style:normal;font-size:11px;font-weight:700;color:#fff;border-radius:999px;padding:2px 8px;margin-left:6px;vertical-align:2px}
+.p em{background:var(--pink)}.t em{background:var(--mint)}
+.go{margin-left:auto;font-size:22px;color:#d9b3c0}
+.tip{margin-top:auto;text-align:center;font-size:11.5px;color:var(--muted);line-height:1.7}
+.tip b{color:var(--ink)}
+</style></head><body>
+<main class="wrap">
+ <div class="hd"><img src="icon-512.png" alt="小宝"><h1>京小宝</h1><p>0—6 岁家庭的贴身助理 · 演示版</p></div>
+ <div class="q">你是谁？</div>
+ <a class="role p" id="r-parent" href="parent.html#/p/home"><span class="ic">👩‍👧</span><div><b>我是家长<em>家长端</em></b><small>每日练习 · 小宝助理 · 胡同 · 北京地图 · 成长档案</small></div><span class="go">›</span></a>
+ <a class="role t" id="r-teacher" href="teacher.html#/t/today"><span class="ic">🧑‍🏫</span><div><b>我是老师<em>老师端</em></b><small>王老师 · 中二班：今日 · 孩子与家长 · 随口记 · 班级</small></div><span class="go">›</span></a>
+ <p class="tip">进入后右上角「⇄ 切换身份」可随时回到这里<br>添加到主屏幕：Safari / Chrome → 分享 → <b>添加到主屏幕</b><br>演示数据，只保存在这台手机的浏览器里</p>
+</main>
+<script>
+(function(){var k='jxb-role';try{var v=localStorage.getItem(k);if(v){var el=document.getElementById('r-'+v);if(el)el.classList.add('last');}}catch(e){}
+['parent','teacher'].forEach(function(r){document.getElementById('r-'+r).addEventListener('click',function(){try{localStorage.setItem(k,r);}catch(e){}});});})();
+</script>
+</body></html>
