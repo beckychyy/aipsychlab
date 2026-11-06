@@ -15670,14 +15670,47 @@ window.scrollTo(0,0);
 </script>
 <script id="jxb-mobile-video-fix">
 /* iOS and embedded browsers may pause muted autoplay while the app rerenders.
-   Reapply the required inline attributes and retry after visibility/touch. */
+   Reapply the required inline attributes and retry after visibility/touch.
+   On phones and embedded webviews, use the original animated GIFs instead:
+   they do not depend on autoplay permission and remain visible in Low Power Mode. */
 (function(){
+ const phone=/iPhone|iPad|iPod|Android|Mobile|MicroMessenger|Weibo|QQ\//i.test(navigator.userAgent)||
+  matchMedia('(pointer:coarse)').matches||innerWidth<=700||/[?&]forceGif=1\b/.test(location.search);
+ const gifBase='./assets/xb-anim/';
+ function gifFor(src){
+  const s=String(src||'').toLowerCase();
+  if(s.includes('clap'))return gifBase+'clap.gif';
+  if(s.includes('dance'))return gifBase+'dance.gif';
+  if(s.includes('sleepy'))return gifBase+'sleepy.gif';
+  if(s.includes('tilt')||s.includes('think')||s.includes('type'))return gifBase+'tilt.gif';
+  return gifBase+'wave.gif';
+ }
+ function useGif(v){
+  if(!phone||!v||v.dataset.jxbSwapped)return;
+  const src=v.getAttribute('src')||v.currentSrc||'';
+  if(!/assets\/xb-anim\/.*\.mp4(?:$|[?#])/i.test(src))return;
+  v.dataset.jxbSwapped='1';
+  const box=v.getBoundingClientRect(),cs=getComputedStyle(v),im=document.createElement('img');
+  im.className=(v.className||'')+' jxb-gif-fallback';
+  im.src=gifFor(src);im.alt='小宝动画';im.decoding='async';
+  im.dataset.m=v.dataset.m||'';im.dataset.jxbGif='1';
+  if(v.getAttribute('style'))im.setAttribute('style',v.getAttribute('style'));
+  im.style.width=box.width?box.width+'px':cs.width;
+  im.style.height=box.height?box.height+'px':cs.height;
+  im.style.objectFit=cs.objectFit==='fill'?'cover':cs.objectFit;
+  im.style.objectPosition=cs.objectPosition;
+  im.style.borderRadius=cs.borderRadius;
+  im.style.flex=cs.flex;
+  im.style.maxWidth=cs.maxWidth;
+  im.style.maxHeight=cs.maxHeight;
+  v.replaceWith(im);
+ }
  function start(v){
   v.muted=true;v.defaultMuted=true;v.autoplay=true;v.loop=true;v.playsInline=true;v.preload='auto';
   v.setAttribute('muted','');v.setAttribute('playsinline','');v.setAttribute('webkit-playsinline','');
   const p=v.play&&v.play();if(p&&p.catch)p.catch(()=>{});
  }
- function startAll(){document.querySelectorAll('#p-device video,#t-device video').forEach(start);}
+ function startAll(){document.querySelectorAll('#p-device video,#t-device video').forEach(v=>{start(v);useGif(v);});}
  if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',startAll,{once:true});else startAll();
  document.addEventListener('visibilitychange',()=>{if(!document.hidden)startAll();});
  document.addEventListener('touchstart',startAll,{passive:true});
