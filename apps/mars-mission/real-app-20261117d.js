@@ -19,7 +19,7 @@ addEventListener('warp:engage',async()=>{
 
 function applyDisplayMode(mode,{persist=true,updateUrl=true}={}){
   if(!displayNames[mode])mode='standard';displayMode=mode;
-  const projectorReportsWide=innerWidth/innerHeight>=2.1,isWall=mode==='wall';document.body.classList.toggle('ultra-wide',mode==='ultrawide'||isWall);document.body.classList.toggle('ultra-forced',mode==='ultrawide'&&!projectorReportsWide);document.body.classList.toggle('wall-14820',isWall);document.body.classList.toggle('kv-mode',mode==='kv');document.body.dataset.displayMode=mode;document.body.dataset.output=isWall?'9458 × 4213 · LEFT / FRONT / RIGHT / FLOOR':mode==='ultrawide'?`10K FORCE · ${innerWidth} × ${innerHeight}`:'';
+  const projectorReportsWide=innerWidth/innerHeight>=2.1,isWall=mode==='wall';document.body.classList.toggle('ultra-wide',mode==='ultrawide'||isWall);document.body.classList.toggle('ultra-forced',mode==='ultrawide'&&!projectorReportsWide);document.body.classList.toggle('wall-14820',isWall);document.body.classList.toggle('kv-mode',mode==='kv');document.body.dataset.displayMode=mode;document.body.dataset.output=isWall?'14820 × 2150 · LEFT / FRONT / RIGHT / FLOOR':mode==='ultrawide'?`10K FORCE · ${innerWidth} × ${innerHeight}`:'';
   $('#kvStage').setAttribute('aria-hidden',mode!=='kv');$('#displayModeBtn').textContent=displayNames[mode];
   $$('[data-display-mode]').forEach(btn=>btn.classList.toggle('active',btn.dataset.displayMode===mode));
   if(mode==='kv')setSpaceScene(3);else setSpaceScene(state.scene);dispatchEvent(new Event('space-layout-change'));

@@ -1,0 +1,118 @@
+/* Exact LED processor map supplied 2026-11-18.
+   One 14820×2150 desktop: LEFT | FRONT | RIGHT | FLOOR-SIGNAL.
+   The floor signal lives at the far right of the GPU canvas, although it is
+   physically installed below the front wall. Black processor margins are
+   deliberately masked and never receive controls or captions. */
+body.wall-14820{
+  --wall-left-x:0%;
+  --wall-left-w:13.927125506%;          /* 2064 / 14820 */
+  --wall-front-x:13.981106613%;         /* (2064 + 8) / 14820 */
+  --wall-front-w:35.829959514%;         /* 5310 / 14820 */
+  --wall-front-c:31.89608637%;
+  --wall-front-end:49.811066127%;
+  --wall-right-x:49.905533063%;         /* + 14 px dead seam */
+  --wall-right-w:13.927125506%;
+  --wall-right-end:63.83265857%;
+  --wall-floor-x:64.048583%;            /* + 32 px dead margin */
+  --wall-floor-w:35.661268556%;         /* 5285 / 14820 */
+  --wall-safe-end:99.709851552%;
+  --floor-y:.744186047%;                /* 16 / 2150 */
+  --floor-h:95.953488372%;              /* 2063 / 2150 */
+  --room-top-h:100%;
+  background:#000;
+}
+
+/* Four independent active rectangles. */
+.wall-14820 #stage{inset:0;overflow:hidden}
+.wall-14820 .wall-world{position:fixed;inset:0;overflow:hidden}
+.wall-14820 .wall-view{top:0;height:100%;bottom:auto;border:0}
+.wall-14820 .wall-camera-left{left:var(--wall-left-x);width:var(--wall-left-w)}
+.wall-14820 .wall-camera-front{left:var(--wall-front-x);width:var(--wall-front-w)}
+.wall-14820 .wall-camera-right{left:var(--wall-right-x);width:var(--wall-right-w)}
+.wall-14820 .wall-camera-floor{left:var(--wall-floor-x);top:var(--floor-y);width:var(--wall-floor-w);height:var(--floor-h);bottom:auto}
+.wall-14820 .room-blank{display:none!important}
+.wall-14820 #universe{left:var(--wall-front-x);top:0;width:var(--wall-front-w);height:100%}
+
+/* Main task UI exists only on the 5310×2150 front screen. */
+.wall-14820 .scene{left:var(--wall-front-x);right:auto;top:0;bottom:auto;width:var(--wall-front-w);height:100%;overflow:hidden}
+.wall-14820 .hud-top{left:var(--wall-front-x);right:auto;top:0;width:var(--wall-front-w);height:8.5vh;padding:0 1.15vw;box-sizing:border-box}
+.wall-14820 .hud-top .brand{min-width:8.8vw;width:auto;left:auto}
+.wall-14820 .hud-top .mission-state{left:50%;top:auto}
+.wall-14820 .hud-top .top-actions{position:static;margin-left:auto;justify-content:flex-end}
+.wall-14820 .hud-btn{height:4.8vh;padding:0 .45vw;font-size:clamp(8px,.52vw,13px)}
+.wall-14820 .display-menu{right:0;left:auto;top:5.2vh;width:13vw}
+.wall-14820 .timeline{left:var(--wall-front-x);right:auto;top:auto;bottom:0;width:var(--wall-front-w);height:10.5vh;padding:0 1.25vw;box-sizing:border-box}
+.wall-14820 .timeline>button{min-width:4.25vw;padding:0 .55vw}
+
+/* Stable front-screen composition: no panel is allowed to drift into a side wall. */
+.wall-14820 .chapter{left:3%;top:11vh}
+.wall-14820 .intro-copy{left:4%;top:18vh;width:56%}
+.wall-14820 .intro h1{font-size:clamp(52px,5.8vh,126px)}
+.wall-14820 .distance-scale{left:auto;right:4%;top:18vh;width:29%}
+.wall-14820 .role-rail{left:4%;right:auto;top:auto;bottom:13vh;width:92%;grid-template-columns:repeat(5,1fr)}
+.wall-14820 .left-card{left:3%;top:19vh;width:34%;max-height:59vh;overflow:auto}
+.wall-14820 .target-list,.wall-14820 .site-options{left:auto;right:3%;top:19vh;width:31%}
+.wall-14820 .observation{left:auto;right:3%;top:auto;bottom:14vh;width:31%}
+.wall-14820 .lunar-site-selector,.wall-14820 .mars-base-reveal{left:auto;right:3%;top:17vh;width:34%;max-height:66vh;overflow:auto}
+.wall-14820 .scan-reticle,.wall-14820 .mars-reticle{left:50%;top:46%}
+.wall-14820 .site-decision{left:3%;top:auto;bottom:14vh;width:34%}
+.wall-14820 .surface-mission{left:auto;right:3%;top:auto;bottom:14vh;width:45%}
+.wall-14820 .base-ready .site-decision{left:3%;top:auto;bottom:14vh;width:34%}
+
+.wall-14820 .launch .lunar-launch-main,.wall-14820 .launch-stars,.wall-14820 .base-airlock{left:0;top:0;width:100%;height:100%}
+.wall-14820 .surround-wing{display:none}
+.wall-14820 .floor-screen{position:fixed;left:var(--wall-floor-x);top:var(--floor-y);width:var(--wall-floor-w);height:var(--floor-h);padding:5vh 3vw}
+.wall-14820 .launch-telemetry{left:auto;right:3%;top:18vh;width:31%}
+.wall-14820 .corridor{left:auto;right:12%;top:39vh;width:17%;height:38vh}
+.wall-14820 .rocket-label{left:50%;top:auto;bottom:13vh}
+.wall-14820 .trajectory-wrap{left:35%;right:3%;top:15vh;width:auto;height:55vh;bottom:auto}
+.wall-14820 .telemetry-strip{left:35%;right:3%;top:auto;bottom:14vh;width:auto}
+.wall-14820 .edl-core{left:36%;right:3%;top:16vh;width:auto;height:52vh}
+.wall-14820 .edl-callout{left:36%;right:3%;top:auto;bottom:14vh;width:auto}
+
+.wall-14820 .debrief-title{left:4%;top:19vh}
+.wall-14820 .score-ring{left:45%;top:20vh}
+.wall-14820 .mission-log{left:4%;right:4%;top:auto;bottom:14vh;width:auto}
+.wall-14820 .final-roles{left:auto;right:4%;top:20vh;width:32%}
+.wall-14820 .rover-game,.wall-14820 .hab-game{left:3%;top:11vh;width:61%;height:68vh;padding:1.4vh .9vw}
+.wall-14820 .base-exploration{height:100%}
+
+/* Dialogs, voice prompts and transitions are centered on the front wall. */
+.wall-14820 .settlement-card,.wall-14820 .audio-gate>div{
+  left:var(--wall-front-c);width:32%;top:50%;max-height:82vh;overflow:auto
+}
+.wall-14820 .toast{left:var(--wall-front-c);top:auto;bottom:13vh}
+.wall-14820 .help-panel{left:var(--wall-front-x);right:auto;top:0;bottom:auto;width:var(--wall-front-w);height:100%;transform:translateY(-105%)}
+.wall-14820 .help-panel.open{transform:none}
+.wall-14820 .warp-copy,.wall-14820 .warp-telemetry,.wall-14820 .transit-copy,.wall-14820 .transit-telemetry{left:var(--wall-front-c);width:31%}
+.wall-14820 .warp-frame,.wall-14820 .transit-frame{left:var(--wall-front-x);right:auto;width:var(--wall-front-w)}
+.wall-14820 .transit-grid{left:var(--wall-front-x);right:auto;width:var(--wall-front-w)}
+.wall-14820 .mission-transit:before{left:var(--wall-front-x)}
+.wall-14820 .mission-transit:after{left:var(--wall-front-end);right:auto}
+.wall-14820 .warp-seam-left{left:var(--wall-front-x)}
+.wall-14820 .warp-seam-right{left:var(--wall-front-end);right:auto}
+
+/* The processor's black regions are non-displayable. Keep them hard black even
+   when full-canvas WebGL/video effects run underneath. */
+.wall-dead-zones{display:none}
+.wall-14820 .wall-dead-zones{display:block;position:fixed;inset:0;z-index:10000;pointer-events:none}
+.wall-14820 .wall-dead-zones i{position:absolute;display:block;background:#000}
+.wall-14820 .dead-seam-left{left:13.927125506%;top:0;width:.053981107%;height:100%}
+.wall-14820 .dead-seam-center{left:49.811066127%;top:0;width:.094466937%;height:100%}
+.wall-14820 .dead-floor-lead{left:63.83265857%;top:0;width:.215924426%;height:100%}
+.wall-14820 .dead-floor-tail{left:99.709851552%;top:0;right:0;height:100%}
+.wall-14820 .dead-floor-top{left:64.048583%;top:0;width:35.661268556%;height:.744186047%}
+.wall-14820 .dead-floor-bottom{left:64.048583%;bottom:0;width:35.661268556%;height:3.302325581%}
+
+/* Calibration lines stay inside active pixels. */
+.wall-14820 .wall-view>span{top:2.2vh;left:1vw}
+.wall-14820 .wall-camera-floor>span{display:block;top:2.2vh}
+.wall-14820 .screen-grid{opacity:.12;background-size:100% 5px;background-position:0 0}
+
+@media(max-height:900px){
+  .wall-14820 .hud-top{height:9vh}
+  .wall-14820 .timeline{height:11vh}
+  .wall-14820 .left-card{top:17vh;max-height:61vh}
+  .wall-14820 .target-list,.wall-14820 .site-options{top:17vh}
+}
+
